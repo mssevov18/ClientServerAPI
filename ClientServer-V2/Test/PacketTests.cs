@@ -1,4 +1,5 @@
 using CommunicationLibrary;
+using CommunicationLibrary;
 using NUnit.Framework;
 using System;
 using System.IO;
@@ -30,7 +31,7 @@ namespace Test
         }
 
         [Test]
-        public void t_ctor_ByteArray()
+        public void ctor_ByteArray()
         {
             Console.Write(Utils.ToString(pckBytes));
             Console.WriteLine();
@@ -47,7 +48,7 @@ namespace Test
         }
 
         [Test]
-        public void t_ctor_Flags_ByteArray()
+        public void ctor_Flags_ByteArray()
         {
             Packet packet = new Packet(PacketType.SingleMsg, msgBytes, 1);
 
@@ -58,7 +59,7 @@ namespace Test
         }
 
         [Test]
-        public void t_ctor_String()
+        public void ctor_String()
         {
             Packet packet = new Packet(PacketType.SingleMsg, msg, 1);
 
@@ -67,7 +68,7 @@ namespace Test
         }
 
         [Test]
-        public void t_PropertyCount_Increment()
+        public void PropertyCount_Increment()
         {
             uint startId = Packet.PacketGenCount;
 
@@ -80,7 +81,7 @@ namespace Test
         }
 
         [Test]
-        public void t_mToByteArray()
+        public void mToByteArray()
         {
             Packet packet = new Packet(PacketType.SingleMsg, msgBytes, 1);
 
@@ -89,7 +90,7 @@ namespace Test
         }
 
         [Test]
-        public void t_smGetPacketFromStreamReader()
+        public void smGetPacketFromStreamReader()
         {
             StreamReader reader = new StreamReader(new MemoryStream(pckBytes));
             
@@ -100,7 +101,7 @@ namespace Test
         }
 
         [Test]
-        public void t_mWriteToFile()
+        public void mWriteToFile()
         {
             // Arrange
             string fileName = "test.txt";

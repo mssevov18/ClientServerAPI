@@ -1,29 +1,31 @@
 ﻿using CommunicationLibrary;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Text;
 
-namespace Client
+namespace TesterProgram
 {
-    internal class ClientProgram
+    internal class Program
     {
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
-            Console.Title = "Client";
+            Console.Title = "Client testing";
+            Dictionary<string, string> ip = new Dictionary<string, string>
+            {
+                {"sevov", "192.168.1.175" },
+                {"cbwifi", "10.2.2.117" },
+                {"tavan", "" }
+            };
 
             Client client = new Client(Console.In, Console.Out, Console.OutputEncoding);
 
             Console.ReadKey();
             Console.Write('\b');
 
-            const string sevovIp = "192.168.1.175";
-            const string tavanIp = "";
-            const string cbwifiIp = "10.2.2.117";
-
             //client.Connect(IPAddress.Any, 50000);
-            client.Connect(cbwifiIp, 50000);
+            client.Connect(ip["cbwifi"], 50000);
 
             if (client.IsConnected)
             {

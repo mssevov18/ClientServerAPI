@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -15,9 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\Client.csproj" />
+    <ProjectReference Include="..\Client\TestClient.csproj" />
     <ProjectReference Include="..\CommunicationLibrary\CommunicationLibrary.csproj" />
-    <ProjectReference Include="..\Server\Server.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,17 +1,16 @@
-﻿using CommunicationLibrary;
-using Client;
-using Server;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Text;
 using System.Net;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using static Test.Utils;
+using CommunicationLibrary;
 
 namespace Test
 {
-	public class PacketHandlerTests
+    public class PacketHandlerTests
 	{
 		private StringWriter _writer;
 		private StringBuilder _builder;
@@ -38,7 +37,7 @@ namespace Test
 		[TestCase("Lorem ipsum")]
 		[TestCase("Dolor Sit amet")]
 		[TestCase("Здравей pederasso!")]
-		public void t_mHandle_ShortMessage(string msg)
+		public void mHandle_ShortMessage(string msg)
 		{
 			_builder.Clear();
 			Packet packet = new Packet(PacketType.SingleMsg, msg);
@@ -52,7 +51,7 @@ namespace Test
 
 		private string[] strings;
 		[Test]
-		public void t_mHandle_LongMessage()
+		public void mHandle_LongMessage()
 		{
 			strings = new string[] { "Hello ", "world!" };
 			_builder.Clear();
@@ -68,7 +67,7 @@ namespace Test
 		}
 
 		[Test]
-		public void t_mHandle_LongERMessage()
+		public void mHandle_LongERMessage()
 		{
 			strings = new string[] { "He", "llo ", "wor", "ld!" };
 			_builder.Clear();
@@ -88,7 +87,7 @@ namespace Test
 		}
 
 		[Test]
-		public void t_mHandle_Response_Message()
+		public void mHandle_Response_Message()
         {
 			string msg = "";
             _builder.Clear();
@@ -103,7 +102,7 @@ namespace Test
         }
 
 		[Test]
-		public void t_mHandle_Response_Message_Fail()
+		public void mHandle_Response_Message_Fail()
 		{
 			string msg = "";
             _builder.Clear();
@@ -119,7 +118,7 @@ namespace Test
 		}
 
 		[Test]
-		public void t_mHandle_File()
+		public void mHandle_File()
 		{
 			
 		}

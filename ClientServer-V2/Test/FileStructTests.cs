@@ -20,7 +20,7 @@ namespace Test
         }
 
         [Test]
-        public void t_FileStruct_ctor()
+        public void ctor()
         {
             FileStruct @struct = new FileStruct(5, "Hello", _encoding.GetBytes("yabadabado"));
 
@@ -30,7 +30,7 @@ namespace Test
         }
 
         [Test]
-        public void t_FileStruct_smGetBytes()
+        public void smGetBytes()
         {
             FileStruct @struct = new FileStruct(5, "Hello", _encoding.GetBytes("yabadabado"));
 
@@ -40,7 +40,7 @@ namespace Test
         }
 
         [Test]
-        public void t_FileStruct_smGetStruct()
+        public void smGetStruct()
         {
             byte[] bytes = new byte[]
             { 5, 72, 101, 108, 108, 111, 121, 97, 98, 97, 100, 97, 98, 97, 100, 111};
