@@ -1,11 +1,11 @@
-﻿using CommunicationLibrary;
+using CommunicationLibrary;
 using System.Text;
 
 namespace ServerTester
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Server testing";

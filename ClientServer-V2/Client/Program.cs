@@ -1,4 +1,4 @@
-﻿using CommunicationLibrary;
+using CommunicationLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ namespace TesterProgram
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Client testing";
