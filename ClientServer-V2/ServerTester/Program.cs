@@ -1,4 +1,5 @@
 using CommunicationLibrary;
+using System.Reflection;
 using System.Text;
 
 namespace ServerTester
@@ -19,7 +20,6 @@ namespace ServerTester
             Server server = new Server(Console.Out, Console.OutputEncoding);
             //server.Start(IPAddress.Any, 50000);
             server.Start(ip["cbwifi"], 50000);
-
         }
     }
 }
