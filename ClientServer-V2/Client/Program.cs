@@ -16,7 +16,8 @@ namespace TesterProgram
             {
                 {"sevov", "192.168.1.175" },
                 {"cbwifi", "10.2.2.117" },
-                {"tavan", "" }
+                {"acerpc", "192.168.0.222" },
+                {"tavan", "192.168.0.175" }
             };
 
             Client client = new Client(Console.In, Console.Out, Console.OutputEncoding);
@@ -25,7 +26,7 @@ namespace TesterProgram
             Console.Write('\b');
 
             //client.Connect(IPAddress.Any, 50000);
-            client.Connect(ip["cbwifi"], 50000);
+            client.Connect(ip["tavan"], 50000);
 
             if (client.IsConnected)
             {

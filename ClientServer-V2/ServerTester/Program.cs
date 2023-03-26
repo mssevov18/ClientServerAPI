@@ -14,12 +14,13 @@ namespace ServerTester
             {
                 {"sevov", "192.168.1.175" },
                 {"cbwifi", "10.2.2.117" },
-                {"tavan", "" }
-            };
+				{"acerpc", "192.168.0.222" },
+				{"tavan", "192.168.0.175" }
+			};
 
             Server server = new Server(Console.Out, Console.OutputEncoding);
             //server.Start(IPAddress.Any, 50000);
-            server.Start(ip["cbwifi"], 50000);
+            server.Start(ip["tavan"], 50000);
         }
     }
 }
