@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -26,7 +26,6 @@ namespace CommunicationLibrary
             { PacketType.Flags.File | PacketType.Flags.Start, "Start File" },
             { PacketType.Flags.File | PacketType.Flags.End, "End File" }
         };
-        //TODO: Change the Handle responses to this dictionary -> handling becomes modular
         private Dictionary<PacketType.Flags, Action> _responses = new();
         //private Dictionary<PacketType.Flags, Func<object[], object>> _responses = new();
         //private Dictionary<PacketType.Flags, Action<object[], object>> _responses = new();
@@ -68,61 +67,6 @@ namespace CommunicationLibrary
         }
         private TextWriter? _textWriter;
 
-        #region OldHandle-KeepSafe
-        //public void Handle(byte[] packetBytes)
-        //{
-        //    Handle(new Packet(packetBytes));
-        //}
-
-        //public void Handle(Packet packet)
-        //{
-        //    if (_textWriter == null || _encoding == null)
-        //        throw new Exception("either _textWriter or _encoding is null");
-
-        //    switch (packet.Flags)
-        //    {
-        //        //=============
-        //        //Messages
-        //        case PacketType.Flags.Message | PacketType.Flags.Single:
-        //            _textWriter.WriteLine(_encoding.GetString(packet.Bytes));
-        //            break;
-
-        //        case PacketType.Flags.Message | PacketType.Flags.Start:
-        //            _longBuffer.Add(packet.Bytes);
-        //            break;
-
-        //        case PacketType.Flags.Message | PacketType.Flags.End:
-        //            _longBuffer.Add(packet.Bytes);
-
-        //            foreach (byte[] bytes in _longBuffer)
-        //                _textWriter.Write(_encoding.GetString(bytes));
-        //            _textWriter.WriteLine();
-        //            _longBuffer.Clear();
-        //            break;
-
-        //        // If the _longBuffer is in use, then the
-        //        // base messages are added to it
-        //        case PacketType.Flags.Message:
-        //            if (_longBuffer.Count > 0)
-        //                _longBuffer.Add(packet.Bytes);
-        //            break;
-
-        //        //=============
-        //        //Files
-        //        //TODO: FILES
-        //        //https://code-maze.com/convert-byte-array-to-file-csharp/
-        //        case PacketType.Flags.File | PacketType.Flags.Single:
-        //            break;
-        //        case PacketType.Flags.File | PacketType.Flags.Start:
-        //            break;
-        //        case PacketType.Flags.File | PacketType.Flags.End:
-        //            break;
-        //        case PacketType.Flags.File:
-        //            break;
-        //    }
-        //}
-        #endregion
-
         public Packet Handle(byte[] packetBytes) => Handle(new Packet(packetBytes));
         public Packet Handle(Packet packet)
         {
@@ -133,8 +77,7 @@ namespace CommunicationLibrary
                 if (_encoding == null)
                     throw new Exception("_encoding is null");
 
-#warning FINISH THIS YOU PIECE OF SHIT <3
-#warning bez heit
+#warning Finish the Handle method
 
                 //_responses[packet.Flags]
 
@@ -142,7 +85,6 @@ namespace CommunicationLibrary
                 {
                     //=============
                     //Responses
-                    //TODO: Responses
                     case PacketType.Flags.Response:
                     case PacketType.Flags.RspSingleMsg:
                         _textWriter.WriteLine(packet.ToString());
@@ -184,13 +126,8 @@ namespace CommunicationLibrary
 
                     //=============
                     //Files
-                    //TODO: FILES
                     //https://code-maze.com/convert-byte-array-to-file-csharp/
                     case PacketType.Flags.File | PacketType.Flags.Single:
-#warning (:
-#warning dovurshi go
-#warning pederas takuv
-#warning tuka ima mn heit
                         FileStruct fstruct = packet.File;
                         if (packet.File.Name.Length == 0)
                             fstruct.Name = Path.GetRandomFileName();
@@ -221,7 +158,7 @@ namespace CommunicationLibrary
             catch (Exception e)
             {
                 return new Packet(
-                    PacketType.RspShortErr,
+                    PacketType.RspSingleErr,
                     e.Message + " | {" + packet + "}",
                     packet.Id);
             }

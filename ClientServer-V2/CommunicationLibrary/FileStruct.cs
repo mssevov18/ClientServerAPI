@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -28,7 +28,6 @@ namespace CommunicationLibrary
     {
         public byte NameLength;
         public string Name;
-        //TODO: add type (.txt)
         //public string Type;
         public byte[] Data;
 

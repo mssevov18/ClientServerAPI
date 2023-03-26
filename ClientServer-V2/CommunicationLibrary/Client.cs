@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -133,11 +133,6 @@ namespace CommunicationLibrary
             }
         }
 
-        //TODO: Handle Server shutdown
-        //TODO: Handle User disconnect
-        //TODO: Start + End File
-        //TODO: User Recieve Data
-
         /// <summary>
         /// Send a string
         /// </summary>
@@ -154,8 +149,8 @@ namespace CommunicationLibrary
         }
 
 
-        //TODO: UPDATE SendLongMsg
-        public void SendLongMsg(byte[] bytes)
+#warning Outdated Method
+		public void SendLongMsg(byte[] bytes)
         {
             int dataLength = bytes.Length;
             ushort iterations = 0;
@@ -174,8 +169,7 @@ namespace CommunicationLibrary
                     flags |= PacketType.Flags.Start;
                 else
                 {
-                    //TODO: Check if MsgMaxSize is checked against the correct size!
-                    if (dataLength <= Packet.__MsgMaxSize)
+					if (dataLength <= Packet.__MsgMaxSize)
                         flags |= PacketType.Flags.End;
                     else
                         flags = PacketType.Flags.Message;
@@ -212,9 +206,7 @@ namespace CommunicationLibrary
         public void SendFile(FileStruct fileStruct) =>
             SendPacket(new Packet(fileStruct));
 
-#warning old method
-#warning update
-        //TODO: Update method SendLongFile
+#warning Outdated Method
         public void SendLongFile(byte[] fileBytes)
         {
             int dataLength = fileBytes.Length;

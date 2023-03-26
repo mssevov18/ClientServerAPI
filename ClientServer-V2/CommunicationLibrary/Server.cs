@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -82,15 +82,13 @@ namespace CommunicationLibrary
                 bool bClientConnected = true;
 
                 Packet packet, response;
-#warning write encoding handshake
-                //TODO: write encoding handshake
+#warning Write encoding handshake
                 while (bClientConnected)
                 {
                     packet = Packet.GetPacketFromNetworkStream(network);
 
                     response = _handler.Handle(packet);
 
-                    //TODO: Replies with TwoWay flag
                     if (response.Flags.HasFlag(PacketType.Flags.Response))
                     {
                         network.Write(

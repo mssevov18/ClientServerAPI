@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
@@ -220,9 +220,6 @@ namespace CommunicationLibrary
             string filePath = Path.Combine(directoryPath, fileName);
 
             // write the bytes to the file
-#warning tup si brat
-#warning tva go komitni taka i shte si za cirka
-#warning nz ama tova e mn cringe
             //FileStruct = FileStruct.GetStruct(bytes);
 
             System.IO.File.WriteAllBytes(filePath, File.Data);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CommunicationLibrary
@@ -37,7 +37,6 @@ namespace CommunicationLibrary
         // have a continuity flag
 
         // TwoWay means that the Handler should send the sender a message
-        //TODO: Change Short to Single
         public static PacketType.Flags SingleMsg => Flags.SingleMsg;
         public static PacketType.Flags StartMsg => Flags.StartMsg;
         public static PacketType.Flags EndMsg => Flags.EndMsg;
@@ -52,7 +51,7 @@ namespace CommunicationLibrary
         public static PacketType.Flags EndErr => Flags.Error | Flags.End;
 
         public static PacketType.Flags RspSingleMsg => Flags.RspSingleMsg;
-        public static PacketType.Flags RspShortFile => Flags.File | Flags.Single | Flags.Response;
-        public static PacketType.Flags RspShortErr => Flags.Error | Flags.Single | Flags.Response;
+        public static PacketType.Flags RspSingleFile => Flags.File | Flags.Single | Flags.Response;
+        public static PacketType.Flags RspSingleErr => Flags.Error | Flags.Single | Flags.Response;
     }
 }
