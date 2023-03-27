@@ -25,37 +25,42 @@ namespace CommunicationLibrary.Logic
 			{ PacketType.Flags.File | PacketType.Flags.End, "End File" }
 		};
 
-		private Dictionary<PacketType.Flags, Action> preHandleAction = new Dictionary<PacketType.Flags, Action>();
-		private Dictionary<PacketType.Flags, Action> postHandleAction = new Dictionary<PacketType.Flags, Action>();
+
+		//private Dictionary<PacketType.Flags, Action> preHandleAction = new Dictionary<PacketType.Flags, Action>();
+		//private Dictionary<PacketType.Flags, Action> postHandleAction = new Dictionary<PacketType.Flags, Action>();
+
+		//public Reactor<Action> PreHandleReactor = new Reactor<Action>();
+		//public Reactor<Func<object, object[]>> PostHandleReactor = new Reactor<Func<object, object[]>>();
+
 
 		private List<byte[]> longBuffer = new List<byte[]>();
 		private FileStream fileStream;
 
+
+		//public void ChangePreHandleAction(PacketType.Flags flags, Action action)
+		//{
+		//	if (!preHandleAction.ContainsKey(flags))
+		//		return;
+
+		//	preHandleAction[flags] = action;
+		//}
+		//public void ChangePostHandleAction(PacketType.Flags flags, Action action)
+		//{
+		//	if (!postHandleAction.ContainsKey(flags))
+		//		return;
+
+		//	postHandleAction[flags] = action;
+		//}
+		//public void SetActions(Dictionary<PacketType.Flags, Action> preAction,
+		//						 Dictionary<PacketType.Flags, Action> postAction)
+		//{
+		//	preHandleAction = preAction;
+		//	postHandleAction = postAction;
+		//}
 		public PacketHandler(Encoding encoding, TextWriter textWriter)
 		{
 			Encoding = encoding;
 			TextWriter = textWriter;
-		}
-
-		public void ChangePreHandleAction(PacketType.Flags flags, Action action)
-		{
-			if (!preHandleAction.ContainsKey(flags))
-				return;
-
-			preHandleAction[flags] = action;
-		}
-		public void ChangePostHandleAction(PacketType.Flags flags, Action action)
-		{
-			if (!postHandleAction.ContainsKey(flags))
-				return;
-
-			postHandleAction[flags] = action;
-		}
-		public void SetActions(Dictionary<PacketType.Flags, Action> preAction,
-								 Dictionary<PacketType.Flags, Action> postAction)
-		{
-			preHandleAction = preAction;
-			postHandleAction = postAction;
 		}
 
 		public Encoding Encoding
