@@ -1,4 +1,4 @@
-﻿using CommunicationLibrary;
+using CommunicationLibrary;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace Test
         }
 
         [Test]
-        public void smGetBytes()
+        public void sm_GetBytes()
         {
             FileStruct @struct = new FileStruct(5, "Hello", _encoding.GetBytes("yabadabado"));
 
@@ -40,7 +40,7 @@ namespace Test
         }
 
         [Test]
-        public void smGetStruct()
+        public void sm_GetStruct()
         {
             byte[] bytes = new byte[]
             { 5, 72, 101, 108, 108, 111, 121, 97, 98, 97, 100, 97, 98, 97, 100, 111};

@@ -68,7 +68,7 @@ namespace Test
         }
 
         [Test]
-        public void PropertyCount_Increment()
+        public void prop_Count_Increment()
         {
             uint startId = Packet.PacketGenCount;
 
@@ -81,7 +81,7 @@ namespace Test
         }
 
         [Test]
-        public void mToByteArray()
+        public void m_ToByteArray()
         {
             Packet packet = new Packet(PacketType.SingleMsg, msgBytes, 1);
 
@@ -90,7 +90,7 @@ namespace Test
         }
 
         [Test]
-        public void smGetPacketFromStreamReader()
+        public void sm_GetPacketFromStreamReader()
         {
             StreamReader reader = new StreamReader(new MemoryStream(pckBytes));
             
@@ -101,7 +101,7 @@ namespace Test
         }
 
         [Test]
-        public void mWriteToFile()
+        public void m_WriteToFile()
         {
             // Arrange
             string fileName = "test.txt";

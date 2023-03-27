@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System;
 using System.Text;
 using System.Net;
@@ -37,7 +37,7 @@ namespace Test
 		[TestCase("Lorem ipsum")]
 		[TestCase("Dolor Sit amet")]
 		[TestCase("Здравей pederasso!")]
-		public void mHandle_ShortMessage(string msg)
+		public void m_Handle_ShortMessage(string msg)
 		{
 			_builder.Clear();
 			Packet packet = new Packet(PacketType.SingleMsg, msg);
@@ -51,7 +51,7 @@ namespace Test
 
 		private string[] strings;
 		[Test]
-		public void mHandle_LongMessage()
+		public void m_Handle_LongMessage()
 		{
 			strings = new string[] { "Hello ", "world!" };
 			_builder.Clear();
@@ -67,7 +67,7 @@ namespace Test
 		}
 
 		[Test]
-		public void mHandle_LongERMessage()
+		public void m_Handle_LongERMessage()
 		{
 			strings = new string[] { "He", "llo ", "wor", "ld!" };
 			_builder.Clear();
@@ -87,7 +87,7 @@ namespace Test
 		}
 
 		[Test]
-		public void mHandle_Response_Message()
+		public void m_Handle_Response_Message()
         {
 			string msg = "";
             _builder.Clear();
@@ -102,7 +102,7 @@ namespace Test
         }
 
 		[Test]
-		public void mHandle_Response_Message_Fail()
+		public void m_Handle_Response_Message_Fail()
 		{
 			string msg = "";
             _builder.Clear();
@@ -118,7 +118,7 @@ namespace Test
 		}
 
 		[Test]
-		public void mHandle_File()
+		public void m_Handle_File()
 		{
 			
 		}

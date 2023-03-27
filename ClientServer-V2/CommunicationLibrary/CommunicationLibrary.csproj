@@ -7,6 +7,11 @@
     <Copyright>mssevov18</Copyright>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <Configurations>Debug;Release;Release Lib</Configurations>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <SignAssembly>False</SignAssembly>
+    <Authors>mssevov18</Authors>
+    <Company>VSCPI</Company>
+    <Description>TCP/IP Client/Server based communication library. Communicates via Packages, that allow file sharing and error handling</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -17,10 +22,18 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <Optimize>False</Optimize>
+    <Optimize>True</Optimize>
     <DebugType>embedded</DebugType>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <WarningsAsErrors>$(WarningsAsErrors);NU1605;FIX;TODO;BROKEN</WarningsAsErrors>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Lib|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(ProjectDir)bin\$(Configuration)\net6.0\CommunicationLibrary.dll&quot; &quot;$(ProjectDir)..\..\..\..\..\..\Documents\libraries\CommunicationLibrary.dll&quot; /Y" />
+  </Target>
 
 </Project>
