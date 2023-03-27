@@ -10,8 +10,9 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <SignAssembly>False</SignAssembly>
     <Authors>mssevov18</Authors>
-    <Company>VSCPI</Company>
     <Description>TCP/IP Client/Server based communication library. Communicates via Packages, that allow file sharing and error handling</Description>
+    <AssemblyVersion>0.1.4.2</AssemblyVersion>
+    <AnalysisLevel>6.0-all</AnalysisLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

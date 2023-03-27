@@ -1,13 +1,10 @@
-﻿using CommunicationLibrary;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Timers;
+using CommunicationLibrary.Models;
 
 namespace Test
 {
-    internal static partial class Utils
+	internal static partial class Utils
     {
         public static void PrintDebug(string expected, string actual)
         {
@@ -59,10 +56,10 @@ namespace Test
         public static byte[] TrimPacketMessage(Packet packet, byte[] input)
         {
 #warning WHAT DO YOU DO?
-            if (packet.Size != Packet.__MsgMaxSize)
+            if (packet.Size != Packet.__MsgMaxSize__)
             {
                 byte[] output = new byte[packet.Size];
-                Buffer.BlockCopy(input, Packet.__zHeaderSize, output, 0, packet.Size);
+                Buffer.BlockCopy(input, Packet.__zHeaderSize__, output, 0, packet.Size);
 
                 return output;
             }

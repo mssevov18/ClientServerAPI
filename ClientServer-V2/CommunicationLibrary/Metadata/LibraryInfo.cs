@@ -1,15 +1,11 @@
 using System;
+using System.Reflection;
 
-namespace CommunicationLibrary
+namespace CommunicationLibrary.Metadata
 {
 	public static class LibraryInfo
 	{
-		public static string Version => $"{MajorVersion}.{MinorVersion}.{Patch}";
-		public static readonly int MajorVersion = 1;
-		public static readonly int MinorVersion = 2;
-		public static readonly int Patch = 4;
-
-		public static readonly DateTime BuildDate = new DateTime(2023, 3, 23, 14, 40, 0);
+		public static readonly Version Version = Assembly.GetExecutingAssembly().GetName().Version;
 
 		public static readonly string[] RoadMapFeatures = new string[]
 		{

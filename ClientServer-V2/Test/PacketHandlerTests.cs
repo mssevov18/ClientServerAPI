@@ -1,16 +1,17 @@
-using NUnit.Framework;
 using System;
 using System.Text;
-using System.Net;
 using System.IO;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
+using NUnit.Framework;
+
 using static Test.Utils;
-using CommunicationLibrary;
+
+using CommunicationLibrary.Logic;
+using CommunicationLibrary.Models;
 
 namespace Test
 {
-    public class PacketHandlerTests
+	public class PacketHandlerTests
 	{
 		private StringWriter _writer;
 		private StringBuilder _builder;
@@ -27,7 +28,7 @@ namespace Test
 			_encoding = Encoding.UTF8;
 
 			_handler = new PacketHandler(_encoding, _writer);
-			Packet.Encoding = _encoding;
+			Packet._Encoding = _encoding;
 			//Packet.SetEncoding(_encoding);
 		}
 
@@ -40,9 +41,9 @@ namespace Test
 		public void m_Handle_ShortMessage(string msg)
 		{
 			_builder.Clear();
-			Packet packet = new Packet(PacketType.SingleMsg, msg);
+			Packet packet = new Packet(PacketType.Flags.SingleMsg, msg);
 
-            _handler.Handle(packet);
+			_handler.Handle(packet);
 
 			PrintDebug(msg, CleanResult);
 			Assert.That(CleanResult,
@@ -55,8 +56,8 @@ namespace Test
 		{
 			strings = new string[] { "Hello ", "world!" };
 			_builder.Clear();
-			Packet p1 = new Packet(PacketType.StartMsg, strings[0]);
-			Packet p2 = new Packet(PacketType.EndMsg, strings[1]);
+			Packet p1 = new Packet(PacketType.Flags.StartMsg, strings[0]);
+			Packet p2 = new Packet(PacketType.Flags.EndMsg, strings[1]);
 
 			_handler.Handle(p1);
 			_handler.Handle(p2);
@@ -71,10 +72,10 @@ namespace Test
 		{
 			strings = new string[] { "He", "llo ", "wor", "ld!" };
 			_builder.Clear();
-			Packet p1 = new Packet(PacketType.StartMsg, strings[0]);
+			Packet p1 = new Packet(PacketType.Flags.StartMsg, strings[0]);
 			Packet p2 = new Packet(PacketType.Flags.Message, strings[1]);
 			Packet p3 = new Packet(PacketType.Flags.Message, strings[2]);
-			Packet p4 = new Packet(PacketType.EndMsg, strings[3]);
+			Packet p4 = new Packet(PacketType.Flags.EndMsg, strings[3]);
 
 			_handler.Handle(p1);
 			_handler.Handle(p2);
@@ -88,39 +89,39 @@ namespace Test
 
 		[Test]
 		public void m_Handle_Response_Message()
-        {
+		{
 			string msg = "";
-            _builder.Clear();
+			_builder.Clear();
 
-            Packet packet = new Packet(PacketType.SingleMsg, msg);
+			Packet packet = new Packet(PacketType.Flags.SingleMsg, msg);
 
-            Packet response = _handler.Handle(packet);
+			Packet response = (Packet)_handler.Handle(packet);
 
-            PrintDebug(packet.ToString(), response.ToString());
-            Assert.That(packet.Id,
-                Is.EqualTo(response.Id));
-        }
+			PrintDebug(packet.ToString(), response.ToString());
+			Assert.That(packet.Id,
+				Is.EqualTo(response.Id));
+		}
 
 		[Test]
 		public void m_Handle_Response_Message_Fail()
 		{
 			string msg = "";
-            _builder.Clear();
+			_builder.Clear();
 
-            Packet packet = new Packet(PacketType.Flags.None, msg);
+			Packet packet = new Packet(PacketType.Flags.None, msg);
 
-            Packet response = _handler.Handle(packet);
+			Packet response = (Packet)_handler.Handle(packet);
 
-            PrintDebug(packet.ToString(), response.ToString());
-            Assert.That(packet.Id,
-                Is.EqualTo(response.Id));
+			PrintDebug(packet.ToString(), response.ToString());
+			Assert.That(packet.Id,
+				Is.EqualTo(response.Id));
 			Assert.True(response.Flags.HasFlag(PacketType.Flags.Error));
 		}
 
 		[Test]
 		public void m_Handle_File()
 		{
-			
+
 		}
 	}
 }

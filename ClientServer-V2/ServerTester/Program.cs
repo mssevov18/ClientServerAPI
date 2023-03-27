@@ -1,10 +1,10 @@
-using CommunicationLibrary;
-using System.Reflection;
 using System.Text;
+
+using CommunicationLibrary.EndPoints;
 
 namespace ServerTester
 {
-    internal class Program
+	internal class Program
     {
         static void Main()
         {
