@@ -7,7 +7,7 @@ using CommunicationLibrary.Models;
 
 namespace CommunicationLibrary.Logic
 {
-	public class PacketHandler
+	public class PacketHandler : BaseHandler
 	{
 		private readonly Dictionary<PacketType.Flags, string> _sResponses_ = new Dictionary<PacketType.Flags, string>()
 		{
@@ -63,19 +63,6 @@ namespace CommunicationLibrary.Logic
 			TextWriter = textWriter;
 		}
 
-		public Encoding Encoding
-		{
-			get => _encoding;
-			set
-			{
-				_encoding = value;
-				//Packet.SetEncoding(_encoding);
-				Packet._Encoding = _encoding;
-				FileStruct.Encoding = _encoding;
-			}
-		}
-		private Encoding _encoding;
-
 		public TextWriter TextWriter
 		{
 			get => _textWriter;
@@ -83,15 +70,14 @@ namespace CommunicationLibrary.Logic
 		}
 		private TextWriter _textWriter;
 
-		public Packet Handle(byte[] packetBytes) => Handle(new Packet(packetBytes));
-		public Packet Handle(Packet packet)
+		public override Packet Handle(Packet packet)
 		{
 			try
 			{
 				if (_textWriter == null)
 					throw new Exception("_textWriter is null");
-				if (_encoding == null)
-					throw new Exception("_encoding is null");
+				if (encoding == null)
+					throw new Exception("encoding is null");
 
 #warning Finish the Handle method
 
@@ -103,7 +89,7 @@ namespace CommunicationLibrary.Logic
 					//Responses
 					case PacketType.Flags.Response:
 					case PacketType.Flags.RspSingleMsg:
-						_textWriter.WriteLine((string)packet.ToString());
+						_textWriter.WriteLine(packet.ToString());
 
 						break;
 
@@ -112,20 +98,20 @@ namespace CommunicationLibrary.Logic
 					//Messages
 					case PacketType.Flags.SingleMsg:
 						//Clear operation
-						_textWriter.WriteLine(_encoding.GetString((byte[])packet.Bytes));
+						_textWriter.WriteLine(encoding.GetString(packet.Bytes));
 
 						break;
 					case PacketType.Flags.StartMsg:
-						longBuffer.Add((byte[])packet.Bytes);
+						longBuffer.Add(packet.Bytes);
 
 						break;
 
 					case PacketType.Flags.EndMsg:
 						//Clear operation
-						longBuffer.Add((byte[])packet.Bytes);
+						longBuffer.Add(packet.Bytes);
 
 						foreach (byte[] bytes in longBuffer)
-							_textWriter.Write(_encoding.GetString(bytes));
+							_textWriter.Write(encoding.GetString(bytes));
 						_textWriter.WriteLine();
 
 						longBuffer.Clear();
@@ -136,7 +122,7 @@ namespace CommunicationLibrary.Logic
 					// base messages are added to it
 					case PacketType.Flags.Message:
 						if (longBuffer.Count > 0)
-							longBuffer.Add((byte[])packet.Bytes);
+							longBuffer.Add(packet.Bytes);
 
 						break;
 

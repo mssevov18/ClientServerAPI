@@ -14,32 +14,31 @@ namespace CommunicationLibrary.EndPoints
 {
 	public class Client
 	{
-		private TcpClient _client;
-		private NetworkStream _nStream;
-		public bool IsConnected => _isConnected;
-		private bool _isConnected;
+		private TcpClient client;
+		private NetworkStream nStream;
+		public bool IsConnected => isConnected;
+		private bool isConnected;
 
-		private TextReader _textReader; // Console.In
-		private TextWriter _textWriter; // Console.Out
-		private Encoding _encoding; // Console.OutputEncoding
+		private TextReader textReader; // Console.In
+		private TextWriter textWriter; // Console.Out
+		private Encoding encoding; // Console.OutputEncoding
 
 		private Thread _receiveThread;
 
-		private Queue<Packet> _packQueue = new Queue<Packet>();
-		private Queue<uint> _packIdQueue = new Queue<uint>();
+		private Queue<Packet> packQueue = new Queue<Packet>();
+		private Queue<uint> packIdQueue = new Queue<uint>();
 
-		private PacketHandler _handler;
+		private IHandler handler;
 
-		public Client(TextReader textReader, TextWriter textWriter, Encoding encoding)
+		public Client(TextReader textReader, TextWriter textWriter, IHandler handler)
 		{
-			_client = new TcpClient();
-			_isConnected = false;
+			client = new TcpClient();
+			isConnected = false;
 
-			_textReader = textReader;
-			_textWriter = textWriter;
-			_encoding = encoding;
-
-			_handler = new PacketHandler(encoding, textWriter);
+			this.textReader = textReader;
+			this.textWriter = textWriter;
+			this.handler = handler;
+			this.encoding = handler.Encoding;
 		}
 
 		/// <summary>
@@ -58,9 +57,9 @@ namespace CommunicationLibrary.EndPoints
 		{
 			try
 			{
-				_client.Connect(ipAddress, port);
-				_nStream = _client.GetStream();
-				_isConnected = true;
+				client.Connect(ipAddress, port);
+				nStream = client.GetStream();
+				isConnected = true;
 
 				//_cThread = new Thread(HandleCommunication);
 				//_cThread.Start();
@@ -71,21 +70,21 @@ namespace CommunicationLibrary.EndPoints
 			catch (Exception)
 			{
 #warning Exception needs handling
-				_isConnected = false;
+				isConnected = false;
 				throw;
 			}
 		}
 
 		public void Disconnect()
 		{
-			if (!_isConnected)
+			if (!isConnected)
 				return;
 
 			try
 			{
-				_isConnected = false;
-				_client.Close();
-				_nStream.Close();
+				isConnected = false;
+				client.Close();
+				nStream.Close();
 			}
 			catch (Exception)
 			{
@@ -102,18 +101,18 @@ namespace CommunicationLibrary.EndPoints
 			try
 			{
 				//Handle incoming messages....
-				while (_isConnected)
+				while (isConnected)
 				{
 					// I think im overdoing this...
 					// The bank system needs a connection
 					// Not a 0ms 24/7 back and forth chat service ):
 					//kkdkkdkdkkdkdkmsdfmsdlkfmsldkfmslmflkmgvkmpoimcoinomvrotnvonec
-					_handler.Handle(Packet.GetPacketFromNetworkStream(_nStream));
+					handler.Handle(Packet.GetPacketFromNetworkStream(nStream));
 				}
 			}
 			catch (IOException)
 			{
-				_textWriter.WriteLine("Server terminated");
+				textWriter.WriteLine("Server terminated");
 			}
 		}
 
@@ -124,15 +123,15 @@ namespace CommunicationLibrary.EndPoints
 		{
 			Packet curPacket;
 
-			while (_isConnected && _packQueue.Count != 0)
+			while (isConnected && packQueue.Count != 0)
 			{
-				curPacket = _packQueue.Dequeue();
-				_packIdQueue.Enqueue(curPacket.Id);
-				_nStream.Write(
+				curPacket = packQueue.Dequeue();
+				packIdQueue.Enqueue(curPacket.Id);
+				nStream.Write(
 					curPacket.ToByteArray(),
 					0,
 					Packet.__zHeaderSize__ + curPacket.Size);
-				_nStream.Flush();
+				nStream.Flush();
 			}
 		}
 
@@ -141,7 +140,7 @@ namespace CommunicationLibrary.EndPoints
 		/// </summary>
 		/// <param name="data"></param>
 		public void SendMsg(string data) =>
-			SendMsg(_encoding.GetBytes(data));
+			SendMsg(encoding.GetBytes(data));
 
 		public void SendMsg(byte[] data)
 		{
@@ -178,7 +177,7 @@ namespace CommunicationLibrary.EndPoints
 						flags = PacketType.Flags.Message;
 				}
 
-				_packQueue.Enqueue(new Packet(PacketType.Flags.StartMsg, tempBuffer));
+				packQueue.Enqueue(new Packet(PacketType.Flags.StartMsg, tempBuffer));
 
 				iterations++;
 				dataLength -= Packet.__MsgMaxSize__;
@@ -192,7 +191,7 @@ namespace CommunicationLibrary.EndPoints
 
 			foreach (string line in File.ReadAllLines(path))
 			{
-				byte[] buffer = _encoding.GetBytes(line);
+				byte[] buffer = encoding.GetBytes(line);
 				Buffer.BlockCopy(buffer, 0, bytes, bytes.Length, buffer.Length);
 			}
 
@@ -235,7 +234,7 @@ namespace CommunicationLibrary.EndPoints
 						flags = PacketType.Flags.Message;
 				}
 
-				_packQueue.Enqueue(new Packet(flags, tempBuffer));
+				packQueue.Enqueue(new Packet(flags, tempBuffer));
 
 				iterations++;
 				dataLength -= Packet.__MsgMaxSize__;
@@ -247,7 +246,7 @@ namespace CommunicationLibrary.EndPoints
 			if (packet.Size != packet.Bytes.Length)
 				throw new Exception("Packet size mismatch!");
 
-			_packQueue.Enqueue(packet);
+			packQueue.Enqueue(packet);
 
 			SendLoop();
 		}

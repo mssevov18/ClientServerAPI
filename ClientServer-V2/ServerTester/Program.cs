@@ -1,6 +1,7 @@
 using System.Text;
 
 using CommunicationLibrary.EndPoints;
+using CommunicationLibrary.Logic;
 
 namespace ServerTester
 {
@@ -18,7 +19,7 @@ namespace ServerTester
 				{"tavan", "192.168.0.175" }
 			};
 
-            Server server = new Server(Console.Out, Console.OutputEncoding);
+			Server server = new Server(Console.Out, new PacketHandler(Console.OutputEncoding, Console.Out));
             //server.Start(IPAddress.Any, 50000);
             server.Start(ip["tavan"], 50000);
         }

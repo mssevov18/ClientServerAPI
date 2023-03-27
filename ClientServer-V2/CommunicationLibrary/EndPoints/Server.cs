@@ -11,23 +11,22 @@ namespace CommunicationLibrary.EndPoints
 {
 	public class Server
 	{
-		private TcpListener _server;
-		private IPAddress _ipAddress;
-		private int _port;
-		public bool IsRunning => _isRunning;
-		private bool _isRunning;
+		private TcpListener server;
+		private IPAddress ipAddress;
+		private int port;
+		public bool IsRunning => isRunning;
+		private bool isRunning;
 
-		private TextWriter _textWriter;
-		private Encoding _encoding;
+		private TextWriter textWriter;
+		private Encoding encoding;
 
-		private PacketHandler _handler;
+		private IHandler handler;
 
-		public Server(TextWriter writer, Encoding encoding)
+		public Server(TextWriter textWriter, IHandler handler)
 		{
-			_textWriter = writer;
-			_encoding = encoding;
-
-			_handler = new PacketHandler(encoding, writer);
+			this.textWriter = textWriter;
+			this.handler = handler;
+			this.encoding = handler.Encoding;
 		}
 
 		public void Start(string ipAddress, int port)
@@ -37,28 +36,28 @@ namespace CommunicationLibrary.EndPoints
 
 		public void Start(IPAddress ipAddress, int port)
 		{
-			_ipAddress = ipAddress;
-			_port = port;
-			_server = new TcpListener(_ipAddress, _port);
-			_server.Start();
-			_isRunning = true;
+			this.ipAddress = ipAddress;
+			this.port = port;
+			server = new TcpListener(this.ipAddress, this.port);
+			server.Start();
+			isRunning = true;
 
 			LoopClients();
 		}
 
 		public void Stop()
 		{
-			_server.Stop();
-			_isRunning = false;
+			server.Stop();
+			isRunning = false;
 		}
 
 
 		public void LoopClients()
 		{
-			while (_isRunning)
+			while (isRunning)
 			{
 				// wait for client connection
-				TcpClient newClient = _server.AcceptTcpClient();
+				TcpClient newClient = server.AcceptTcpClient();
 
 				// client found.
 				// create a thread to handle communication
@@ -85,7 +84,7 @@ namespace CommunicationLibrary.EndPoints
 				{
 					packet = Packet.GetPacketFromNetworkStream(network);
 
-					response = _handler.Handle(packet);
+					response = handler.Handle(packet);
 
 					if (response.Flags.HasFlag(PacketType.Flags.Response))
 					{
@@ -99,9 +98,8 @@ namespace CommunicationLibrary.EndPoints
 			}
 			catch (IOException)
 			{
-				_textWriter.WriteLine($"Client Disconnected");
+				textWriter.WriteLine($"Client Disconnected");
 			}
-
 		}
 	}
 }

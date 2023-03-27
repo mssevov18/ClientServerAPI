@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 
 using CommunicationLibrary.EndPoints;
+using CommunicationLibrary.Logic;
 using CommunicationLibrary.Models;
 
 namespace TesterProgram
@@ -22,7 +23,7 @@ namespace TesterProgram
                 {"tavan", "192.168.0.175" }
             };
 
-            Client client = new Client(Console.In, Console.Out, Console.OutputEncoding);
+			Client client = new Client(Console.In, Console.Out, new PacketHandler(Console.OutputEncoding, Console.Out));
 
             Console.ReadKey();
             Console.Write('\b');
