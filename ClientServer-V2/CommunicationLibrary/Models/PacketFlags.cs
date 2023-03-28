@@ -3,7 +3,7 @@ using System;
 namespace CommunicationLibrary.Models
 {
 	// Remove most unused methods after figuring out what to use..
-	public static class PacketType
+	public static class PacketFlags
 	{
 		[Flags]
 		public enum Flags : byte

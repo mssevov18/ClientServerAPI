@@ -31,7 +31,7 @@ namespace CommunicationLibrary.Models
 		/// <summary>
 		/// Gets or sets the flags of the packet.
 		/// </summary>
-		public PacketType.Flags Flags { get; set; }
+		public PacketFlags.Flags Flags { get; set; }
 
 		/// <summary>
 		/// Gets or sets the size of the packet.

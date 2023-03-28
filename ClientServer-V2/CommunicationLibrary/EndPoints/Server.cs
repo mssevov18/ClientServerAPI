@@ -86,7 +86,7 @@ namespace CommunicationLibrary.EndPoints
 
 					response = handler.Handle(packet);
 
-					if (response.Flags.HasFlag(PacketType.Flags.Response))
+					if (response.Flags.HasFlag(PacketFlags.Flags.Response))
 					{
 						network.Write(
 							response.ToByteArray(),

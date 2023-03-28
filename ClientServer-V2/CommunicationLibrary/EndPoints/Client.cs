@@ -147,7 +147,7 @@ namespace CommunicationLibrary.EndPoints
 			if (data.Length > Packet.__MsgMaxSize__)
 				SendLongMsg(data);
 			else
-				SendPacket(new Packet(PacketType.Flags.SingleMsg, data));
+				SendPacket(new Packet(PacketFlags.Flags.SingleMsg, data));
 		}
 
 
@@ -165,19 +165,19 @@ namespace CommunicationLibrary.EndPoints
 								 Packet.__MsgMaxSize__);
 
 
-				PacketType.Flags flags = PacketType.Flags.Message;
+				PacketFlags.Flags flags = PacketFlags.Flags.Message;
 
 				if (iterations == 0)
-					flags |= PacketType.Flags.Start;
+					flags |= PacketFlags.Flags.Start;
 				else
 				{
 					if (dataLength <= Packet.__MsgMaxSize__)
-						flags |= PacketType.Flags.End;
+						flags |= PacketFlags.Flags.End;
 					else
-						flags = PacketType.Flags.Message;
+						flags = PacketFlags.Flags.Message;
 				}
 
-				packQueue.Enqueue(new Packet(PacketType.Flags.StartMsg, tempBuffer));
+				packQueue.Enqueue(new Packet(PacketFlags.Flags.StartMsg, tempBuffer));
 
 				iterations++;
 				dataLength -= Packet.__MsgMaxSize__;
@@ -222,16 +222,16 @@ namespace CommunicationLibrary.EndPoints
 								 Packet.__MsgMaxSize__);
 
 
-				PacketType.Flags flags = PacketType.Flags.File;
+				PacketFlags.Flags flags = PacketFlags.Flags.File;
 
 				if (iterations == 0)
-					flags |= PacketType.Flags.Start;
+					flags |= PacketFlags.Flags.Start;
 				else
 				{
 					if (dataLength <= Packet.__MsgMaxSize__)
-						flags |= PacketType.Flags.End;
+						flags |= PacketFlags.Flags.End;
 					else
-						flags = PacketType.Flags.Message;
+						flags = PacketFlags.Flags.Message;
 				}
 
 				packQueue.Enqueue(new Packet(flags, tempBuffer));

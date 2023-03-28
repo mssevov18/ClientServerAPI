@@ -24,7 +24,7 @@ namespace Test.Packets
 			//Packet.SetEncoding(Encoding.UTF8);
 			Packet._Encoding = _encoding;
 			FileStruct.Encoding = _encoding;
-			expectedPacket = new Packet((PacketType.Flags)17, msgBytes, 1);
+			expectedPacket = new Packet((PacketFlags.Flags)17, msgBytes, 1);
 		}
 
 		[Test]
@@ -32,7 +32,7 @@ namespace Test.Packets
 		{
 			Console.Write(Utils.ToString(pckBytes));
 			Console.WriteLine();
-			Console.Write(Utils.ToString(new Packet((PacketType.Flags)17, msg, 1).ToByteArray()));
+			Console.Write(Utils.ToString(new Packet((PacketFlags.Flags)17, msg, 1).ToByteArray()));
 			Console.WriteLine();
 			Console.WriteLine(expectedPacket);
 			Console.WriteLine();
@@ -47,7 +47,7 @@ namespace Test.Packets
 		[Test]
 		public void ctor_Flags_ByteArray()
 		{
-			Packet packet = new Packet(PacketType.Flags.SingleMsg, msgBytes, 1);
+			Packet packet = new Packet(PacketFlags.Flags.SingleMsg, msgBytes, 1);
 
 			PrintDebug(pckBytes, packet.ToByteArray());
 			Console.WriteLine();
@@ -58,7 +58,7 @@ namespace Test.Packets
 		[Test]
 		public void ctor_String()
 		{
-			Packet packet = new Packet(PacketType.Flags.SingleMsg, msg, 1);
+			Packet packet = new Packet(PacketFlags.Flags.SingleMsg, msg, 1);
 
 			PrintDebug(pckBytes, packet.ToByteArray());
 			Assert.That(pckBytes, Is.EqualTo(packet.ToByteArray()));
@@ -80,7 +80,7 @@ namespace Test.Packets
 		[Test]
 		public void m_ToByteArray()
 		{
-			Packet packet = new Packet(PacketType.Flags.SingleMsg, msgBytes, 1);
+			Packet packet = new Packet(PacketFlags.Flags.SingleMsg, msgBytes, 1);
 
 			PrintDebug(pckBytes, packet.Bytes);
 			Assert.That(pckBytes, Is.EqualTo(packet.ToByteArray()));

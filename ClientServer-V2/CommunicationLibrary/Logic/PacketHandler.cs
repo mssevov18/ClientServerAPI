@@ -7,22 +7,23 @@ using CommunicationLibrary.Models;
 
 namespace CommunicationLibrary.Logic
 {
-	public class PacketHandler : BaseHandler
+	//Example Handler
+	public class ExamplePacketHandler : BaseHandler
 	{
-		private readonly Dictionary<PacketType.Flags, string> _sResponses_ = new Dictionary<PacketType.Flags, string>()
+		private readonly Dictionary<PacketFlags.Flags, string> _sResponses_ = new Dictionary<PacketFlags.Flags, string>()
 		{
-			{ PacketType.Flags.Message, "Message" },
-			{ PacketType.Flags.Message | PacketType.Flags.Single, "Single Message"},
-			{ PacketType.Flags.Message | PacketType.Flags.Start, "Start Message"},
-			{ PacketType.Flags.Message | PacketType.Flags.End, "End Message"},
-			{ PacketType.Flags.Message | PacketType.Flags.Single | PacketType.Flags.Response, "Single Response Message"},
+			{ PacketFlags.Flags.Message, "Message" },
+			{ PacketFlags.Flags.Message | PacketFlags.Flags.Single, "Single Message"},
+			{ PacketFlags.Flags.Message | PacketFlags.Flags.Start, "Start Message"},
+			{ PacketFlags.Flags.Message | PacketFlags.Flags.End, "End Message"},
+			{ PacketFlags.Flags.Message | PacketFlags.Flags.Single | PacketFlags.Flags.Response, "Single Response Message"},
 
-			{ PacketType.Flags.Error | PacketType.Flags.Single, "Single Error" },
-			{ PacketType.Flags.Error | PacketType.Flags.Single | PacketType.Flags.Response, "Single Error Response" },
+			{ PacketFlags.Flags.Error | PacketFlags.Flags.Single, "Single Error" },
+			{ PacketFlags.Flags.Error | PacketFlags.Flags.Single | PacketFlags.Flags.Response, "Single Error Response" },
 
-			{ PacketType.Flags.File | PacketType.Flags.Single, "Single File" },
-			{ PacketType.Flags.File | PacketType.Flags.Start, "Start File" },
-			{ PacketType.Flags.File | PacketType.Flags.End, "End File" }
+			{ PacketFlags.Flags.File | PacketFlags.Flags.Single, "Single File" },
+			{ PacketFlags.Flags.File | PacketFlags.Flags.Start, "Start File" },
+			{ PacketFlags.Flags.File | PacketFlags.Flags.End, "End File" }
 		};
 
 
@@ -57,7 +58,7 @@ namespace CommunicationLibrary.Logic
 		//	preHandleAction = preAction;
 		//	postHandleAction = postAction;
 		//}
-		public PacketHandler(Encoding encoding, TextWriter textWriter)
+		public ExamplePacketHandler(Encoding encoding, TextWriter textWriter)
 		{
 			Encoding = encoding;
 			TextWriter = textWriter;
@@ -87,8 +88,8 @@ namespace CommunicationLibrary.Logic
 				{
 					//=============
 					//Responses
-					case PacketType.Flags.Response:
-					case PacketType.Flags.RspSingleMsg:
+					case PacketFlags.Flags.Response:
+					case PacketFlags.Flags.RspSingleMsg:
 						_textWriter.WriteLine(packet.ToString());
 
 						break;
@@ -96,17 +97,17 @@ namespace CommunicationLibrary.Logic
 
 					//=============
 					//Messages
-					case PacketType.Flags.SingleMsg:
+					case PacketFlags.Flags.SingleMsg:
 						//Clear operation
 						_textWriter.WriteLine(encoding.GetString(packet.Bytes));
 
 						break;
-					case PacketType.Flags.StartMsg:
+					case PacketFlags.Flags.StartMsg:
 						longBuffer.Add(packet.Bytes);
 
 						break;
 
-					case PacketType.Flags.EndMsg:
+					case PacketFlags.Flags.EndMsg:
 						//Clear operation
 						longBuffer.Add(packet.Bytes);
 
@@ -120,7 +121,7 @@ namespace CommunicationLibrary.Logic
 
 					// If the _longBuffer is in use, then the
 					// base messages are added to it
-					case PacketType.Flags.Message:
+					case PacketFlags.Flags.Message:
 						if (longBuffer.Count > 0)
 							longBuffer.Add(packet.Bytes);
 
@@ -129,7 +130,7 @@ namespace CommunicationLibrary.Logic
 					//=============
 					//Files
 					//https://code-maze.com/convert-byte-array-to-file-csharp/
-					case PacketType.Flags.File | PacketType.Flags.Single:
+					case PacketFlags.Flags.File | PacketFlags.Flags.Single:
 						FileStruct fstruct = packet.File;
 						if (packet.File.Name.Length == 0)
 							fstruct.Name = Path.GetRandomFileName();
@@ -144,18 +145,18 @@ namespace CommunicationLibrary.Logic
 						break;
 
 					//Clear operation
-					case PacketType.Flags.File | PacketType.Flags.Start:
+					case PacketFlags.Flags.File | PacketFlags.Flags.Start:
 						throw new NotImplementedException();
-					case PacketType.Flags.File | PacketType.Flags.End:
+					case PacketFlags.Flags.File | PacketFlags.Flags.End:
 						//Clear operation
 						throw new NotImplementedException();
-					case PacketType.Flags.File:
+					case PacketFlags.Flags.File:
 						throw new NotImplementedException();
 
-					case PacketType.Flags.Group:
+					case PacketFlags.Flags.Group:
 						throw new NotImplementedException();
 
-					case PacketType.Flags.None:
+					case PacketFlags.Flags.None:
 						throw new ArgumentNullException("Packet's has no flags");
 				}
 
@@ -163,13 +164,13 @@ namespace CommunicationLibrary.Logic
 			catch (Exception e)
 			{
 				return new Packet(
-					PacketType.Flags.RspSingleErr,
+					PacketFlags.Flags.RspSingleErr,
 					e.Message + " | {" + packet + "}",
 					packet.Id);
 			}
 
 			return new Packet(
-				PacketType.Flags.RspSingleMsg,
+				PacketFlags.Flags.RspSingleMsg,
 				_sResponses_[packet.Flags] + ":: {" + packet + "}",
 				packet.Id);
 		}
