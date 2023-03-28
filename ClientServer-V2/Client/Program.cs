@@ -6,6 +6,7 @@ using System.Text;
 using CommunicationLibrary.EndPoints;
 using CommunicationLibrary.Logic;
 using CommunicationLibrary.Models;
+using CommunicationLibrary.Models.Features;
 
 namespace TesterProgram
 {

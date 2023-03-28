@@ -1,7 +1,10 @@
 using System.Text;
 
+
 namespace CommunicationLibrary.Models
 {
+	using Features;
+
 	/// <summary>
 	/// Defines properties and methods that a communication packet should have.
 	/// </summary>
@@ -27,6 +30,11 @@ namespace CommunicationLibrary.Models
 		/// The encoding used for the packet.
 		/// </summary>
 		public static Encoding Encoding;
+
+		/// <summary>
+		/// Gets or sets the flags of the packet.
+		/// </summary>
+		public byte FlagsByte { get; set; }
 
 		/// <summary>
 		/// Gets or sets the flags of the packet.

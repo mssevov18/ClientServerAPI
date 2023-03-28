@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using CommunicationLibrary.Models;
 
 namespace CommunicationLibrary.Logic
 {
+	using Models;
+	using Models.Features;
+
 	//Example Handler
 	public class ExamplePacketHandler : BaseHandler
 	{
@@ -58,7 +60,8 @@ namespace CommunicationLibrary.Logic
 		//	preHandleAction = preAction;
 		//	postHandleAction = postAction;
 		//}
-		public ExamplePacketHandler(Encoding encoding, TextWriter textWriter)
+		public ExamplePacketHandler(Encoding encoding) : base(encoding) => TextWriter = null;
+		public ExamplePacketHandler(Encoding encoding, TextWriter textWriter) : base(encoding)
 		{
 			Encoding = encoding;
 			TextWriter = textWriter;

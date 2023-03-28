@@ -4,11 +4,13 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-using CommunicationLibrary.Logic;
-using CommunicationLibrary.Models;
 
 namespace CommunicationLibrary.EndPoints
 {
+	using Logic;
+	using Models;
+	using Models.Features;
+
 	public class Server
 	{
 		private TcpListener server;

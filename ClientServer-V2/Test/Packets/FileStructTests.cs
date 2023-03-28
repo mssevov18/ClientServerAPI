@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 using static Test.Utils;
 
-using CommunicationLibrary.Models;
+using CommunicationLibrary.Models.Features;
 
 namespace Test.Packets
 {

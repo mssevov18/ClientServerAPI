@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace CommunicationLibrary.Models
+namespace CommunicationLibrary.Models.Features
 {
 	/// <summary>
 	/// POCO struct to contain fileInfo

@@ -1,6 +1,6 @@
 using System;
 
-namespace CommunicationLibrary.Models
+namespace CommunicationLibrary.Models.Features
 {
 	// Remove most unused methods after figuring out what to use..
 	public static class PacketFlags

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CommunicationLibrary.Models;
-
 namespace CommunicationLibrary.Logic
 {
+	using Models;
+	using Models.Features;
+
 	public abstract class BaseHandler : IHandler
 	{
 		public Encoding Encoding
@@ -21,6 +22,8 @@ namespace CommunicationLibrary.Logic
 			}
 		}
 		protected Encoding encoding;
+
+		public BaseHandler(Encoding encoding) => Encoding = encoding;
 
 		public abstract Packet Handle(Packet packet);
 	}

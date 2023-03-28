@@ -8,6 +8,7 @@ using static Test.Utils;
 
 using CommunicationLibrary.Logic;
 using CommunicationLibrary.Models;
+using CommunicationLibrary.Models.Features;
 
 namespace Test
 {

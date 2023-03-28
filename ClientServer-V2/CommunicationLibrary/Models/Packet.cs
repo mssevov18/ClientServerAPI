@@ -5,6 +5,10 @@ using System.Text;
 
 namespace CommunicationLibrary.Models
 {
+	using Features;
+
+	using static Features.PacketFlags;
+
 	public class Packet : IPacket
 	{
 		public static uint _PacketGenCount => _packetGenCount;
@@ -15,17 +19,28 @@ namespace CommunicationLibrary.Models
 		public static readonly ushort __MsgMaxSize__ = ushort.MaxValue;
 		public static readonly byte __zHeaderSize__ = 7;
 
-		public PacketFlags.Flags Flags
+		public byte FlagsByte
 		{
-			get => flags;
+			get => flagsByte;
+			set
+			{
+				flagsByte = value;
+				flags = (Flags)value;
+			}
+		}
+		protected byte flagsByte;
+
+		public Flags Flags
+		{
+			get => (Flags)flagsByte;
 			set
 			{
 				flags = value;
-				//if (value == FileProtocol.AssignedFlag)
-				//	protocol = new ProtocolFamily();
+				flagsByte = (byte)value;
 			}
 		}
-		protected PacketFlags.Flags flags;
+		[NonSerialized]
+		protected Flags flags;
 
 		public ushort Size
 		{
@@ -39,7 +54,7 @@ namespace CommunicationLibrary.Models
 			get => id;
 			set
 			{
-				if (flags.HasFlag(PacketFlags.Flags.Response))
+				if (Flags.HasFlag(Flags.Response))
 					id = value;
 			}
 		}
@@ -67,7 +82,7 @@ namespace CommunicationLibrary.Models
 		{
 			get
 			{
-				if (flags.HasFlag(PacketFlags.Flags.File))
+				if (Flags.HasFlag(Flags.File))
 					return FileStruct.GetStruct(bytes);
 
 				throw new Exception("Packet is not a file!");
@@ -94,7 +109,7 @@ namespace CommunicationLibrary.Models
 		/// <param name="message"></param>
 		/// <param name="id"></param>
 		/// <exception cref="Exception"></exception>
-		public Packet(PacketFlags.Flags flags, string message, uint id = 0)
+		public Packet(Flags flags, string message, uint id = 0)
 		{
 			if (_Encoding == null)
 				throw new Exception("Encoding can't be null!");
@@ -110,7 +125,7 @@ namespace CommunicationLibrary.Models
 		/// <param name="flags"></param>
 		/// <param name="msgBytes"></param>
 		/// <param name="id"></param>
-		public Packet(PacketFlags.Flags flags, byte[] msgBytes, uint id = 0)
+		public Packet(Flags flags, byte[] msgBytes, uint id = 0)
 		{
 			Flags = flags;
 			Bytes = msgBytes;
@@ -122,7 +137,7 @@ namespace CommunicationLibrary.Models
 		/// <param name="packetBytes"></param>
 		public Packet(byte[] packetBytes)
 		{
-			Flags = (PacketFlags.Flags)packetBytes[0];
+			Flags = (Flags)packetBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
 													   packetBytes[2] });
 			Bytes = new ArraySegment<byte>(packetBytes, __zHeaderSize__, Size).ToArray();
@@ -139,7 +154,7 @@ namespace CommunicationLibrary.Models
 		/// <param name="id"></param>
 		public Packet(byte[] inputBytes, uint id = 0)
 		{
-			Flags = (PacketFlags.Flags)inputBytes[0];
+			Flags = (Flags)inputBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { inputBytes[1],
 													   inputBytes[2] });
 			Bytes = new ArraySegment<byte>(inputBytes, __zHeaderSize__, Size).ToArray();
@@ -156,7 +171,7 @@ namespace CommunicationLibrary.Models
 			if (fileStruct.Length > __MsgMaxSize__)
 				throw new ArgumentOutOfRangeException();
 
-			Flags = PacketFlags.Flags.SingleFile;
+			Flags = Flags.SingleFile;
 			//fileStruct.NameLength;
 
 			Bytes = FileStruct.GetBytes(fileStruct);
@@ -180,7 +195,7 @@ namespace CommunicationLibrary.Models
 		/// <inheritdoc />
 		public void Clear()
 		{
-			Flags = PacketFlags.Flags.None;
+			Flags = Flags.None;
 			Size = 0;
 			Array.Clear(Bytes, 0, Bytes.Length);
 		}
@@ -212,7 +227,7 @@ namespace CommunicationLibrary.Models
 		{
 			Span<byte> buffer = _Encoding.GetBytes(reader.ReadToEnd());
 
-			return new Packet((PacketFlags.Flags)buffer[0],
+			return new Packet((Flags)buffer[0],
 				buffer.Slice(7, BitConverter.ToUInt16(buffer.Slice(1, 2))).ToArray(),
 				BitConverter.ToUInt32(buffer.Slice(3, 4)));
 		}
@@ -227,18 +242,17 @@ namespace CommunicationLibrary.Models
 			byte[] buffer = new byte[__zHeaderSize__];
 
 			// Get the first 7 Bytes to create the header
-			PacketFlags.Flags flags =    //   Flags - 1B
-				(PacketFlags.Flags)network.ReadByte();
-			network.Read(buffer, 0, 2); //   Size  - 2B
+			byte flagsByte = (byte)network.ReadByte();	//   Flags - 1B
+			network.Read(buffer, 0, 2);					//   Size  - 2B
 			ushort size = BitConverter.ToUInt16(buffer, 0);
-			network.Read(buffer, 0, 4); //   Id    - 4B
+			network.Read(buffer, 0, 4);					//   Id    - 4B
 			uint id = BitConverter.ToUInt32(buffer, 0);
 
 			buffer = new byte[size];
 			network.Read(buffer, 0, size);
 			byte[] bytes = buffer;
 
-			return new Packet(flags, bytes, id);
+			return new Packet((Flags)flagsByte, bytes, id);
 		}
 
 		/// <summary>
