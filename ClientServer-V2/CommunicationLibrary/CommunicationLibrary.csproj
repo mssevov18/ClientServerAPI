@@ -34,7 +34,7 @@
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)bin\Release\net6.0\CommunicationLibrary.dll&quot; &quot;$(ProjectDir)..\..\..\..\..\..\Documents\libraries\CommunicationLibrary.dll&quot; /Y&#xD;&#xA;xcopy &quot;$(ProjectDir)bin\Release\net6.0\CommunicationLibrary.dll&quot; &quot;$(ProjectDir)..\..\..\..\Thesis2023\2223-otj-12-project-repo-csharp-mssevov18\libraries\CommunicationLibrary.dll&quot; /Y" />
+    <Exec Command="call postBuild.bat" />
   </Target>
 
 </Project>
