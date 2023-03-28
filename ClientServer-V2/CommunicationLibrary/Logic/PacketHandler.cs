@@ -153,7 +153,7 @@ namespace CommunicationLibrary.Logic
 					case PacketFlags.Flags.File:
 						throw new NotImplementedException();
 
-					case PacketFlags.Flags.Group:
+					case PacketFlags.Flags.Custom:
 						throw new NotImplementedException();
 
 					case PacketFlags.Flags.None:

@@ -14,7 +14,7 @@ namespace CommunicationLibrary.Models
 			Message = 0b_0000_0001,  // Message 1
 			Error = 0b_0000_0010,    // Error - 2
 			File = 0b_0000_0100,     // File - 4
-			Group = 0b_0000_1000,    // Group - 8
+			Custom = 0b_0000_1000,   // Custom - 8
 
 			// Continuity
 			Single = 0b_0001_0000,   // Single - 16 
@@ -35,16 +35,15 @@ namespace CommunicationLibrary.Models
 			// Error
 			RspSingleErr = Response | Single | Error,
 
-			// Multiple
-			SingleGroup = Single | Group,
+			// Custom
+			SingleCustom = Single | Custom,
 
 			// if the message is between a startMsg and an endMsg it shouldnt
 			// have a continuity flag
 
 			// TwoWay means that the Handler should send the sender a message
 
-			// Multiple - Tells the handler to wait for all Packets listed:
-			// dataBytes[] = { (1, singleMsg), (2, singleFile) }
+			// Custom - Treated
 		}
 	}
 }
