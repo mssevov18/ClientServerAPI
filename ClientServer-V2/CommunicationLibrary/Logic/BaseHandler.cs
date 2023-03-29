@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Logic
 {
+	using System.IO;
+
 	using Models;
 	using Models.Features;
 
@@ -22,9 +24,24 @@ namespace CommunicationLibrary.Logic
 			}
 		}
 		protected Encoding encoding;
+		
+		public TextWriter ResultWriter
+		{
+			get => resultWriter;
+			set => resultWriter =value;
+		}
+		protected TextWriter resultWriter;
 
-		public BaseHandler(Encoding encoding) => Encoding = encoding;
-
+		public BaseHandler(Encoding encoding, TextWriter textWriter)
+		{
+			Encoding = encoding;
+			ResultWriter = textWriter;
+		}
+		/// <summary>
+		/// Returns the response packet
+		/// </summary>
+		/// <param name="packet"></param>
+		/// <returns></returns>
 		public abstract Packet Handle(Packet packet);
 	}
 }

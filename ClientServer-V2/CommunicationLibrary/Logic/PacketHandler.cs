@@ -60,25 +60,13 @@ namespace CommunicationLibrary.Logic
 		//	preHandleAction = preAction;
 		//	postHandleAction = postAction;
 		//}
-		public ExamplePacketHandler(Encoding encoding) : base(encoding) => TextWriter = null;
-		public ExamplePacketHandler(Encoding encoding, TextWriter textWriter) : base(encoding)
-		{
-			Encoding = encoding;
-			TextWriter = textWriter;
-		}
-
-		public TextWriter TextWriter
-		{
-			get => _textWriter;
-			set => _textWriter = value;
-		}
-		private TextWriter _textWriter;
+		public ExamplePacketHandler(Encoding encoding, TextWriter textWriter) : base(encoding, textWriter) { }
 
 		public override Packet Handle(Packet packet)
 		{
 			try
 			{
-				if (_textWriter == null)
+				if (resultWriter == null)
 					throw new Exception("_textWriter is null");
 				if (encoding == null)
 					throw new Exception("encoding is null");
@@ -93,7 +81,7 @@ namespace CommunicationLibrary.Logic
 					//Responses
 					case PacketFlags.Flags.Response:
 					case PacketFlags.Flags.RspSingleMsg:
-						_textWriter.WriteLine(packet.ToString());
+						resultWriter.WriteLine(packet.ToString());
 
 						break;
 
@@ -102,7 +90,7 @@ namespace CommunicationLibrary.Logic
 					//Messages
 					case PacketFlags.Flags.SingleMsg:
 						//Clear operation
-						_textWriter.WriteLine(encoding.GetString(packet.Bytes));
+						resultWriter.WriteLine(encoding.GetString(packet.Bytes));
 
 						break;
 					case PacketFlags.Flags.StartMsg:
@@ -115,8 +103,8 @@ namespace CommunicationLibrary.Logic
 						longBuffer.Add(packet.Bytes);
 
 						foreach (byte[] bytes in longBuffer)
-							_textWriter.Write(encoding.GetString(bytes));
-						_textWriter.WriteLine();
+							resultWriter.Write(encoding.GetString(bytes));
+						resultWriter.WriteLine();
 
 						longBuffer.Clear();
 
@@ -144,7 +132,7 @@ namespace CommunicationLibrary.Logic
 						fileStream.Write(fstruct.Data, 0, fstruct.Data.Length);
 						fileStream.Close();
 
-						_textWriter.WriteLine($"File {fstruct.Name} recieved");
+						resultWriter.WriteLine($"File {fstruct.Name} recieved");
 						break;
 
 					//Clear operation
@@ -156,7 +144,7 @@ namespace CommunicationLibrary.Logic
 					case PacketFlags.Flags.File:
 						throw new NotImplementedException();
 
-					case PacketFlags.Flags.Custom:
+					case (PacketFlags.Flags)0b_0000_1000:
 						throw new NotImplementedException();
 
 					case PacketFlags.Flags.None:

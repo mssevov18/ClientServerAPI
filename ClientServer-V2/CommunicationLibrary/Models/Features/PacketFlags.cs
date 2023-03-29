@@ -35,15 +35,12 @@ namespace CommunicationLibrary.Models.Features
 			// Error
 			RspSingleErr = Response | Single | Error,
 
-			// Custom
-			SingleCustom = Single | Custom,
-
 			// if the message is between a startMsg and an endMsg it shouldnt
 			// have a continuity flag
 
 			// TwoWay means that the Handler should send the sender a message
-
-			// Custom - Treated
 		}
+
+		public static readonly Flags[] Values = (Flags[])Enum.GetValues(typeof(Flags));
 	}
 }

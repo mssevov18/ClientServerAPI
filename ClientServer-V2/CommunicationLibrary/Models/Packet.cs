@@ -12,12 +12,12 @@ namespace CommunicationLibrary.Models
 	public class Packet : IPacket
 	{
 		public static uint _PacketGenCount => _packetGenCount;
-		protected static uint _packetGenCount = 1;
+		private static uint _packetGenCount = 1;
 
 		public static Encoding _Encoding;
 
-		public static readonly ushort __MsgMaxSize__ = ushort.MaxValue;
-		public static readonly byte __zHeaderSize__ = 7;
+		public const ushort __MsgMaxSize__ = ushort.MaxValue;
+		public const byte __zHeaderSize__ = 7;
 
 		public byte FlagsByte
 		{
@@ -28,11 +28,11 @@ namespace CommunicationLibrary.Models
 				flags = (Flags)value;
 			}
 		}
-		protected byte flagsByte;
+		private byte flagsByte;
 
 		public Flags Flags
 		{
-			get => (Flags)flagsByte;
+			get => flags;
 			set
 			{
 				flags = value;
@@ -40,14 +40,14 @@ namespace CommunicationLibrary.Models
 			}
 		}
 		[NonSerialized]
-		protected Flags flags;
+		private Flags flags;
 
 		public ushort Size
 		{
 			get => size;
 			set => size = value;
 		}
-		protected ushort size;
+		private ushort size;
 
 		public uint Id
 		{
@@ -58,7 +58,7 @@ namespace CommunicationLibrary.Models
 					id = value;
 			}
 		}
-		protected uint id;
+		private uint id;
 
 		public byte[] Bytes
 		{
@@ -76,7 +76,7 @@ namespace CommunicationLibrary.Models
 			get => _Encoding.GetString(bytes);
 			set => Bytes = _Encoding.GetBytes(value);
 		}
-		protected byte[] bytes;
+		private byte[] bytes;
 
 		public FileStruct File
 		{

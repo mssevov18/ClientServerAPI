@@ -65,6 +65,8 @@ namespace CommunicationLibrary.Models.Features
 			return bytes;
 		}
 
+		public static FileStruct GetStruct(Packet packet)
+			=> GetStruct(packet.Bytes);
 		public static FileStruct GetStruct(byte[] bytes)
 		{
 			return new FileStruct(

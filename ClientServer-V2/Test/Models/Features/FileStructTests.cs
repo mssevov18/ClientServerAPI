@@ -6,7 +6,7 @@ using static Test.Utils;
 
 using CommunicationLibrary.Models.Features;
 
-namespace Test.Packets
+namespace Test.Models.Features
 {
 	public class FileStructTests
 	{
