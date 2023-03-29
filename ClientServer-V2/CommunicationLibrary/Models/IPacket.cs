@@ -3,6 +3,8 @@ using System.Text;
 
 namespace CommunicationLibrary.Models
 {
+	using System;
+
 	using Features;
 
 	/// <summary>
@@ -35,11 +37,6 @@ namespace CommunicationLibrary.Models
 		/// Gets or sets the flags of the packet.
 		/// </summary>
 		public byte FlagsByte { get; set; }
-
-		/// <summary>
-		/// Gets or sets the flags of the packet.
-		/// </summary>
-		public PacketFlags.Flags Flags { get; set; }
 
 		/// <summary>
 		/// Gets or sets the size of the packet.

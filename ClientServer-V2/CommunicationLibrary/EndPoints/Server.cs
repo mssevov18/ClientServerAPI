@@ -7,11 +7,15 @@ using System.Threading;
 
 namespace CommunicationLibrary.EndPoints
 {
+	using System;
+
 	using Logic;
 	using Models;
 	using Models.Features;
 
-	public class Server
+	public class Server<TPacketFlags>
+		where TPacketFlags :
+					struct, Enum
 	{
 		private TcpListener server;
 		private IPAddress ipAddress;
@@ -22,12 +26,12 @@ namespace CommunicationLibrary.EndPoints
 		private TextWriter textWriter;
 		private Encoding encoding;
 
-		private IHandler handler;
+		private IHandler<TPacketFlags> BaseHandler;
 
-		public Server(TextWriter textWriter, IHandler handler)
+		public Server(TextWriter textWriter, IHandler<TPacketFlags> handler)
 		{
 			this.textWriter = textWriter;
-			this.handler = handler;
+			this.BaseHandler = handler;
 			this.encoding = handler.Encoding;
 		}
 
@@ -69,7 +73,7 @@ namespace CommunicationLibrary.EndPoints
 			}
 		}
 
-		public void HandleClientPackets(object obj)
+		private void HandleClientPackets(object obj)
 		{
 			try
 			{
@@ -84,18 +88,15 @@ namespace CommunicationLibrary.EndPoints
 #warning Write encoding handshake hahaha
 				while (bClientConnected)
 				{
-					packet = Packet.GetPacketFromNetworkStream(network);
+					packet = PacketBuilder.GetPacketFromNetworkStream(network);
 
-					response = handler.Handle(packet);
+					response = BaseHandler.Handle(packet);
 
-					if (response.Flags.HasFlag(PacketFlags.Flags.Response))
-					{
-						network.Write(
-							response.ToByteArray(),
-							0,
-							Packet.__zHeaderSize__ + response.Size);
-						network.Flush();
-					}
+					network.Write(
+						response.ToByteArray(),
+						0,
+						Packet.__HeaderSize__ + response.Size);
+					network.Flush();
 				}
 			}
 			catch (IOException)

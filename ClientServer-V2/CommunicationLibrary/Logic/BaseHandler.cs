@@ -11,7 +11,9 @@ namespace CommunicationLibrary.Logic
 	using Models;
 	using Models.Features;
 
-	public abstract class BaseHandler : IHandler
+	public abstract class BaseHandler<TPacketFlags> : IHandler<TPacketFlags>
+		where TPacketFlags :
+					struct, Enum
 	{
 		public Encoding Encoding
 		{
@@ -31,6 +33,8 @@ namespace CommunicationLibrary.Logic
 			set => resultWriter =value;
 		}
 		protected TextWriter resultWriter;
+
+		public Type PacketFlagsType => typeof(TPacketFlags);
 
 		public BaseHandler(Encoding encoding, TextWriter textWriter)
 		{

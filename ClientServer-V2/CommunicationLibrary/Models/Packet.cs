@@ -16,31 +16,16 @@ namespace CommunicationLibrary.Models
 
 		public static Encoding _Encoding;
 
-		public const ushort __MsgMaxSize__ = ushort.MaxValue;
-		public const byte __zHeaderSize__ = 7;
+		public const ushort __MessageMaxSize__ = ushort.MaxValue;
+		public const byte __HeaderSize__ = 7;
+		public const uint __PacketMaxSize__ = ushort.MaxValue + 7;
 
 		public byte FlagsByte
 		{
 			get => flagsByte;
-			set
-			{
-				flagsByte = value;
-				flags = (Flags)value;
-			}
+			set => flagsByte = value;
 		}
 		private byte flagsByte;
-
-		public Flags Flags
-		{
-			get => flags;
-			set
-			{
-				flags = value;
-				flagsByte = (byte)value;
-			}
-		}
-		[NonSerialized]
-		private Flags flags;
 
 		public ushort Size
 		{
@@ -52,42 +37,27 @@ namespace CommunicationLibrary.Models
 		public uint Id
 		{
 			get => id;
-			set
-			{
-				if (Flags.HasFlag(Flags.Response))
-					id = value;
-			}
+			set => id = value;
 		}
 		private uint id;
 
 		public byte[] Bytes
 		{
-			get => bytes;
+			get => messageBytes;
 			set
 			{
 				if (value.Length > ushort.MaxValue)
 					throw new ArgumentOutOfRangeException($"{nameof(value)} is too large");
-				bytes = value;
-				size = (ushort)bytes.Length;
+				messageBytes = value;
+				size = (ushort)messageBytes.Length;
 			}
 		}
 		public string Message
 		{
-			get => _Encoding.GetString(bytes);
+			get => _Encoding.GetString(messageBytes);
 			set => Bytes = _Encoding.GetBytes(value);
 		}
-		private byte[] bytes;
-
-		public FileStruct File
-		{
-			get
-			{
-				if (Flags.HasFlag(Flags.File))
-					return FileStruct.GetStruct(bytes);
-
-				throw new Exception("Packet is not a file!");
-			}
-		}
+		private byte[] messageBytes;
 
 		#region ctor
 		/// <summary>
@@ -97,7 +67,7 @@ namespace CommunicationLibrary.Models
 		/// <param name="id"></param>
 		public Packet(uint id = 0)
 		{
-			Flags = 0;
+			FlagsByte = 0;
 			Bytes = new byte[0];
 			_PacketGen(id);
 		}
@@ -109,12 +79,12 @@ namespace CommunicationLibrary.Models
 		/// <param name="message"></param>
 		/// <param name="id"></param>
 		/// <exception cref="Exception"></exception>
-		public Packet(Flags flags, string message, uint id = 0)
+		public Packet(byte flagsbyte, string message, uint id = 0)
 		{
 			if (_Encoding == null)
 				throw new Exception("Encoding can't be null!");
 
-			Flags = flags;
+			FlagsByte = flagsbyte;
 			Message = message;
 			_PacketGen(id);
 		}
@@ -125,9 +95,9 @@ namespace CommunicationLibrary.Models
 		/// <param name="flags"></param>
 		/// <param name="msgBytes"></param>
 		/// <param name="id"></param>
-		public Packet(Flags flags, byte[] msgBytes, uint id = 0)
+		public Packet(byte flagsbyte, byte[] msgBytes, uint id = 0)
 		{
-			Flags = flags;
+			FlagsByte = flagsbyte;
 			Bytes = msgBytes;
 			_PacketGen(id);
 		}
@@ -137,10 +107,10 @@ namespace CommunicationLibrary.Models
 		/// <param name="packetBytes"></param>
 		public Packet(byte[] packetBytes)
 		{
-			Flags = (Flags)packetBytes[0];
+			FlagsByte = packetBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
 													   packetBytes[2] });
-			Bytes = new ArraySegment<byte>(packetBytes, __zHeaderSize__, Size).ToArray();
+			Bytes = new ArraySegment<byte>(packetBytes, __HeaderSize__, Size).ToArray();
 			_PacketGen(BitConverter.ToUInt32(new byte[4] { packetBytes[3],
 														   packetBytes[4],
 														   packetBytes[5],
@@ -148,16 +118,15 @@ namespace CommunicationLibrary.Models
 		}
 		/// <summary>
 		/// 
-		/// If id is 0 (optional), the packet's id will autogenerate
 		/// </summary>
-		/// <param name="inputBytes"></param>
+		/// <param name="packetBytes"></param>
 		/// <param name="id"></param>
-		public Packet(byte[] inputBytes, uint id = 0)
+		public Packet(byte[] packetBytes, uint id)
 		{
-			Flags = (Flags)inputBytes[0];
-			Size = BitConverter.ToUInt16(new byte[2] { inputBytes[1],
-													   inputBytes[2] });
-			Bytes = new ArraySegment<byte>(inputBytes, __zHeaderSize__, Size).ToArray();
+			FlagsByte = packetBytes[0];
+			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
+													   packetBytes[2] });
+			Bytes = new ArraySegment<byte>(packetBytes, __HeaderSize__, Size).ToArray();
 			_PacketGen(id);
 		}
 		/// <summary>
@@ -168,10 +137,9 @@ namespace CommunicationLibrary.Models
 		/// <param name="id"></param>
 		public Packet(FileStruct fileStruct, uint id = 0)
 		{
-			if (fileStruct.Length > __MsgMaxSize__)
+			if (fileStruct.Length > __MessageMaxSize__)
 				throw new ArgumentOutOfRangeException();
 
-			Flags = Flags.SingleFile;
 			//fileStruct.NameLength;
 
 			Bytes = FileStruct.GetBytes(fileStruct);
@@ -195,7 +163,7 @@ namespace CommunicationLibrary.Models
 		/// <inheritdoc />
 		public void Clear()
 		{
-			Flags = Flags.None;
+			FlagsByte = 0;
 			Size = 0;
 			Array.Clear(Bytes, 0, Bytes.Length);
 		}
@@ -203,9 +171,9 @@ namespace CommunicationLibrary.Models
 		/// <inheritdoc />
 		public byte[] ToByteArray()
 		{
-			byte[] result = new byte[__zHeaderSize__ + Bytes.Length];
+			byte[] result = new byte[__HeaderSize__ + Bytes.Length];
 
-			Buffer.SetByte(result, 0, (byte)Flags);
+			Buffer.SetByte(result, 0, FlagsByte);
 
 			Buffer.BlockCopy(BitConverter.GetBytes(Size), 0,
 							 result, 1, 2);
@@ -213,46 +181,9 @@ namespace CommunicationLibrary.Models
 			Buffer.BlockCopy(BitConverter.GetBytes(Id), 0, result, 3, 4);
 
 			Buffer.BlockCopy(Bytes, 0,
-							 result, __zHeaderSize__, Bytes.Length);
+							 result, __HeaderSize__, Bytes.Length);
 
 			return result;
-		}
-
-		/// <summary>
-		/// Returns a packet from a StreamReader object.
-		/// </summary>
-		/// <param name="reader">A StreamReader object that contains the packet data.</param>
-		/// <returns>A Packet object that represents the packet.</returns>
-		public static Packet GetPacketFromStreamReader(StreamReader reader)
-		{
-			Span<byte> buffer = _Encoding.GetBytes(reader.ReadToEnd());
-
-			return new Packet((Flags)buffer[0],
-				buffer.Slice(7, BitConverter.ToUInt16(buffer.Slice(1, 2))).ToArray(),
-				BitConverter.ToUInt32(buffer.Slice(3, 4)));
-		}
-
-		/// <summary>
-		/// Returns a packet from a NetworkStream object.
-		/// </summary>
-		/// <param name="network">A NetworkStream object that contains the packet data.</param>
-		/// <returns>A Packet object that represents the packet.</returns>
-		public static Packet GetPacketFromNetworkStream(NetworkStream network)
-		{
-			byte[] buffer = new byte[__zHeaderSize__];
-
-			// Get the first 7 Bytes to create the header
-			byte flagsByte = (byte)network.ReadByte();	//   Flags - 1B
-			network.Read(buffer, 0, 2);					//   Size  - 2B
-			ushort size = BitConverter.ToUInt16(buffer, 0);
-			network.Read(buffer, 0, 4);					//   Id    - 4B
-			uint id = BitConverter.ToUInt32(buffer, 0);
-
-			buffer = new byte[size];
-			network.Read(buffer, 0, size);
-			byte[] bytes = buffer;
-
-			return new Packet((Flags)flagsByte, bytes, id);
 		}
 
 		/// <summary>
@@ -279,6 +210,6 @@ namespace CommunicationLibrary.Models
 			return filePath;
 		}
 
-		public override string ToString() => $"#{Id} {Flags}[{Size}] {{ {_Encoding.GetString(Bytes)} }}";
+		public override string ToString() => $"#{Id} {FlagsByte}[{Size}] {{ {_Encoding.GetString(Bytes)} }}";
 	}
 }

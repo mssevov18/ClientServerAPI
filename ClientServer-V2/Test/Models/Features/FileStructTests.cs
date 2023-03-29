@@ -11,17 +11,30 @@ namespace Test.Models.Features
 	public class FileStructTests
 	{
 		private static Encoding _encoding = Encoding.UTF8;
+		private string testString = "yabadabado";
+		private byte[] __encodedBytes;
 
 		[SetUp]
 		public void SetUp()
 		{
 			FileStruct.Encoding = _encoding;
+			__encodedBytes =  _encoding.GetBytes("yabadabado");
 		}
 
 		[Test]
-		public void ctor()
+		public void ctor_byteArr()
 		{
-			FileStruct @struct = new FileStruct(5, "Hello", _encoding.GetBytes("yabadabado"));
+			FileStruct @struct = new FileStruct(5, "Hello", __encodedBytes);
+
+			Assert.That(@struct.NameLength, Is.EqualTo(5));
+			Assert.That(@struct.Name, Is.EqualTo("Hello"));
+			Assert.That(@struct.Length, Is.EqualTo(16));
+		}
+
+		[Test]
+		public void ctor_string()
+		{
+			FileStruct @struct = new FileStruct(5, "Hello", testString);
 
 			Assert.That(@struct.NameLength, Is.EqualTo(5));
 			Assert.That(@struct.Name, Is.EqualTo("Hello"));

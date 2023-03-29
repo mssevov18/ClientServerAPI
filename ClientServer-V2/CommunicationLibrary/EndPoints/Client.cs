@@ -12,9 +12,10 @@ namespace CommunicationLibrary.EndPoints
 {
 	using Logic;
 	using Models;
-	using Models.Features;
 
-	public class Client
+	public class Client<TPacketFlags>
+		where TPacketFlags :
+					struct, Enum
 	{
 		private TcpClient client;
 		private NetworkStream nStream;
@@ -30,9 +31,9 @@ namespace CommunicationLibrary.EndPoints
 		private Queue<Packet> packQueue = new Queue<Packet>();
 		private Queue<uint> packIdQueue = new Queue<uint>();
 
-		private IHandler handler;
+		private IHandler<TPacketFlags> handler;
 
-		public Client(TextReader textReader, TextWriter textWriter, IHandler handler)
+		public Client(TextReader textReader, TextWriter textWriter, IHandler<TPacketFlags> handler)
 		{
 			client = new TcpClient();
 			isConnected = false;
@@ -109,7 +110,7 @@ namespace CommunicationLibrary.EndPoints
 					// The bank system needs a connection
 					// Not a 0ms 24/7 back and forth chat service ):
 					//kkdkkdkdkkdkdkmsdfmsdlkfmsldkfmslmflkmgvkmpoimcoinomvrotnvonec
-					handler.Handle(Packet.GetPacketFromNetworkStream(nStream));
+					handler.Handle(PacketBuilder.GetPacketFromNetworkStream(nStream));
 				}
 			}
 			catch (IOException)
@@ -132,114 +133,8 @@ namespace CommunicationLibrary.EndPoints
 				nStream.Write(
 					curPacket.ToByteArray(),
 					0,
-					Packet.__zHeaderSize__ + curPacket.Size);
+					Packet.__HeaderSize__ + curPacket.Size);
 				nStream.Flush();
-			}
-		}
-
-		/// <summary>
-		/// Send a string
-		/// </summary>
-		/// <param name="data"></param>
-		public void SendMsg(string data) =>
-			SendMsg(encoding.GetBytes(data));
-
-		public void SendMsg(byte[] data)
-		{
-			if (data.Length > Packet.__MsgMaxSize__)
-				SendLongMsg(data);
-			else
-				SendPacket(new Packet(PacketFlags.Flags.SingleMsg, data));
-		}
-
-
-#warning Outdated Method
-		public void SendLongMsg(byte[] bytes)
-		{
-			int dataLength = bytes.Length;
-			ushort iterations = 0;
-			while (dataLength > 0)
-			{
-				byte[] tempBuffer = new byte[Packet.__MsgMaxSize__];
-
-				Buffer.BlockCopy(bytes, iterations * Packet.__MsgMaxSize__,
-								 tempBuffer, 0,
-								 Packet.__MsgMaxSize__);
-
-
-				PacketFlags.Flags flags = PacketFlags.Flags.Message;
-
-				if (iterations == 0)
-					flags |= PacketFlags.Flags.Start;
-				else
-				{
-					if (dataLength <= Packet.__MsgMaxSize__)
-						flags |= PacketFlags.Flags.End;
-					else
-						flags = PacketFlags.Flags.Message;
-				}
-
-				packQueue.Enqueue(new Packet(PacketFlags.Flags.StartMsg, tempBuffer));
-
-				iterations++;
-				dataLength -= Packet.__MsgMaxSize__;
-			}
-		}
-
-		public void SendFile(string path)
-		{
-			FileInfo fileInfo = new FileInfo(path);
-			byte[] bytes = new byte[fileInfo.Length];
-
-			foreach (string line in File.ReadAllLines(path))
-			{
-				byte[] buffer = encoding.GetBytes(line);
-				Buffer.BlockCopy(buffer, 0, bytes, bytes.Length, buffer.Length);
-			}
-
-			SendFile(path.Split('\\').LastOrDefault(), bytes);
-		}
-		public void SendFile(string name, byte[] fileBytes)
-		{
-			if (fileBytes.Length > Packet.__MsgMaxSize__)
-				SendLongFile(fileBytes);
-			else
-
-				SendFile(new FileStruct(name, fileBytes));
-		}
-		public void SendFile(FileStruct fileStruct) =>
-			SendPacket(new Packet(fileStruct));
-
-#warning Outdated Method
-		public void SendLongFile(byte[] fileBytes)
-		{
-			int dataLength = fileBytes.Length;
-			ushort iterations = 0;
-			while (dataLength > 0)
-			{
-				byte[] tempBuffer = new byte[Packet.__MsgMaxSize__];
-
-				Buffer.BlockCopy(fileBytes, iterations * Packet.__MsgMaxSize__,
-								 tempBuffer, 0,
-								 Packet.__MsgMaxSize__);
-
-
-				PacketFlags.Flags flags = PacketFlags.Flags.File;
-
-				if (iterations == 0)
-					flags |= PacketFlags.Flags.Start;
-				else
-				{
-					if (dataLength <= Packet.__MsgMaxSize__)
-						flags |= PacketFlags.Flags.End;
-					else
-						flags = PacketFlags.Flags.Message;
-				}
-
-				packQueue.Enqueue(new Packet(flags, tempBuffer));
-
-				iterations++;
-				dataLength -= Packet.__MsgMaxSize__;
 			}
 		}
 
@@ -249,6 +144,18 @@ namespace CommunicationLibrary.EndPoints
 				throw new Exception("Packet size mismatch!");
 
 			packQueue.Enqueue(packet);
+
+			SendLoop();
+		}
+		public void SendPacket(Packet[] packets)
+		{
+			foreach (Packet packet in packets)
+			{
+				if (packet.Size != packet.Bytes.Length)
+					throw new Exception("Packet size mismatch!");
+
+				packQueue.Enqueue(packet);
+			}
 
 			SendLoop();
 		}

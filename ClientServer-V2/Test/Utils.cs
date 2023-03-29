@@ -56,10 +56,10 @@ namespace Test
         public static byte[] TrimPacketMessage(Packet packet, byte[] input)
         {
 #warning WHAT DO YOU DO?
-            if (packet.Size != Packet.__MsgMaxSize__)
+            if (packet.Size != Packet.__MessageMaxSize__)
             {
                 byte[] output = new byte[packet.Size];
-                Buffer.BlockCopy(input, Packet.__zHeaderSize__, output, 0, packet.Size);
+                Buffer.BlockCopy(input, Packet.__HeaderSize__, output, 0, packet.Size);
 
                 return output;
             }

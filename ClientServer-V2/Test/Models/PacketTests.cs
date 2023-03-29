@@ -26,7 +26,7 @@ namespace Test.Models.Packets
 			//Packet.SetEncoding(Encoding.UTF8);
 			Packet._Encoding = _encoding;
 			FileStruct.Encoding = _encoding;
-			expectedPacket = new Packet((PacketFlags.Flags)17, msgBytes, 1);
+			expectedPacket = new Packet(17, msgBytes, 1);
 		}
 
 		[Test]
@@ -34,7 +34,7 @@ namespace Test.Models.Packets
 		{
 			Console.Write(Utils.ToString(pckBytes));
 			Console.WriteLine();
-			Console.Write(Utils.ToString(new Packet((PacketFlags.Flags)17, msg, 1).ToByteArray()));
+			Console.Write(Utils.ToString(new Packet(17, msg, 1).ToByteArray()));
 			Console.WriteLine();
 			Console.WriteLine(expectedPacket);
 			Console.WriteLine();
@@ -49,7 +49,7 @@ namespace Test.Models.Packets
 		[Test]
 		public void ctor_Flags_ByteArray()
 		{
-			Packet packet = new Packet(PacketFlags.Flags.SingleMsg, msgBytes, 1);
+			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msgBytes, 1);
 
 			PrintDebug(pckBytes, packet.ToByteArray());
 			Console.WriteLine();
@@ -60,7 +60,7 @@ namespace Test.Models.Packets
 		[Test]
 		public void ctor_String()
 		{
-			Packet packet = new Packet(PacketFlags.Flags.SingleMsg, msg, 1);
+			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msg, 1);
 
 			PrintDebug(pckBytes, packet.ToByteArray());
 			Assert.That(pckBytes, Is.EqualTo(packet.ToByteArray()));
@@ -82,7 +82,7 @@ namespace Test.Models.Packets
 		[Test]
 		public void m_ToByteArray()
 		{
-			Packet packet = new Packet(PacketFlags.Flags.SingleMsg, msgBytes, 1);
+			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msgBytes, 1);
 
 			PrintDebug(pckBytes, packet.Bytes);
 			Assert.That(pckBytes, Is.EqualTo(packet.ToByteArray()));
@@ -93,7 +93,7 @@ namespace Test.Models.Packets
 		{
 			StreamReader reader = new StreamReader(new MemoryStream(pckBytes));
 
-			Packet packet = Packet.GetPacketFromStreamReader(reader);
+			Packet packet = PacketBuilder.GetPacketFromStreamReader(reader);
 
 			PrintDebug(pckBytes, packet.Bytes);
 			Assert.That(pckBytes, Is.EqualTo(packet.ToByteArray()));

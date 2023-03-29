@@ -14,7 +14,6 @@ namespace CommunicationLibrary.Models.Features
 			Message = 0b_0000_0001,  // Message 1
 			Error = 0b_0000_0010,    // Error - 2
 			File = 0b_0000_0100,     // File - 4
-			Custom = 0b_0000_1000,   // Custom - 8
 
 			// Continuity
 			Single = 0b_0001_0000,   // Single - 16 

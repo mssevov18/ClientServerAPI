@@ -2,6 +2,7 @@ using System.Text;
 
 using CommunicationLibrary.EndPoints;
 using CommunicationLibrary.Logic;
+using CommunicationLibrary.Models.Features;
 
 namespace ServerTester
 {
@@ -19,7 +20,7 @@ namespace ServerTester
 				{"tavan", "192.168.0.175" }
 			};
 
-			Server server = new Server(Console.Out, new ExamplePacketHandler(Console.OutputEncoding, Console.Out));
+			Server<PacketFlags.Flags> server = new Server<PacketFlags.Flags>(Console.Out, new ExamplePacketHandler(Console.OutputEncoding, Console.Out));
             //server.Start(IPAddress.Any, 50000);
             server.Start(ip["tavan"], 50000);
         }

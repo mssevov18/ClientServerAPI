@@ -10,7 +10,7 @@ namespace CommunicationLibrary.Logic
 	using Models.Features;
 
 	//Example Handler
-	public class ExamplePacketHandler : BaseHandler
+	public class ExamplePacketHandler : BaseHandler<PacketFlags.Flags>
 	{
 		private readonly Dictionary<PacketFlags.Flags, string> _sResponses_ = new Dictionary<PacketFlags.Flags, string>()
 		{
@@ -75,7 +75,7 @@ namespace CommunicationLibrary.Logic
 
 				//_responses[packet.Flags]
 
-				switch (packet.Flags)
+				switch ((PacketFlags.Flags)packet.FlagsByte)
 				{
 					//=============
 					//Responses
@@ -122,8 +122,8 @@ namespace CommunicationLibrary.Logic
 					//Files
 					//https://code-maze.com/convert-byte-array-to-file-csharp/
 					case PacketFlags.Flags.File | PacketFlags.Flags.Single:
-						FileStruct fstruct = packet.File;
-						if (packet.File.Name.Length == 0)
+						FileStruct fstruct = FileStruct.GetStruct(packet);
+						if (fstruct.Name.Length == 0)
 							fstruct.Name = Path.GetRandomFileName();
 						if (File.Exists(fstruct.Name))
 							fileStream = new FileStream(fstruct.Name, FileMode.Truncate);
@@ -155,14 +155,14 @@ namespace CommunicationLibrary.Logic
 			catch (Exception e)
 			{
 				return new Packet(
-					PacketFlags.Flags.RspSingleErr,
+					(byte)PacketFlags.Flags.RspSingleErr,
 					e.Message + " | {" + packet + "}",
 					packet.Id);
 			}
 
 			return new Packet(
-				PacketFlags.Flags.RspSingleMsg,
-				_sResponses_[packet.Flags] + ":: {" + packet + "}",
+				(byte)PacketFlags.Flags.RspSingleMsg,
+				_sResponses_[(PacketFlags.Flags)packet.FlagsByte] + ":: {" + packet + "}",
 				packet.Id);
 		}
 	}
