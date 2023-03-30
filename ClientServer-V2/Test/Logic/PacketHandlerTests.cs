@@ -10,7 +10,7 @@ using CommunicationLibrary.Logic;
 using CommunicationLibrary.Models;
 using CommunicationLibrary.Models.Features;
 
-namespace Test
+namespace Test.Logic
 {
 	public class PacketHandlerTests
 	{
@@ -33,7 +33,7 @@ namespace Test
 			//Packet.SetEncoding(_encoding);
 		}
 
-		private string CleanResult => Utils.RemoveControlCharacters(_builder.ToString());
+		private string CleanResult => RemoveControlCharacters(_builder.ToString());
 
 		[TestCase("Hello World")]
 		[TestCase("Lorem ipsum")]
@@ -96,7 +96,7 @@ namespace Test
 
 			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msg);
 
-			Packet response = (Packet)_handler.Handle(packet);
+			Packet response = _handler.Handle(packet);
 
 			PrintDebug(packet.ToString(), response.ToString());
 			Assert.That(packet.Id,
@@ -116,7 +116,7 @@ namespace Test
 			PrintDebug(packet.ToString(), response.ToString());
 			Assert.That(packet.Id,
 				Is.EqualTo(response.Id));
-			Assert.True(((PacketFlags.Flags)response.FlagsByte).HasFlag( PacketFlags.Flags.Error));
+			Assert.True(((PacketFlags.Flags)response.FlagsByte).HasFlag(PacketFlags.Flags.Error));
 		}
 
 		[Test]

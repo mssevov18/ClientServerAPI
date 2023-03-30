@@ -18,7 +18,7 @@ namespace CommunicationLibrary.Models.Features
 	///    </item>
 	///</list>
 	/// </summary>
-	public struct FileStruct
+	public struct FileStruct: IMessageStruct<FileStruct>
 	{
 		public static readonly int __HeaderMaxSize__ = 256;
 		public static readonly int __DataMaxSize__ = Packet.__MessageMaxSize__ - __HeaderMaxSize__;
