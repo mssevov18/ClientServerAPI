@@ -22,7 +22,7 @@ namespace ServerTester
 
 			Server<PacketFlags.Flags> server = new Server<PacketFlags.Flags>(Console.Out, new ExamplePacketHandler(Console.OutputEncoding, Console.Out));
             //server.Start(IPAddress.Any, 50000);
-            server.Start(ip["tavan"], 50000);
+            server.Start(ip["sevov"], 50000);
         }
     }
 }

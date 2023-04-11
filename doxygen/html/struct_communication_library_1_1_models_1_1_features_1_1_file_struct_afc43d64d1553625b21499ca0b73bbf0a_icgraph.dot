@@ -1,0 +1,15 @@
+digraph "CommunicationLibrary.Models.Features.FileStruct.GetBytes"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [label="CommunicationLibrary.Models.\lFeatures.FileStruct.GetBytes",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="CommunicationLibrary.Models.\lPacket.Packet",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_communication_library_1_1_models_1_1_packet.html#af0675fe16148106e84dd75b86a35cd35",tooltip="If id is 0 (optional), the packet's id will autogenerate."];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="Test.Models.Features.File\lStructTests.sm_GetBytes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_features_1_1_file_struct_tests.html#a79a61bfa9f48ae762e43c380e7b0cae4",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="Test.Models.Features.File\lStructTests.sm_GetStruct",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_features_1_1_file_struct_tests.html#a325eba590ef8698d18dafef658360a6d",tooltip=" "];
+}

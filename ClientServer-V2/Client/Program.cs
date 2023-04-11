@@ -31,7 +31,7 @@ namespace TesterProgram
             Console.Write('\b');
 
             //client.Connect(IPAddress.Any, 50000);
-            client.Connect(ip["tavan"], 50000);
+            client.Connect(ip["sevov"], 50000);
 
             if (client.IsConnected)
             {

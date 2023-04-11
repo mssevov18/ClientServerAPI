@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="bg">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Communication Library: CommunicationLibrary.Models.IPacket Интерфейс Препратка</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Communication Library<span id="projectnumber">&#160;1.4.6</span>
+   </div>
+   <div id="projectbrief">A TCP based Client-Server Communication Library</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Генериран от Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Търсене');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('interface_communication_library_1_1_models_1_1_i_packet.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Зареждане...</div>
+<div class="SRStatus" id="Searching">Търсене...</div>
+<div class="SRStatus" id="NoMatches">Не намерено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Общодостъпни членове функции</a> &#124;
+<a href="#pub-static-attribs">Статични общодостъпни атрибути</a> &#124;
+<a href="#properties">Свойства</a> &#124;
+<a href="interface_communication_library_1_1_models_1_1_i_packet-members.html">Списък на всички членове</a>  </div>
+  <div class="headertitle"><div class="title">CommunicationLibrary.Models.IPacket Интерфейс Препратка</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Defines properties and methods that a communication packet should have.  
+ <a href="interface_communication_library_1_1_models_1_1_i_packet.html#details">Допълнително...</a></p>
+<div class="dynheader">
+Диаграма на наследяване за CommunicationLibrary.Models.IPacket:</div>
+<div class="dyncontent">
+<div class="center"><img src="interface_communication_library_1_1_models_1_1_i_packet__inherit__graph.png" border="0" usemap="#a_communication_library_8_models_8_i_packet_inherit__map" alt="Inheritance graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">легенда</a>]</span></center></div>
+<div class="dynheader">
+Граф на зависимости за класа CommunicationLibrary.Models.IPacket:</div>
+<div class="dyncontent">
+<div class="center"><img src="interface_communication_library_1_1_models_1_1_i_packet__coll__graph.png" border="0" usemap="#a_communication_library_8_models_8_i_packet_coll__map" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">легенда</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Общодостъпни членове функции</h2></td></tr>
+<tr class="memitem:a1de1d864a1460e135e9977e505613786"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#a1de1d864a1460e135e9977e505613786">Clear</a> ()</td></tr>
+<tr class="memdesc:a1de1d864a1460e135e9977e505613786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the packet properties.  <br /></td></tr>
+<tr class="separator:a1de1d864a1460e135e9977e505613786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf78626a67d64be1e7ece1890e04670"><td class="memItemLeft" align="right" valign="top">byte[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#abcf78626a67d64be1e7ece1890e04670">ToByteArray</a> ()</td></tr>
+<tr class="memdesc:abcf78626a67d64be1e7ece1890e04670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the packet as a byte array.  <br /></td></tr>
+<tr class="separator:abcf78626a67d64be1e7ece1890e04670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a593c1e1573f66a3c1d75e6bcbd134b14"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#a593c1e1573f66a3c1d75e6bcbd134b14">ToString</a> ()</td></tr>
+<tr class="memdesc:a593c1e1573f66a3c1d75e6bcbd134b14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the packet as a string.  <br /></td></tr>
+<tr class="separator:a593c1e1573f66a3c1d75e6bcbd134b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Статични общодостъпни атрибути</h2></td></tr>
+<tr class="memitem:a720c9c591ba3e9170d86f22bc6e3473f"><td class="memItemLeft" align="right" valign="top">static readonly ushort&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#a720c9c591ba3e9170d86f22bc6e3473f">__MsgMaxSize</a> = ushort.MaxValue</td></tr>
+<tr class="memdesc:a720c9c591ba3e9170d86f22bc6e3473f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum size of a message. (65535 Bytes)  <br /></td></tr>
+<tr class="separator:a720c9c591ba3e9170d86f22bc6e3473f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17ca3c49b5c46d2736d45a6b44b7d65c"><td class="memItemLeft" align="right" valign="top">static readonly byte&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#a17ca3c49b5c46d2736d45a6b44b7d65c">__zHeaderSize</a> = 7</td></tr>
+<tr class="memdesc:a17ca3c49b5c46d2736d45a6b44b7d65c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size of the header of a packet. (7 Bytes)  <br /></td></tr>
+<tr class="separator:a17ca3c49b5c46d2736d45a6b44b7d65c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33718504c9c56fcd995c71fd7ca7d7ef"><td class="memItemLeft" align="right" valign="top">static uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#a33718504c9c56fcd995c71fd7ca7d7ef">PacketGenCount</a> = 1</td></tr>
+<tr class="memdesc:a33718504c9c56fcd995c71fd7ca7d7ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of packets that have been autogenerated. It is used as a seed for id generation.  <br /></td></tr>
+<tr class="separator:a33718504c9c56fcd995c71fd7ca7d7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98406c256f386b20411f89130c37119a"><td class="memItemLeft" align="right" valign="top">static Encoding&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#a98406c256f386b20411f89130c37119a">Encoding</a></td></tr>
+<tr class="memdesc:a98406c256f386b20411f89130c37119a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The encoding used for the packet.  <br /></td></tr>
+<tr class="separator:a98406c256f386b20411f89130c37119a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Свойства</h2></td></tr>
+<tr class="memitem:a8133c80a33ef3f9427368a2453de1c9e"><td class="memItemLeft" align="right" valign="top">byte&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#a8133c80a33ef3f9427368a2453de1c9e">FlagsByte</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a8133c80a33ef3f9427368a2453de1c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the flags of the packet.  <br /></td></tr>
+<tr class="separator:a8133c80a33ef3f9427368a2453de1c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb685f3a7f100babcdd9bb6607463d5e"><td class="memItemLeft" align="right" valign="top">ushort&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#afb685f3a7f100babcdd9bb6607463d5e">Size</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:afb685f3a7f100babcdd9bb6607463d5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the size of the packet.  <br /></td></tr>
+<tr class="separator:afb685f3a7f100babcdd9bb6607463d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adce1eca2ebda3f82b42211515169baaa"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#adce1eca2ebda3f82b42211515169baaa">Id</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:adce1eca2ebda3f82b42211515169baaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the id of the packet.  <br /></td></tr>
+<tr class="separator:adce1eca2ebda3f82b42211515169baaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa647256f009f5c75833885a2bb31d72e"><td class="memItemLeft" align="right" valign="top">byte[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#aa647256f009f5c75833885a2bb31d72e">Bytes</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:aa647256f009f5c75833885a2bb31d72e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the bytes of the packet.  <br /></td></tr>
+<tr class="separator:aa647256f009f5c75833885a2bb31d72e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc885880c76591bb9f6132f1abce6525"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html#adc885880c76591bb9f6132f1abce6525">Message</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:adc885880c76591bb9f6132f1abce6525"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the bytes of the packet.  <br /></td></tr>
+<tr class="separator:adc885880c76591bb9f6132f1abce6525"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробно описание</h2>
+<div class="textblock"><p>Defines properties and methods that a communication packet should have. </p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00013">13</a>.</p>
+</div><h2 class="groupheader">Членове Функции(методи) Документация</h2>
+<a id="a1de1d864a1460e135e9977e505613786" name="a1de1d864a1460e135e9977e505613786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1de1d864a1460e135e9977e505613786">&#9670;&#160;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommunicationLibrary.Models.IPacket.Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clears the packet properties. </p>
+
+<p>Заменя в <a class="el" href="class_communication_library_1_1_models_1_1_packet.html#a207d0195502579f4b3b57608e1417b98">CommunicationLibrary.Models.Packet</a>.</p>
+
+</div>
+</div>
+<a id="abcf78626a67d64be1e7ece1890e04670" name="abcf78626a67d64be1e7ece1890e04670"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcf78626a67d64be1e7ece1890e04670">&#9670;&#160;</a></span>ToByteArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">byte[] CommunicationLibrary.Models.IPacket.ToByteArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the packet as a byte array. </p>
+<dl class="section return"><dt>Връща</dt><dd>A byte array that represents the packet.</dd></dl>
+
+<p>Заменя в <a class="el" href="class_communication_library_1_1_models_1_1_packet.html#ad6b18c21c8bef639b6c23f339693a03c">CommunicationLibrary.Models.Packet</a>.</p>
+
+</div>
+</div>
+<a id="a593c1e1573f66a3c1d75e6bcbd134b14" name="a593c1e1573f66a3c1d75e6bcbd134b14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a593c1e1573f66a3c1d75e6bcbd134b14">&#9670;&#160;</a></span>ToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string CommunicationLibrary.Models.IPacket.ToString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the packet as a string. </p>
+<dl class="section return"><dt>Връща</dt><dd>A string that represents the packet.</dd></dl>
+
+<p>Заменя в <a class="el" href="class_communication_library_1_1_models_1_1_packet.html#ac2faa89d8f680af07c301e254da9881d">CommunicationLibrary.Models.Packet</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Член данни Документация</h2>
+<a id="a720c9c591ba3e9170d86f22bc6e3473f" name="a720c9c591ba3e9170d86f22bc6e3473f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a720c9c591ba3e9170d86f22bc6e3473f">&#9670;&#160;</a></span>__MsgMaxSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly ushort CommunicationLibrary.Models.IPacket.__MsgMaxSize = ushort.MaxValue</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The maximum size of a message. (65535 Bytes) </p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00018">18</a>.</p>
+
+</div>
+</div>
+<a id="a17ca3c49b5c46d2736d45a6b44b7d65c" name="a17ca3c49b5c46d2736d45a6b44b7d65c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17ca3c49b5c46d2736d45a6b44b7d65c">&#9670;&#160;</a></span>__zHeaderSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly byte CommunicationLibrary.Models.IPacket.__zHeaderSize = 7</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The size of the header of a packet. (7 Bytes) </p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00023">23</a>.</p>
+
+</div>
+</div>
+<a id="a98406c256f386b20411f89130c37119a" name="a98406c256f386b20411f89130c37119a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98406c256f386b20411f89130c37119a">&#9670;&#160;</a></span>Encoding</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Encoding CommunicationLibrary.Models.IPacket.Encoding</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The encoding used for the packet. </p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00034">34</a>.</p>
+
+</div>
+</div>
+<a id="a33718504c9c56fcd995c71fd7ca7d7ef" name="a33718504c9c56fcd995c71fd7ca7d7ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33718504c9c56fcd995c71fd7ca7d7ef">&#9670;&#160;</a></span>PacketGenCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint CommunicationLibrary.Models.IPacket.PacketGenCount = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of packets that have been autogenerated. It is used as a seed for id generation. </p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00029">29</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Свойство Документация</h2>
+<a id="aa647256f009f5c75833885a2bb31d72e" name="aa647256f009f5c75833885a2bb31d72e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa647256f009f5c75833885a2bb31d72e">&#9670;&#160;</a></span>Bytes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">byte [] CommunicationLibrary.Models.IPacket.Bytes</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets or sets the bytes of the packet. </p>
+
+<p>Заменя в <a class="el" href="class_communication_library_1_1_models_1_1_packet.html#a59e84f818b8bbf3812e31e43048347cc">CommunicationLibrary.Models.Packet</a>.</p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00054">54</a>.</p>
+
+</div>
+</div>
+<a id="a8133c80a33ef3f9427368a2453de1c9e" name="a8133c80a33ef3f9427368a2453de1c9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8133c80a33ef3f9427368a2453de1c9e">&#9670;&#160;</a></span>FlagsByte</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">byte CommunicationLibrary.Models.IPacket.FlagsByte</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets or sets the flags of the packet. </p>
+
+<p>Заменя в <a class="el" href="class_communication_library_1_1_models_1_1_packet.html#a552e77e49afd96169c5268a18a1b4884">CommunicationLibrary.Models.Packet</a>.</p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00039">39</a>.</p>
+
+</div>
+</div>
+<a id="adce1eca2ebda3f82b42211515169baaa" name="adce1eca2ebda3f82b42211515169baaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce1eca2ebda3f82b42211515169baaa">&#9670;&#160;</a></span>Id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint CommunicationLibrary.Models.IPacket.Id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets or sets the id of the packet. </p>
+
+<p>Заменя в <a class="el" href="class_communication_library_1_1_models_1_1_packet.html#a439eaefd26926f2e5b24892b4f04e4f4">CommunicationLibrary.Models.Packet</a>.</p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00049">49</a>.</p>
+
+</div>
+</div>
+<a id="adc885880c76591bb9f6132f1abce6525" name="adc885880c76591bb9f6132f1abce6525"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc885880c76591bb9f6132f1abce6525">&#9670;&#160;</a></span>Message</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string CommunicationLibrary.Models.IPacket.Message</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets or sets the bytes of the packet. </p>
+
+<p>Заменя в <a class="el" href="class_communication_library_1_1_models_1_1_packet.html#a1dc4d4aea1801809802d028e6665b6c5">CommunicationLibrary.Models.Packet</a>.</p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00059">59</a>.</p>
+
+</div>
+</div>
+<a id="afb685f3a7f100babcdd9bb6607463d5e" name="afb685f3a7f100babcdd9bb6607463d5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb685f3a7f100babcdd9bb6607463d5e">&#9670;&#160;</a></span>Size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ushort CommunicationLibrary.Models.IPacket.Size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets or sets the size of the packet. </p>
+
+<p>Заменя в <a class="el" href="class_communication_library_1_1_models_1_1_packet.html#a1e0b00abfbd17abd6d8d05693cd1a789">CommunicationLibrary.Models.Packet</a>.</p>
+
+<p class="definition">Виж дефиницията във файла <a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a> ред <a class="el" href="_i_packet_8cs_source.html#l00044">44</a>.</p>
+
+</div>
+</div>
+<hr/>Документация за интерфейс генериран от следният файл:<ul>
+<li>CommunicationLibrary/Models/<a class="el" href="_i_packet_8cs_source.html">IPacket.cs</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_communication_library.html">CommunicationLibrary</a></li><li class="navelem"><a class="el" href="namespace_communication_library_1_1_models.html">Models</a></li><li class="navelem"><a class="el" href="interface_communication_library_1_1_models_1_1_i_packet.html">IPacket</a></li>
+    <li class="footer">Генериран от <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

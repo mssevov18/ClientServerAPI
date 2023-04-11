@@ -1,0 +1,12 @@
+digraph "CommunicationLibrary/Metadata"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_09bacaa5f41a1292cd7c9ca32099ac35 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="CommunicationLibrary", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_09bacaa5f41a1292cd7c9ca32099ac35.html",tooltip=""]
+  dir_75ecea29f0395bc984b7b48cc649688e [label="Metadata", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_75ecea29f0395bc984b7b48cc649688e.html",tooltip=""];
+  }
+}

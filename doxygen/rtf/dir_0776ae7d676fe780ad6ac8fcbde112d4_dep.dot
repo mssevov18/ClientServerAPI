@@ -1,0 +1,16 @@
+digraph "ServerTester/obj/Release Lib"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_bbbb5f9ebb22f747f92631e6dd24bd7e {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="obj", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_bbbb5f9ebb22f747f92631e6dd24bd7e.html",tooltip=""]
+  subgraph clusterdir_0776ae7d676fe780ad6ac8fcbde112d4 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_0776ae7d676fe780ad6ac8fcbde112d4.html",tooltip=""]
+    dir_0776ae7d676fe780ad6ac8fcbde112d4 [shape=plaintext, label="Release Lib"];
+  dir_9ee3490ff2d89c96fe58c80bb5510507 [label="net6.0", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_9ee3490ff2d89c96fe58c80bb5510507.html",tooltip=""];
+  }
+  }
+}

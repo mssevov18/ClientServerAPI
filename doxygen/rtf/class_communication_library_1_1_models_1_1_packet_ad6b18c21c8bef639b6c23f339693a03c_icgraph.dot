@@ -1,0 +1,19 @@
+digraph "CommunicationLibrary.Models.Packet.ToByteArray"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [label="CommunicationLibrary.Models.\lPacket.ToByteArray",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Returns the packet as a byte array.A byte array that represents the packet."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="Test.Models.Packets.Packet\lTests.ctor_ByteArray",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_packets_1_1_packet_tests.html#a52f478da05d26e1fa49a631e29ff3927",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="steelblue1",style="solid"];
+  Node3 [label="Test.Models.Packets.Packet\lTests.ctor_Flags_ByteArray",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_packets_1_1_packet_tests.html#ab901290edfd3e72dba251c301e9a1d3c",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="steelblue1",style="solid"];
+  Node4 [label="Test.Models.Packets.Packet\lTests.ctor_String",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_packets_1_1_packet_tests.html#a33616f5e8d6873f5e1419a4b23e03139",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="steelblue1",style="solid"];
+  Node5 [label="Test.Models.Packets.Packet\lTests.m_ToByteArray",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_packets_1_1_packet_tests.html#acd6c2668a1e241f9d3f76bf578cc3391",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="steelblue1",style="solid"];
+  Node6 [label="Test.Models.Packets.Packet\lTests.sm_GetPacketFromStreamReader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_packets_1_1_packet_tests.html#a413270eebb0f47f276be83db225a5650",tooltip=" "];
+}

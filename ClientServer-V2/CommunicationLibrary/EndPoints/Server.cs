@@ -8,8 +8,12 @@ using System.Threading;
 namespace CommunicationLibrary.EndPoints
 {
 	using System;
+	using System.Collections.ObjectModel;
+
+	using CommunicationLibrary.Logic;
 
 	using Logic;
+
 	using Models;
 	using Models.Features;
 
@@ -24,7 +28,11 @@ namespace CommunicationLibrary.EndPoints
 		private bool isRunning;
 
 		private TextWriter textWriter;
-		private Encoding encoding;
+
+		public Action<Packet> OnPacketRecieved;
+
+		public event EventHandler<ClientEventArgs> ClientConnected;
+		public event EventHandler<ClientEventArgs> ClientDisconnected;
 
 		private IHandler<TPacketFlags> BaseHandler;
 
@@ -32,7 +40,6 @@ namespace CommunicationLibrary.EndPoints
 		{
 			this.textWriter = textWriter;
 			this.BaseHandler = handler;
-			this.encoding = handler.Encoding;
 		}
 
 		public void Start(string ipAddress, int port)
@@ -75,14 +82,14 @@ namespace CommunicationLibrary.EndPoints
 
 		private void HandleClientPackets(object obj)
 		{
+			// retrieve client from parameter passed to thread
+			TcpClient client = (TcpClient)obj;
+			NetworkStream network = client.GetStream();
+			bool bClientConnected = true;
+
+			RaiseClientConnected(client);
 			try
 			{
-				// retrieve client from parameter passed to thread
-				TcpClient client = (TcpClient)obj;
-
-				NetworkStream network = client.GetStream();
-
-				bool bClientConnected = true;
 
 				Packet packet, response;
 #warning Write encoding handshake hahaha
@@ -91,6 +98,7 @@ namespace CommunicationLibrary.EndPoints
 					packet = PacketBuilder.GetPacketFromNetworkStream(network);
 
 					response = BaseHandler.Handle(packet);
+					OnPacketRecieved(packet);
 
 					network.Write(
 						response.ToByteArray(),
@@ -101,7 +109,29 @@ namespace CommunicationLibrary.EndPoints
 			}
 			catch (IOException)
 			{
-				textWriter.WriteLine($"Client Disconnected");
+				RaiseClientDisconnected(client);
+			}
+			catch (Exception)
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		private void RaiseClientConnected(TcpClient client)
+		{
+			var handler = ClientConnected;
+			if (handler != null)
+			{
+				handler(this, new ClientEventArgs(client));
+			}
+		}
+
+		private void RaiseClientDisconnected(TcpClient client)
+		{
+			var handler = ClientDisconnected;
+			if (handler != null)
+			{
+				handler(this, new ClientEventArgs(client));
 			}
 		}
 	}

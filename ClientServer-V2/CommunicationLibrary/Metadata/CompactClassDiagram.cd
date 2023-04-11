@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CommunicationLibrary.EndPoints.Client&lt;TPacketFlags&gt;" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAgAAAAAAABAAAAAQLAIgAAAKIAAAAAAFAAgAAA=</HashCode>
+      <FileName>EndPoints\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommunicationLibrary.EndPoints.Server&lt;TPacketFlags&gt;" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIgAAIACAAAIBAAAAAQAAAAAAAAIgAIAAAAAAgAAI=</HashCode>
+      <FileName>EndPoints\Server.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommunicationLibrary.Logic.BaseHandler&lt;TPacketFlags&gt;" Collapsed="true">
+    <Position X="3" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAQAAAAgAAAAIIAAAAAAAAAAAE=</HashCode>
+      <FileName>Logic\BaseHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CommunicationLibrary.Logic.ExamplePacketHandler" Collapsed="true">
+    <Position X="3" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAgAAoAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\PacketHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommunicationLibrary.Metadata.LibraryInfo" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAQAAAAAA=</HashCode>
+      <FileName>Metadata\LibraryInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommunicationLibrary.Models.Features.PacketFlags" Collapsed="true">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Features\PacketFlags.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommunicationLibrary.Models.Packet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAQAAAEAAgAAEAIAAIEAIACYAAAAEAAAIIQBAAgA=</HashCode>
+      <FileName>Models\Packet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CommunicationLibrary.Models.PacketBuilder" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAABgAAAAAAAAAEAAAAAAAQAAIAIAgAIIAAQAEA=</HashCode>
+      <FileName>Models\PacketBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CommunicationLibrary.Models.Features.FileStruct" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAgAAAAAAAAAAAAARAgAAAABgAAAAAIAAAAgA=</HashCode>
+      <FileName>Models\Features\FileStruct.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Interface Name="CommunicationLibrary.Logic.IHandler&lt;TPacketFlags&gt;" Collapsed="true">
+    <Position X="0.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAQAAAAgAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\IHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CommunicationLibrary.Models.Features.IMessageStruct&lt;TStruct&gt;" Collapsed="true">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAgAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Features\IMessageStruct.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CommunicationLibrary.Models.IPacket" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAEAIAAIAAAggAAAAAAAAAIsABAAAA=</HashCode>
+      <FileName>Models\IPacket.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

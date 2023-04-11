@@ -1,0 +1,11 @@
+digraph "CommunicationLibrary.Models.Packet.WriteToFile"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [label="CommunicationLibrary.Models.\lPacket.WriteToFile",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Writes the packet bytes to a file in the specified directory and returns the full file path."];
+  Node1 -> Node2 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="Test.Models.Packets.Packet\lTests.m_WriteToFile",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_packets_1_1_packet_tests.html#ab44849ca3597d30a52d51a0c965a8494",tooltip=" "];
+}

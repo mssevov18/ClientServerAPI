@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['encoding_0',['Encoding',['../class_communication_library_1_1_logic_1_1_base_handler.html#a321a3a39647eaa1206ad9ccd787bf7dc',1,'CommunicationLibrary.Logic.BaseHandler.Encoding()'],['../interface_communication_library_1_1_logic_1_1_i_handler.html#a9beaf87681bdf52d59d8c50558803437',1,'CommunicationLibrary.Logic.IHandler.Encoding()'],['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#a082149b6240740aa3f1ae6c589f8a239',1,'CommunicationLibrary.Models.Features.FileStruct.Encoding()'],['../interface_communication_library_1_1_models_1_1_i_packet.html#a98406c256f386b20411f89130c37119a',1,'CommunicationLibrary.Models.IPacket.Encoding()']]],
+  ['encoding_1',['encoding',['../class_communication_library_1_1_logic_1_1_base_handler.html#a2344224111887415cc3c93345af82b54',1,'CommunicationLibrary::Logic::BaseHandler']]],
+  ['examplepackethandler_2',['ExamplePacketHandler',['../class_communication_library_1_1_logic_1_1_example_packet_handler.html',1,'CommunicationLibrary.Logic.ExamplePacketHandler'],['../class_communication_library_1_1_logic_1_1_example_packet_handler.html#a587a31841ff693a7693e0d795cd93256',1,'CommunicationLibrary.Logic.ExamplePacketHandler.ExamplePacketHandler()']]]
+];

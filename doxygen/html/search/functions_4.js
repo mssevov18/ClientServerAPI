@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['filestruct_0',['FileStruct',['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#a4e2d1c085f7699434b947f60c06b224d',1,'CommunicationLibrary.Models.Features.FileStruct.FileStruct(byte nameLength, string name, byte[] data)'],['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#a71c4024f109f5f2abf9805746a2af36f',1,'CommunicationLibrary.Models.Features.FileStruct.FileStruct(byte nameLength, string name, string data)'],['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#ae7b0ef773ca294c33bacb5a9d3b37276',1,'CommunicationLibrary.Models.Features.FileStruct.FileStruct(string name, byte[] data)'],['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#abcc2a756b4736d7058b2d5155ba30c2f',1,'CommunicationLibrary.Models.Features.FileStruct.FileStruct(string name, string data)']]]
+];
