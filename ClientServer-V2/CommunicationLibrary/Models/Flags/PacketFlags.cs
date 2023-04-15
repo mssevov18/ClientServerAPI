@@ -1,6 +1,6 @@
 using System;
 
-namespace CommunicationLibrary.Models.Features
+namespace CommunicationLibrary.Models.Flags
 {
 	[Flags]
 	public enum PacketFlags : byte

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Models.Flags
 {
-	public interface IFlagged<TFlagEnum> : IEnumerated<TFlagEnum> where TFlagEnum : struct, Enum
+	public interface IEnumFlagged<TFlagEnum> : IEnumerated<TFlagEnum> where TFlagEnum : struct, Enum
 	{
 		public bool HasFlag(TFlagEnum flag);
 	}

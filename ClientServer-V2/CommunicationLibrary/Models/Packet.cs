@@ -9,7 +9,7 @@ namespace CommunicationLibrary.Models
 
 	using Features;
 
-	using static Features.PacketFlags;
+	using static CommunicationLibrary.Models.Flags.PacketFlags;
 
 	public class Packet : IPacket
 	{

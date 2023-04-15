@@ -2,7 +2,7 @@ using System.Text;
 
 using CommunicationLibrary.EndPoints;
 using CommunicationLibrary.Logic;
-using CommunicationLibrary.Models.Features;
+using CommunicationLibrary.Models.Flags;
 
 namespace ServerTester
 {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 using CommunicationLibrary.Models.Features;
+using CommunicationLibrary.Models.Flags;
 
 namespace CommunicationLibrary.Models
 {

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace CommunicationLibrary.Logic
 {
+	using CommunicationLibrary.Models.Flags;
 	using CommunicationLibrary.Models.Pairs;
 
 	using Models;

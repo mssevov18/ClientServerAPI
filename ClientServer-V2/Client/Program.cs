@@ -8,6 +8,7 @@ using CommunicationLibrary.EndPoints;
 using CommunicationLibrary.Logic;
 using CommunicationLibrary.Models;
 using CommunicationLibrary.Models.Features;
+using CommunicationLibrary.Models.Flags;
 
 namespace TesterProgram
 {

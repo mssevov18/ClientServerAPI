@@ -9,6 +9,7 @@ using static Test.Utils;
 
 using CommunicationLibrary.Models;
 using CommunicationLibrary.Models.Features;
+using CommunicationLibrary.Models.Flags;
 
 namespace Test.Models.Packets
 {

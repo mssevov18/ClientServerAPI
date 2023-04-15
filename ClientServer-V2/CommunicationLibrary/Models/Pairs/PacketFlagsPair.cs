@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using CommunicationLibrary.Models.Features;
 using CommunicationLibrary.Models.Flags;
 
 namespace CommunicationLibrary.Models.Pairs
 {
-	public class PacketFlagsPair : IPair<PacketFlags>, IFlagged<PacketFlags>
+	public class PacketFlagsPair : IEnumPair<PacketFlags>, IEnumFlagged<PacketFlags>
 	{
 		public PacketFlags Enum
 		{
