@@ -9,8 +9,6 @@ using System.Xml.Linq;
 
 using CommunicationLibrary.Models.Features;
 
-using static CommunicationLibrary.Models.Features.PacketFlags;
-
 namespace CommunicationLibrary.Models
 {
 	public static class PacketBuilder
@@ -30,7 +28,7 @@ namespace CommunicationLibrary.Models
 			if (message.Length > Packet.__MessageMaxSize__)
 				return GetPacketsFromLongMsg(message);
 			else
-				return new Packet[] { new Packet((byte)Flags.SingleMsg, message) };
+				return new Packet[] { new Packet(PacketFlags.SingleMsg, message) };
 		}
 
 
@@ -50,19 +48,19 @@ namespace CommunicationLibrary.Models
 								 Packet.__MessageMaxSize__);
 
 
-				Flags flags = Flags.Message;
+				PacketFlags flags = PacketFlags.Message;
 
 				if (iteration == 0)
-					flags |= Flags.Start;
+					flags |= PacketFlags.Start;
 				else
 				{
 					if (dataLength <= Packet.__MessageMaxSize__)
-						flags |= Flags.End;
+						flags |= PacketFlags.End;
 					else
-						flags = Flags.Message;
+						flags = PacketFlags.Message;
 				}
 
-				packetsArr[iteration] = new Packet((byte)Flags.StartMsg, tempBuffer);
+				packetsArr[iteration] = new Packet(PacketFlags.StartMsg, tempBuffer);
 
 				iteration++;
 				dataLength -= Packet.__MessageMaxSize__;
@@ -94,7 +92,7 @@ namespace CommunicationLibrary.Models
 		}
 #warning File may not be split here!
 		public static Packet[] GetFilePackets(FileStruct fileStruct) =>
-			new Packet[] { new Packet((byte)Flags.SingleFile, FileStruct.GetBytes(fileStruct)) };
+			new Packet[] { new Packet(PacketFlags.SingleFile, FileStruct.GetBytes(fileStruct)) };
 
 #warning Outdated Method
 		public static Packet[] GetLongFilePackets(byte[] fileBytes)
@@ -112,16 +110,16 @@ namespace CommunicationLibrary.Models
 								 filePacketDataMaxSize);
 
 
-				Flags flags = Flags.File;
+				PacketFlags flags = PacketFlags.File;
 
 				if (iteration == 0)
-					flags |= Flags.Start;
+					flags |= PacketFlags.Start;
 				else
 				{
 					if (dataLength <= filePacketDataMaxSize)
-						flags |= Flags.End;
+						flags |= PacketFlags.End;
 					else
-						flags = Flags.Message;
+						flags = PacketFlags.Message;
 				}
 
 				packetsArr[iteration] = (new Packet((byte)flags, tempBuffer));

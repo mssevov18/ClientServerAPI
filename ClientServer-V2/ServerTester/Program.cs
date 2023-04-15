@@ -20,7 +20,7 @@ namespace ServerTester
 				{"tavan", "192.168.0.175" }
 			};
 
-			Server<PacketFlags.Flags> server = new Server<PacketFlags.Flags>(Console.Out, new ExamplePacketHandler(Console.OutputEncoding, Console.Out));
+			Server<PacketFlags> server = new Server<PacketFlags>(Console.Out, new ExamplePacketHandler(Console.OutputEncoding, Console.Out));
             //server.Start(IPAddress.Any, 50000);
             server.Start(ip["sevov"], 50000);
         }

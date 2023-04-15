@@ -5,6 +5,8 @@ using System.Text;
 
 namespace CommunicationLibrary.Models
 {
+	using CommunicationLibrary.Models.Pairs;
+
 	using Features;
 
 	using static Features.PacketFlags;
@@ -20,12 +22,12 @@ namespace CommunicationLibrary.Models
 		public const byte __HeaderSize__ = 7;
 		public const uint __PacketMaxSize__ = ushort.MaxValue + 7;
 
-		public byte FlagsByte
+		public PacketFlagsPair Flags
 		{
-			get => flagsByte;
-			set => flagsByte = value;
+			get => flags;
+			set => flags = value;
 		}
-		private byte flagsByte;
+		private PacketFlagsPair flags;
 
 		public ushort Size
 		{
@@ -67,7 +69,7 @@ namespace CommunicationLibrary.Models
 		/// <param name="id"></param>
 		public Packet(uint id = 0)
 		{
-			FlagsByte = 0;
+			Flags = 0;
 			Bytes = new byte[0];
 			_PacketGen(id);
 		}
@@ -79,12 +81,12 @@ namespace CommunicationLibrary.Models
 		/// <param name="message"></param>
 		/// <param name="id"></param>
 		/// <exception cref="Exception"></exception>
-		public Packet(byte flagsbyte, string message, uint id = 0)
+		public Packet(PacketFlagsPair flags, string message, uint id = 0)
 		{
 			if (_Encoding == null)
 				throw new Exception("Encoding can't be null!");
 
-			FlagsByte = flagsbyte;
+			Flags = flags;
 			Message = message;
 			_PacketGen(id);
 		}
@@ -95,9 +97,9 @@ namespace CommunicationLibrary.Models
 		/// <param name="flags"></param>
 		/// <param name="msgBytes"></param>
 		/// <param name="id"></param>
-		public Packet(byte flagsbyte, byte[] msgBytes, uint id = 0)
+		public Packet(PacketFlagsPair flags, byte[] msgBytes, uint id = 0)
 		{
-			FlagsByte = flagsbyte;
+			Flags = flags;
 			Bytes = msgBytes;
 			_PacketGen(id);
 		}
@@ -107,7 +109,7 @@ namespace CommunicationLibrary.Models
 		/// <param name="packetBytes"></param>
 		public Packet(byte[] packetBytes)
 		{
-			FlagsByte = packetBytes[0];
+			Flags = packetBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
 													   packetBytes[2] });
 			Bytes = new ArraySegment<byte>(packetBytes, __HeaderSize__, Size).ToArray();
@@ -123,7 +125,7 @@ namespace CommunicationLibrary.Models
 		/// <param name="id"></param>
 		public Packet(byte[] packetBytes, uint id)
 		{
-			FlagsByte = packetBytes[0];
+			Flags = packetBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
 													   packetBytes[2] });
 			Bytes = new ArraySegment<byte>(packetBytes, __HeaderSize__, Size).ToArray();
@@ -163,7 +165,7 @@ namespace CommunicationLibrary.Models
 		/// <inheritdoc />
 		public void Clear()
 		{
-			FlagsByte = 0;
+			Flags = 0;
 			Size = 0;
 			Array.Clear(Bytes, 0, Bytes.Length);
 		}
@@ -173,7 +175,7 @@ namespace CommunicationLibrary.Models
 		{
 			byte[] result = new byte[__HeaderSize__ + Bytes.Length];
 
-			Buffer.SetByte(result, 0, FlagsByte);
+			Buffer.SetByte(result, 0, Flags);
 
 			Buffer.BlockCopy(BitConverter.GetBytes(Size), 0,
 							 result, 1, 2);
@@ -210,6 +212,6 @@ namespace CommunicationLibrary.Models
 			return filePath;
 		}
 
-		public override string ToString() => $"#{Id} {FlagsByte}[{Size}] {{ {_Encoding.GetString(Bytes)} }}";
+		public override string ToString() => $"#{Id} {Flags}[{Size}] {{ {_Encoding.GetString(Bytes)} }}";
 	}
 }

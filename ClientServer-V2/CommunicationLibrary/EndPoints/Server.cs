@@ -34,12 +34,12 @@ namespace CommunicationLibrary.EndPoints
 		public event EventHandler<ClientEventArgs> ClientConnected;
 		public event EventHandler<ClientEventArgs> ClientDisconnected;
 
-		private IHandler<TPacketFlags> BaseHandler;
+		private IHandler<TPacketFlags> Handler;
 
 		public Server(TextWriter textWriter, IHandler<TPacketFlags> handler)
 		{
 			this.textWriter = textWriter;
-			this.BaseHandler = handler;
+			this.Handler = handler;
 		}
 
 		public void Start(string ipAddress, int port)
@@ -90,15 +90,15 @@ namespace CommunicationLibrary.EndPoints
 			RaiseClientConnected(client);
 			try
 			{
-
 				Packet packet, response;
 #warning Write encoding handshake hahaha
 				while (bClientConnected)
 				{
 					packet = PacketBuilder.GetPacketFromNetworkStream(network);
 
-					response = BaseHandler.Handle(packet);
-					OnPacketRecieved(packet);
+					response = Handler.Handle(packet);
+					if (OnPacketRecieved != null)
+						OnPacketRecieved(packet);
 
 					network.Write(
 						response.ToByteArray(),

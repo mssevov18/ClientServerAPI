@@ -49,7 +49,7 @@ namespace Test.Models.Packets
 		[Test]
 		public void ctor_Flags_ByteArray()
 		{
-			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msgBytes, 1);
+			Packet packet = new Packet(PacketFlags.SingleMsg, msgBytes, 1);
 
 			PrintDebug(pckBytes, packet.ToByteArray());
 			Console.WriteLine();
@@ -60,7 +60,7 @@ namespace Test.Models.Packets
 		[Test]
 		public void ctor_String()
 		{
-			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msg, 1);
+			Packet packet = new Packet(PacketFlags.SingleMsg, msg, 1);
 
 			PrintDebug(pckBytes, packet.ToByteArray());
 			Assert.That(pckBytes, Is.EqualTo(packet.ToByteArray()));
@@ -82,7 +82,7 @@ namespace Test.Models.Packets
 		[Test]
 		public void m_ToByteArray()
 		{
-			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msgBytes, 1);
+			Packet packet = new Packet(PacketFlags.SingleMsg, msgBytes, 1);
 
 			PrintDebug(pckBytes, packet.Bytes);
 			Assert.That(pckBytes, Is.EqualTo(packet.ToByteArray()));

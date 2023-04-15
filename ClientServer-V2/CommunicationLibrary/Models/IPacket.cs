@@ -4,6 +4,7 @@ using System.Text;
 namespace CommunicationLibrary.Models
 {
 	using System;
+	using CommunicationLibrary.Models.Pairs;
 
 	using Features;
 
@@ -36,7 +37,7 @@ namespace CommunicationLibrary.Models
 		/// <summary>
 		/// Gets or sets the flags of the packet.
 		/// </summary>
-		public byte FlagsByte { get; set; }
+		public PacketFlagsPair Flags { get; set; }
 
 		/// <summary>
 		/// Gets or sets the size of the packet.

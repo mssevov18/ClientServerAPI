@@ -42,7 +42,7 @@ namespace Test.Logic
 		public void m_Handle_ShortMessage(string msg)
 		{
 			_builder.Clear();
-			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msg);
+			Packet packet = new Packet(PacketFlags.SingleMsg, msg);
 
 			_handler.Handle(packet);
 
@@ -57,8 +57,8 @@ namespace Test.Logic
 		{
 			strings = new string[] { "Hello ", "world!" };
 			_builder.Clear();
-			Packet p1 = new Packet((byte)PacketFlags.Flags.StartMsg, strings[0]);
-			Packet p2 = new Packet((byte)PacketFlags.Flags.EndMsg, strings[1]);
+			Packet p1 = new Packet(PacketFlags.StartMsg, strings[0]);
+			Packet p2 = new Packet(PacketFlags.EndMsg, strings[1]);
 
 			_handler.Handle(p1);
 			_handler.Handle(p2);
@@ -73,10 +73,10 @@ namespace Test.Logic
 		{
 			strings = new string[] { "He", "llo ", "wor", "ld!" };
 			_builder.Clear();
-			Packet p1 = new Packet((byte)PacketFlags.Flags.StartMsg, strings[0]);
-			Packet p2 = new Packet((byte)PacketFlags.Flags.Message, strings[1]);
-			Packet p3 = new Packet((byte)PacketFlags.Flags.Message, strings[2]);
-			Packet p4 = new Packet((byte)PacketFlags.Flags.EndMsg, strings[3]);
+			Packet p1 = new Packet(PacketFlags.StartMsg, strings[0]);
+			Packet p2 = new Packet(PacketFlags.Message, strings[1]);
+			Packet p3 = new Packet(PacketFlags.Message, strings[2]);
+			Packet p4 = new Packet(PacketFlags.EndMsg, strings[3]);
 
 			_handler.Handle(p1);
 			_handler.Handle(p2);
@@ -94,7 +94,7 @@ namespace Test.Logic
 			string msg = "";
 			_builder.Clear();
 
-			Packet packet = new Packet((byte)PacketFlags.Flags.SingleMsg, msg);
+			Packet packet = new Packet(PacketFlags.SingleMsg, msg);
 
 			Packet response = _handler.Handle(packet);
 
@@ -109,14 +109,14 @@ namespace Test.Logic
 			string msg = "";
 			_builder.Clear();
 
-			Packet packet = new Packet((byte)PacketFlags.Flags.None, msg);
+			Packet packet = new Packet(PacketFlags.None, msg);
 
 			Packet response = _handler.Handle(packet);
 
 			PrintDebug(packet.ToString(), response.ToString());
 			Assert.That(packet.Id,
 				Is.EqualTo(response.Id));
-			Assert.True(((PacketFlags.Flags)response.FlagsByte).HasFlag(PacketFlags.Flags.Error));
+			Assert.True(((PacketFlags)response.Flags).HasFlag(PacketFlags.Error));
 		}
 
 		[Test]
