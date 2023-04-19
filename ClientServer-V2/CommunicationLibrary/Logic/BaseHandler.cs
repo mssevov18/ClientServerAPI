@@ -7,32 +7,31 @@ using System.Threading.Tasks;
 namespace CommunicationLibrary.Logic
 {
 	using System.IO;
-
+	using CommunicationLibrary.Models.Structs;
 	using Models;
 	using Models.Features;
 
 	public abstract class BaseHandler<TPacketFlags> : IHandler<TPacketFlags>
-		where TPacketFlags :
-					struct, Enum
+		where TPacketFlags : struct, Enum
 	{
 		public Encoding Encoding
 		{
-			get => encoding;
+			get => _Encoding;
 			set
 			{
-				encoding = value;
-				Packet._Encoding = encoding;
-				FileStruct.Encoding = encoding;
+				_Encoding = value;
+				Packet.Encoding = _Encoding;
+				FileStruct.Encoding = _Encoding;
 			}
 		}
-		protected Encoding encoding;
+		protected Encoding _Encoding;
 		
 		public TextWriter ResultWriter
 		{
-			get => resultWriter;
-			set => resultWriter =value;
+			get => _ResultWriter;
+			set => _ResultWriter =value;
 		}
-		protected TextWriter resultWriter;
+		protected TextWriter _ResultWriter;
 
 		public Type PacketFlagsType => typeof(TPacketFlags);
 

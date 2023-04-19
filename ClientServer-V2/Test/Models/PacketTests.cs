@@ -8,8 +8,8 @@ using NUnit.Framework;
 using static Test.Utils;
 
 using CommunicationLibrary.Models;
-using CommunicationLibrary.Models.Features;
 using CommunicationLibrary.Models.Flags;
+using CommunicationLibrary.Models.Structs;
 
 namespace Test.Models.Packets
 {
@@ -22,16 +22,16 @@ namespace Test.Models.Packets
 		private byte[] msgBytes => _encoding.GetBytes(msg);
 
 		[SetUp]
-		public void Setup()
+		public void SetUp()
 		{
 			//Packet.SetEncoding(Encoding.UTF8);
-			Packet._Encoding = _encoding;
+			Packet.Encoding = _encoding;
 			FileStruct.Encoding = _encoding;
 			expectedPacket = new Packet(17, msgBytes, 1);
 		}
 
 		[Test]
-		public void ctor_ByteArray()
+		public void Ctor_ByteArray()
 		{
 			Console.Write(Utils.ToString(pckBytes));
 			Console.WriteLine();
@@ -48,7 +48,7 @@ namespace Test.Models.Packets
 		}
 
 		[Test]
-		public void ctor_Flags_ByteArray()
+		public void Ctor_Flags_ByteArray()
 		{
 			Packet packet = new Packet(PacketFlags.SingleMsg, msgBytes, 1);
 
@@ -59,7 +59,7 @@ namespace Test.Models.Packets
 		}
 
 		[Test]
-		public void ctor_String()
+		public void Ctor_String()
 		{
 			Packet packet = new Packet(PacketFlags.SingleMsg, msg, 1);
 
@@ -68,20 +68,20 @@ namespace Test.Models.Packets
 		}
 
 		[Test]
-		public void prop_Count_Increment()
+		public void DoesCount_Increment()
 		{
-			uint startId = Packet._PacketGenCount;
+			uint startId = Packet.PacketGenCount;
 
 			int length = RandomNumberGenerator.GetInt32(1, 9);
 			for (int i = 0; i < length; i++)
 				new Packet();
 
-			PrintDebug($"{Packet._PacketGenCount}", $"{startId + length}");
-			Assert.That(Packet._PacketGenCount, Is.EqualTo(startId + length));
+			PrintDebug($"{Packet.PacketGenCount}", $"{startId + length}");
+			Assert.That(Packet.PacketGenCount, Is.EqualTo(startId + length));
 		}
 
 		[Test]
-		public void m_ToByteArray()
+		public void TestToByteArray()
 		{
 			Packet packet = new Packet(PacketFlags.SingleMsg, msgBytes, 1);
 
@@ -90,7 +90,7 @@ namespace Test.Models.Packets
 		}
 
 		[Test]
-		public void sm_GetPacketFromStreamReader()
+		public void CanGetPacketFromStreamReader()
 		{
 			StreamReader reader = new StreamReader(new MemoryStream(pckBytes));
 
@@ -101,7 +101,7 @@ namespace Test.Models.Packets
 		}
 
 		[Test]
-		public void m_WriteToFile()
+		public void CanWriteToFile()
 		{
 			// Arrange
 			string fileName = "test.txt";

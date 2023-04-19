@@ -7,5 +7,5 @@ digraph "CommunicationLibrary.Models.Packet.WriteToFile"
   rankdir="LR";
   Node1 [label="CommunicationLibrary.Models.\lPacket.WriteToFile",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Writes the packet bytes to a file in the specified directory and returns the full file path."];
   Node1 -> Node2 [color="steelblue1",style="solid"];
-  Node2 [label="CommunicationLibrary.Models.\lFeatures.FileStruct.GetStruct",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#ad0e0421d10f56c7306bbdc7c74df2352",tooltip=" "];
+  Node2 [label="CommunicationLibrary.Models.\lStructs.FileStruct.GetStruct",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_communication_library_1_1_models_1_1_structs_1_1_file_struct.html#ad43218ed24c6b0752d61c3f0c626becf",tooltip=" "];
 }

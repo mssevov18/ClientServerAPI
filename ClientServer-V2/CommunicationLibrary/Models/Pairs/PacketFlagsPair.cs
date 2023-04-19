@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunicationLibrary.Models.Features;
 using CommunicationLibrary.Models.Flags;
 
 namespace CommunicationLibrary.Models.Pairs
@@ -16,10 +17,10 @@ namespace CommunicationLibrary.Models.Pairs
 		}
 		public byte Byte
 		{
-			get => @byte;
-			set => @byte = value;
+			get => _byte;
+			set => _byte = value;
 		}
-		private byte @byte;
+		private byte _byte;
 
 		public static implicit operator PacketFlags(PacketFlagsPair pair) => pair.Enum;
 		public static implicit operator byte(PacketFlagsPair pair) => pair.Byte;

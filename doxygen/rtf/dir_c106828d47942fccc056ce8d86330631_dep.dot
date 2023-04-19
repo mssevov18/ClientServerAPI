@@ -1,0 +1,17 @@
+digraph "C:/Users/m4ss/source/repos/mssevov18/ClientServerAPI/ClientServer-V2/Client/obj/Debug"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_c7fbf644e2a0d7aca4421de61c6cb8da {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="obj", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_c7fbf644e2a0d7aca4421de61c6cb8da.html",tooltip=""]
+  subgraph clusterdir_c106828d47942fccc056ce8d86330631 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_c106828d47942fccc056ce8d86330631.html",tooltip=""]
+    dir_c106828d47942fccc056ce8d86330631 [shape=plaintext, label="Debug"];
+  dir_19b911716a8682f2b4265b6629d51486 [label="net5.0", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_19b911716a8682f2b4265b6629d51486.html",tooltip=""];
+  dir_c3dcb66af9f5de998ee0a6bb9cef243d [label="net6.0", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_c3dcb66af9f5de998ee0a6bb9cef243d.html",tooltip=""];
+  }
+  }
+}

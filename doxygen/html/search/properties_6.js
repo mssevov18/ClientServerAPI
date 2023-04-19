@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['message_0',['Message',['../interface_communication_library_1_1_models_1_1_i_packet.html#adc885880c76591bb9f6132f1abce6525',1,'CommunicationLibrary.Models.IPacket.Message()'],['../class_communication_library_1_1_models_1_1_packet.html#a1dc4d4aea1801809802d028e6665b6c5',1,'CommunicationLibrary.Models.Packet.Message()']]]
+  ['length_0',['Length',['../struct_communication_library_1_1_models_1_1_structs_1_1_file_struct.html#ac796c482060d223ae8d72d2035129c96',1,'CommunicationLibrary.Models.Structs.FileStruct.Length()'],['../interface_communication_library_1_1_models_1_1_structs_1_1_i_message_struct.html#a12afc1b33af85f6b82bb086a3b395de6',1,'CommunicationLibrary.Models.Structs.IMessageStruct.Length()']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['filestruct_2ecs_0',['FileStruct.cs',['../_file_struct_8cs.html',1,'']]],
-  ['filestructtests_2ecs_1',['FileStructTests.cs',['../_file_struct_tests_8cs.html',1,'']]]
+  ['examplepackethandler_2ecs_0',['ExamplePacketHandler.cs',['../_example_packet_handler_8cs.html',1,'']]]
 ];

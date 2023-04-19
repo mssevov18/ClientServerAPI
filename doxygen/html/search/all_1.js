@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['_5f_5fdatamaxsize_5f_5f_0',['__DataMaxSize__',['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#a0fe0ee31a858dd7d65b3bb7b16c626b9',1,'CommunicationLibrary::Models::Features::FileStruct']]],
-  ['_5f_5fheadermaxsize_5f_5f_1',['__HeaderMaxSize__',['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#abc6ea7e2b7cb4bfd9a30f9dcf3f5b971',1,'CommunicationLibrary::Models::Features::FileStruct']]],
+  ['_5f_5fdatamaxsize_5f_5f_0',['__DataMaxSize__',['../struct_communication_library_1_1_models_1_1_structs_1_1_file_struct.html#aed6caa26df5197ab4c172ed8e791e68e',1,'CommunicationLibrary::Models::Structs::FileStruct']]],
+  ['_5f_5fheadermaxsize_5f_5f_1',['__HeaderMaxSize__',['../struct_communication_library_1_1_models_1_1_structs_1_1_file_struct.html#ad01f9d70a138273a45f55c3c6e8cb2da',1,'CommunicationLibrary::Models::Structs::FileStruct']]],
   ['_5f_5fheadersize_5f_5f_2',['__HeaderSize__',['../class_communication_library_1_1_models_1_1_packet.html#ad60a6140a9adf58e774a8838bcc1b792',1,'CommunicationLibrary::Models::Packet']]],
   ['_5f_5fmessagemaxsize_5f_5f_3',['__MessageMaxSize__',['../class_communication_library_1_1_models_1_1_packet.html#a1db192da2e37cffc45c0ff18f1d927fa',1,'CommunicationLibrary::Models::Packet']]],
   ['_5f_5fmsgmaxsize_4',['__MsgMaxSize',['../interface_communication_library_1_1_models_1_1_i_packet.html#a720c9c591ba3e9170d86f22bc6e3473f',1,'CommunicationLibrary::Models::IPacket']]],

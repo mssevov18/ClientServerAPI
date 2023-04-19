@@ -6,5 +6,5 @@ digraph "CommunicationLibrary.Logic.ExamplePacketHandler"
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   Node1 [label="CommunicationLibrary.Logic.\lExamplePacketHandler",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
   Node2 -> Node1 [dir="back",color="steelblue1",style="solid"];
-  Node2 [label="BaseHandler\< PacketFlags.\lFlags \>",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$class_communication_library_1_1_logic_1_1_base_handler.html",tooltip=" "];
+  Node2 [label="BaseHandler\< PacketFlags \>",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$class_communication_library_1_1_logic_1_1_base_handler.html",tooltip=" "];
 }

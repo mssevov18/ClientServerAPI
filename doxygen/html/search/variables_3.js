@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['name_0',['Name',['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#af1fe6726085fbcd0780bca8f996abd92',1,'CommunicationLibrary::Models::Features::FileStruct']]],
-  ['namelength_1',['NameLength',['../struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#ae0cc726add7a4d7cbcbcc77837330c72',1,'CommunicationLibrary::Models::Features::FileStruct']]]
+  ['flagvalues_0',['FlagValues',['../class_communication_library_1_1_models_1_1_pairs_1_1_packet_flags_pair.html#a41bc6fc7c96cd579b01de0364344245f',1,'CommunicationLibrary::Models::Pairs::PacketFlagsPair']]]
 ];

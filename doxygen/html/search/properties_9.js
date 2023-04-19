@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['size_0',['Size',['../interface_communication_library_1_1_models_1_1_i_packet.html#afb685f3a7f100babcdd9bb6607463d5e',1,'CommunicationLibrary.Models.IPacket.Size()'],['../class_communication_library_1_1_models_1_1_packet.html#a1e0b00abfbd17abd6d8d05693cd1a789',1,'CommunicationLibrary.Models.Packet.Size()']]]
+  ['resultwriter_0',['ResultWriter',['../class_communication_library_1_1_logic_1_1_base_handler.html#a5a423784c29fd6d1b2f965325abacfec',1,'CommunicationLibrary.Logic.BaseHandler.ResultWriter()'],['../interface_communication_library_1_1_logic_1_1_i_handler.html#a4790c83b09df01f472dc878c29402f17',1,'CommunicationLibrary.Logic.IHandler.ResultWriter()']]]
 ];

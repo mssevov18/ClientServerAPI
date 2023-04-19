@@ -9,7 +9,7 @@ digraph "Test.Logic.PacketHandlerTests.m_Handle_Response_Message"
   Node1 -> Node2 [color="steelblue1",style="solid"];
   Node2 [label="CommunicationLibrary.Logic.\lExamplePacketHandler.Handle",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_communication_library_1_1_logic_1_1_example_packet_handler.html#ac37c4656ec253666e41d40052f9cec90",tooltip="Returns the response packet."];
   Node2 -> Node3 [color="steelblue1",style="solid"];
-  Node3 [label="CommunicationLibrary.Models.\lFeatures.FileStruct.GetStruct",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html#ad0e0421d10f56c7306bbdc7c74df2352",tooltip=" "];
+  Node3 [label="CommunicationLibrary.Models.\lStructs.FileStruct.GetStruct",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_communication_library_1_1_models_1_1_structs_1_1_file_struct.html#ad43218ed24c6b0752d61c3f0c626becf",tooltip=" "];
   Node2 -> Node4 [color="steelblue1",style="solid"];
   Node4 [label="CommunicationLibrary.Models.\lPacket.ToString",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_communication_library_1_1_models_1_1_packet.html#ac2faa89d8f680af07c301e254da9881d",tooltip="Returns the packet as a string."];
   Node1 -> Node4 [color="steelblue1",style="solid"];

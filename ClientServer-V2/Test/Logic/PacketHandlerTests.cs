@@ -20,7 +20,7 @@ namespace Test.Logic
 		private ExamplePacketHandler _handler;
 
 		[SetUp]
-		public void Setup()
+		public void SetUp()
 		{
 			_builder = new StringBuilder();
 			_writer = new StringWriter(_builder);
@@ -29,7 +29,7 @@ namespace Test.Logic
 			_encoding = Encoding.UTF8;
 
 			_handler = new ExamplePacketHandler(_encoding, _writer);
-			Packet._Encoding = _encoding;
+			Packet.Encoding = _encoding;
 			//Packet.SetEncoding(_encoding);
 		}
 
@@ -39,7 +39,7 @@ namespace Test.Logic
 		[TestCase("Lorem ipsum")]
 		[TestCase("Dolor Sit amet")]
 		[TestCase("Здравей pederasso!")]
-		public void m_Handle_ShortMessage(string msg)
+		public void CanHandle_ShortMessages(string msg)
 		{
 			_builder.Clear();
 			Packet packet = new Packet(PacketFlags.SingleMsg, msg);
@@ -53,7 +53,7 @@ namespace Test.Logic
 
 		private string[] strings;
 		[Test]
-		public void m_Handle_LongMessage()
+		public void CanHandle_LongMessages()
 		{
 			strings = new string[] { "Hello ", "world!" };
 			_builder.Clear();
@@ -69,7 +69,7 @@ namespace Test.Logic
 		}
 
 		[Test]
-		public void m_Handle_LongERMessage()
+		public void CanHandle_LongERMessages()
 		{
 			strings = new string[] { "He", "llo ", "wor", "ld!" };
 			_builder.Clear();
@@ -89,7 +89,7 @@ namespace Test.Logic
 		}
 
 		[Test]
-		public void m_Handle_Response_Message()
+		public void CanHandle_ResponseMessage()
 		{
 			string msg = "";
 			_builder.Clear();
@@ -104,7 +104,7 @@ namespace Test.Logic
 		}
 
 		[Test]
-		public void m_Handle_Response_Message_Fail()
+		public void CanHandle_ResponseError()
 		{
 			string msg = "";
 			_builder.Clear();
@@ -120,7 +120,7 @@ namespace Test.Logic
 		}
 
 		[Test]
-		public void m_Handle_File()
+		public void CanHandle_File()
 		{
 
 		}

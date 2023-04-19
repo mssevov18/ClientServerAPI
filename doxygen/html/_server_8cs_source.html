@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Communication Library: CommunicationLibrary/EndPoints/Server.cs Изходен файл</title>
+<title>Communication Library: C:/Users/m4ss/source/repos/mssevov18/ClientServerAPI/ClientServer-V2/CommunicationLibrary/EndPoints/Server.cs Изходен файл</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,125 +103,160 @@ $(document).ready(function(){initNavTree('_server_8cs_source.html',''); initResi
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_communication_library_1_1_end_points.html">CommunicationLibrary.EndPoints</a></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">using </span>System;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">using </span>Logic;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">using </span>Models;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">using </span>Models.Features;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html">   16</a></span>    <span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_namespace" href="namespace_server.html">Server</a>&lt;TPacketFlags&gt;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        where TPacketFlags :</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                    struct, Enum</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">private</span> TcpListener server;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">private</span> IPAddress ipAddress;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">private</span> <span class="keywordtype">int</span> port;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#a41a5248693d5bef30bb288db3298a7f1">   23</a></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_property" href="class_communication_library_1_1_end_points_1_1_server.html#a41a5248693d5bef30bb288db3298a7f1">IsRunning</a> =&gt; isRunning;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">private</span> <span class="keywordtype">bool</span> isRunning;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keyword">private</span> TextWriter textWriter;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">private</span> Encoding encoding;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keyword">private</span> <a class="code hl_interface" href="interface_communication_library_1_1_logic_1_1_i_handler.html">IHandler&lt;TPacketFlags&gt;</a> <a class="code hl_class" href="class_communication_library_1_1_logic_1_1_base_handler.html">BaseHandler</a>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#aacfaa81ea18431e14a16a4c81d0641ec">   31</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#aacfaa81ea18431e14a16a4c81d0641ec">Server</a>(TextWriter textWriter, <a class="code hl_interface" href="interface_communication_library_1_1_logic_1_1_i_handler.html">IHandler&lt;TPacketFlags&gt;</a> handler)</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            this.textWriter = textWriter;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            this.BaseHandler = handler;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            this.encoding = handler.<a class="code hl_property" href="interface_communication_library_1_1_logic_1_1_i_handler.html#a9beaf87681bdf52d59d8c50558803437">Encoding</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#a15d215ac91598ce5ad10055a92439362">   38</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#a15d215ac91598ce5ad10055a92439362">Start</a>(<span class="keywordtype">string</span> ipAddress, <span class="keywordtype">int</span> port)</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#a15d215ac91598ce5ad10055a92439362">Start</a>(IPAddress.Parse(ipAddress), port);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        }</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#a624661f1735532a2890adfdecbef0116">   43</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#a624661f1735532a2890adfdecbef0116">Start</a>(IPAddress ipAddress, <span class="keywordtype">int</span> port)</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            this.ipAddress = ipAddress;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            this.port = port;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            server = <span class="keyword">new</span> TcpListener(this.ipAddress, this.port);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            server.Start();</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            isRunning = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#aebb71332eedd34d2241b4757936589c9">LoopClients</a>();</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#ad3983fff6b68793ab197b4b7e20f8364">   54</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#ad3983fff6b68793ab197b4b7e20f8364">Stop</a>()</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            server.Stop();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            isRunning = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">using </span>System.Collections.ObjectModel;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">using </span><a class="code hl_namespace" href="namespace_communication_library_1_1_logic.html">CommunicationLibrary.Logic</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">using </span>Logic;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">using </span>Models;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">using </span>Models.Features;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html">   20</a></span>    <span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_namespace" href="namespace_server.html">Server</a>&lt;TPacketFlags&gt;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        where TPacketFlags :</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                    struct, Enum</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">private</span> TcpListener server;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">private</span> IPAddress ipAddress;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keyword">private</span> <span class="keywordtype">int</span> port;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#a41a5248693d5bef30bb288db3298a7f1">   27</a></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_property" href="class_communication_library_1_1_end_points_1_1_server.html#a41a5248693d5bef30bb288db3298a7f1">IsRunning</a> =&gt; isRunning;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keyword">private</span> <span class="keywordtype">bool</span> isRunning;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keyword">private</span> TextWriter textWriter;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#a7e3b4bb351657eb738a510649f3bf3ed">   32</a></span>        <span class="keyword">public</span> Action&lt;Packet&gt; <a class="code hl_variable" href="class_communication_library_1_1_end_points_1_1_server.html#a7e3b4bb351657eb738a510649f3bf3ed">OnPacketRecieved</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#afc7b8d28dd23afccac70bbe4ff4db9b4">   34</a></span>        <span class="keyword">public</span> <span class="keyword">event</span> EventHandler&lt;ClientEventArgs&gt; <a class="code hl_event" href="class_communication_library_1_1_end_points_1_1_server.html#afc7b8d28dd23afccac70bbe4ff4db9b4">ClientConnected</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#aca1c17644cdf25bec695d6e478d57359">   35</a></span>        <span class="keyword">public</span> <span class="keyword">event</span> EventHandler&lt;ClientEventArgs&gt; <a class="code hl_event" href="class_communication_library_1_1_end_points_1_1_server.html#aca1c17644cdf25bec695d6e478d57359">ClientDisconnected</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">private</span> <a class="code hl_interface" href="interface_communication_library_1_1_logic_1_1_i_handler.html">IHandler&lt;TPacketFlags&gt;</a> Handler;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#aacfaa81ea18431e14a16a4c81d0641ec">   39</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#aacfaa81ea18431e14a16a4c81d0641ec">Server</a>(TextWriter textWriter, <a class="code hl_interface" href="interface_communication_library_1_1_logic_1_1_i_handler.html">IHandler&lt;TPacketFlags&gt;</a> handler)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            this.textWriter = textWriter;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            this.Handler = handler;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#a15d215ac91598ce5ad10055a92439362">   45</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#a15d215ac91598ce5ad10055a92439362">Start</a>(<span class="keywordtype">string</span> ipAddress, <span class="keywordtype">int</span> port)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <a class="code hl_enumvalue" href="namespace_communication_library_1_1_models_1_1_flags.html#aa595f6bf65d6091adc040e28269fe1fcaa6122a65eaa676f700ae68d393054a37">Start</a>(IPAddress.Parse(ipAddress), port);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#a624661f1735532a2890adfdecbef0116">   50</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#a624661f1735532a2890adfdecbef0116">Start</a>(IPAddress ipAddress, <span class="keywordtype">int</span> port)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            this.ipAddress = ipAddress;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            this.port = port;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            server = <span class="keyword">new</span> TcpListener(this.ipAddress, this.port);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            server.Start();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            isRunning = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#aebb71332eedd34d2241b4757936589c9">LoopClients</a>();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        }</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#aebb71332eedd34d2241b4757936589c9">   61</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#aebb71332eedd34d2241b4757936589c9">LoopClients</a>()</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#ad3983fff6b68793ab197b4b7e20f8364">   61</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#ad3983fff6b68793ab197b4b7e20f8364">Stop</a>()</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">while</span> (isRunning)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <span class="comment">// wait for client connection</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                TcpClient newClient = server.AcceptTcpClient();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            server.Stop();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            isRunning = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                <span class="comment">// client found.</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                <span class="comment">// create a thread to handle communication</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                <span class="comment">//Thread t = new Thread(new ParameterizedThreadStart(HandleClient));</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ParameterizedThreadStart(HandleClientPackets));</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                t.Start(newClient);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            }</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keyword">private</span> <span class="keywordtype">void</span> HandleClientPackets(<span class="keywordtype">object</span> obj)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keywordflow">try</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                <span class="comment">// retrieve client from parameter passed to thread</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                TcpClient client = (TcpClient)obj;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="class_communication_library_1_1_end_points_1_1_server.html#aebb71332eedd34d2241b4757936589c9">   68</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_communication_library_1_1_end_points_1_1_server.html#aebb71332eedd34d2241b4757936589c9">LoopClients</a>()</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordflow">while</span> (isRunning)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="comment">// wait for client connection</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                TcpClient newClient = server.AcceptTcpClient();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                <span class="comment">// client found.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                <span class="comment">// create a thread to handle communication</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                <span class="comment">//Thread t = new Thread(new ParameterizedThreadStart(HandleClient));</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ParameterizedThreadStart(HandleClientPackets));</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                t.Start(newClient);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        }</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                NetworkStream network = client.GetStream();</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                <span class="keywordtype">bool</span> bClientConnected = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                <a class="code hl_class" href="class_communication_library_1_1_models_1_1_packet.html">Packet</a> packet, response;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#warning Write encoding handshake hahaha</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                <span class="keywordflow">while</span> (bClientConnected)</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                {</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                    packet = PacketBuilder.GetPacketFromNetworkStream(network);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                    response = <a class="code hl_class" href="class_communication_library_1_1_logic_1_1_base_handler.html">BaseHandler</a>.<a class="code hl_function" href="class_communication_library_1_1_logic_1_1_base_handler.html#adaeb095967e0cca71d624cd01d78059f">Handle</a>(packet);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    network.Write(</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                        response.<a class="code hl_function" href="class_communication_library_1_1_models_1_1_packet.html#ad6b18c21c8bef639b6c23f339693a03c">ToByteArray</a>(),</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                        0,</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                        Packet.__HeaderSize__ + response.<a class="code hl_property" href="class_communication_library_1_1_models_1_1_packet.html#a1e0b00abfbd17abd6d8d05693cd1a789">Size</a>);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    network.Flush();</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                }</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            }</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keywordflow">catch</span> (IOException)</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                textWriter.WriteLine($<span class="stringliteral">&quot;Client Disconnected&quot;</span>);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            }</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
-<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_a15d215ac91598ce5ad10055a92439362"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#a15d215ac91598ce5ad10055a92439362">CommunicationLibrary.EndPoints.Server.Start</a></div><div class="ttdeci">void Start(string ipAddress, int port)</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00038">Server.cs:38</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_a41a5248693d5bef30bb288db3298a7f1"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#a41a5248693d5bef30bb288db3298a7f1">CommunicationLibrary.EndPoints.Server.IsRunning</a></div><div class="ttdeci">bool IsRunning</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00023">Server.cs:23</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_a624661f1735532a2890adfdecbef0116"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#a624661f1735532a2890adfdecbef0116">CommunicationLibrary.EndPoints.Server.Start</a></div><div class="ttdeci">void Start(IPAddress ipAddress, int port)</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00043">Server.cs:43</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_aacfaa81ea18431e14a16a4c81d0641ec"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#aacfaa81ea18431e14a16a4c81d0641ec">CommunicationLibrary.EndPoints.Server.Server</a></div><div class="ttdeci">Server(TextWriter textWriter, IHandler&lt; TPacketFlags &gt; handler)</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00031">Server.cs:31</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_ad3983fff6b68793ab197b4b7e20f8364"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#ad3983fff6b68793ab197b4b7e20f8364">CommunicationLibrary.EndPoints.Server.Stop</a></div><div class="ttdeci">void Stop()</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00054">Server.cs:54</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_aebb71332eedd34d2241b4757936589c9"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#aebb71332eedd34d2241b4757936589c9">CommunicationLibrary.EndPoints.Server.LoopClients</a></div><div class="ttdeci">void LoopClients()</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00061">Server.cs:61</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_logic_1_1_base_handler_html"><div class="ttname"><a href="class_communication_library_1_1_logic_1_1_base_handler.html">CommunicationLibrary.Logic.BaseHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="_base_handler_8cs_source.html#l00014">BaseHandler.cs:17</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_logic_1_1_base_handler_html_adaeb095967e0cca71d624cd01d78059f"><div class="ttname"><a href="class_communication_library_1_1_logic_1_1_base_handler.html#adaeb095967e0cca71d624cd01d78059f">CommunicationLibrary.Logic.BaseHandler.Handle</a></div><div class="ttdeci">abstract Packet Handle(Packet packet)</div><div class="ttdoc">Returns the response packet.</div></div>
-<div class="ttc" id="aclass_communication_library_1_1_models_1_1_packet_html"><div class="ttname"><a href="class_communication_library_1_1_models_1_1_packet.html">CommunicationLibrary.Models.Packet</a></div><div class="ttdef"><b>Definition:</b> <a href="_packet_8cs_source.html#l00012">Packet.cs:13</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_models_1_1_packet_html_a1e0b00abfbd17abd6d8d05693cd1a789"><div class="ttname"><a href="class_communication_library_1_1_models_1_1_packet.html#a1e0b00abfbd17abd6d8d05693cd1a789">CommunicationLibrary.Models.Packet.Size</a></div><div class="ttdeci">ushort Size</div><div class="ttdoc">Gets or sets the size of the packet.</div><div class="ttdef"><b>Definition:</b> <a href="_packet_8cs_source.html#l00030">Packet.cs:31</a></div></div>
-<div class="ttc" id="aclass_communication_library_1_1_models_1_1_packet_html_ad6b18c21c8bef639b6c23f339693a03c"><div class="ttname"><a href="class_communication_library_1_1_models_1_1_packet.html#ad6b18c21c8bef639b6c23f339693a03c">CommunicationLibrary.Models.Packet.ToByteArray</a></div><div class="ttdeci">byte[] ToByteArray()</div><div class="ttdoc">Returns the packet as a byte array.A byte array that represents the packet.</div><div class="ttdef"><b>Definition:</b> <a href="_packet_8cs_source.html#l00172">Packet.cs:172</a></div></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keyword">private</span> <span class="keywordtype">void</span> HandleClientPackets(<span class="keywordtype">object</span> obj)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="comment">// retrieve client from parameter passed to thread</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            TcpClient client = (TcpClient)obj;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            NetworkStream network = client.GetStream();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordtype">bool</span> bClientConnected = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            RaiseClientConnected(client);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <a class="code hl_class" href="class_communication_library_1_1_models_1_1_packet.html">Packet</a> packet, response;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#warning Write encoding handshake hahaha</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="keywordflow">while</span> (bClientConnected)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    packet = PacketBuilder.GetPacketFromNetworkStream(network);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    response = Handler.<a class="code hl_function" href="interface_communication_library_1_1_logic_1_1_i_handler.html#a5ea2a2f81bac3410180b134137605715">Handle</a>(packet);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                    <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_communication_library_1_1_end_points_1_1_server.html#a7e3b4bb351657eb738a510649f3bf3ed">OnPacketRecieved</a> != <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                        <a class="code hl_variable" href="class_communication_library_1_1_end_points_1_1_server.html#a7e3b4bb351657eb738a510649f3bf3ed">OnPacketRecieved</a>(packet);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                    network.Write(</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                        response.<a class="code hl_function" href="class_communication_library_1_1_models_1_1_packet.html#ad6b18c21c8bef639b6c23f339693a03c">ToByteArray</a>(),</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                        0,</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                        <a class="code hl_class" href="class_communication_library_1_1_models_1_1_packet.html">Packet</a>.<a class="code hl_variable" href="class_communication_library_1_1_models_1_1_packet.html#ad60a6140a9adf58e774a8838bcc1b792">__HeaderSize__</a> + response.<a class="code hl_property" href="class_communication_library_1_1_models_1_1_packet.html#a1e0b00abfbd17abd6d8d05693cd1a789">Size</a>);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    network.Flush();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordflow">catch</span> (IOException)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                RaiseClientDisconnected(client);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="keywordflow">catch</span> (Exception)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                <span class="keywordflow">throw</span> <span class="keyword">new</span> NotImplementedException();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keyword">private</span> <span class="keywordtype">void</span> RaiseClientConnected(TcpClient client)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            var handler = <a class="code hl_event" href="class_communication_library_1_1_end_points_1_1_server.html#afc7b8d28dd23afccac70bbe4ff4db9b4">ClientConnected</a>;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keywordflow">if</span> (handler != <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                handler(<span class="keyword">this</span>, <span class="keyword">new</span> <a class="code hl_class" href="class_communication_library_1_1_logic_1_1_client_event_args.html">ClientEventArgs</a>(client));</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keyword">private</span> <span class="keywordtype">void</span> RaiseClientDisconnected(TcpClient client)</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            var handler = <a class="code hl_event" href="class_communication_library_1_1_end_points_1_1_server.html#aca1c17644cdf25bec695d6e478d57359">ClientDisconnected</a>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">if</span> (handler != <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                handler(<span class="keyword">this</span>, <span class="keyword">new</span> <a class="code hl_class" href="class_communication_library_1_1_logic_1_1_client_event_args.html">ClientEventArgs</a>(client));</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_a15d215ac91598ce5ad10055a92439362"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#a15d215ac91598ce5ad10055a92439362">CommunicationLibrary.EndPoints.Server.Start</a></div><div class="ttdeci">void Start(string ipAddress, int port)</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00045">Server.cs:45</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_a41a5248693d5bef30bb288db3298a7f1"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#a41a5248693d5bef30bb288db3298a7f1">CommunicationLibrary.EndPoints.Server.IsRunning</a></div><div class="ttdeci">bool IsRunning</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00027">Server.cs:27</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_a624661f1735532a2890adfdecbef0116"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#a624661f1735532a2890adfdecbef0116">CommunicationLibrary.EndPoints.Server.Start</a></div><div class="ttdeci">void Start(IPAddress ipAddress, int port)</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00050">Server.cs:50</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_a7e3b4bb351657eb738a510649f3bf3ed"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#a7e3b4bb351657eb738a510649f3bf3ed">CommunicationLibrary.EndPoints.Server.OnPacketRecieved</a></div><div class="ttdeci">Action&lt; Packet &gt; OnPacketRecieved</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00032">Server.cs:32</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_aacfaa81ea18431e14a16a4c81d0641ec"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#aacfaa81ea18431e14a16a4c81d0641ec">CommunicationLibrary.EndPoints.Server.Server</a></div><div class="ttdeci">Server(TextWriter textWriter, IHandler&lt; TPacketFlags &gt; handler)</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00039">Server.cs:39</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_aca1c17644cdf25bec695d6e478d57359"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#aca1c17644cdf25bec695d6e478d57359">CommunicationLibrary.EndPoints.Server.ClientDisconnected</a></div><div class="ttdeci">EventHandler&lt; ClientEventArgs &gt; ClientDisconnected</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00035">Server.cs:35</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_ad3983fff6b68793ab197b4b7e20f8364"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#ad3983fff6b68793ab197b4b7e20f8364">CommunicationLibrary.EndPoints.Server.Stop</a></div><div class="ttdeci">void Stop()</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00061">Server.cs:61</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_aebb71332eedd34d2241b4757936589c9"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#aebb71332eedd34d2241b4757936589c9">CommunicationLibrary.EndPoints.Server.LoopClients</a></div><div class="ttdeci">void LoopClients()</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00068">Server.cs:68</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_end_points_1_1_server_html_afc7b8d28dd23afccac70bbe4ff4db9b4"><div class="ttname"><a href="class_communication_library_1_1_end_points_1_1_server.html#afc7b8d28dd23afccac70bbe4ff4db9b4">CommunicationLibrary.EndPoints.Server.ClientConnected</a></div><div class="ttdeci">EventHandler&lt; ClientEventArgs &gt; ClientConnected</div><div class="ttdef"><b>Definition:</b> <a href="_server_8cs_source.html#l00034">Server.cs:34</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_logic_1_1_client_event_args_html"><div class="ttname"><a href="class_communication_library_1_1_logic_1_1_client_event_args.html">CommunicationLibrary.Logic.ClientEventArgs</a></div><div class="ttdef"><b>Definition:</b> <a href="_client_event_args_8cs_source.html#l00006">ClientEventArgs.cs:7</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_models_1_1_packet_html"><div class="ttname"><a href="class_communication_library_1_1_models_1_1_packet.html">CommunicationLibrary.Models.Packet</a></div><div class="ttdef"><b>Definition:</b> <a href="_packet_8cs_source.html#l00014">Packet.cs:15</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_models_1_1_packet_html_a1e0b00abfbd17abd6d8d05693cd1a789"><div class="ttname"><a href="class_communication_library_1_1_models_1_1_packet.html#a1e0b00abfbd17abd6d8d05693cd1a789">CommunicationLibrary.Models.Packet.Size</a></div><div class="ttdeci">ushort Size</div><div class="ttdoc">Gets or sets the size of the packet.</div><div class="ttdef"><b>Definition:</b> <a href="_packet_8cs_source.html#l00032">Packet.cs:33</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_models_1_1_packet_html_ad60a6140a9adf58e774a8838bcc1b792"><div class="ttname"><a href="class_communication_library_1_1_models_1_1_packet.html#ad60a6140a9adf58e774a8838bcc1b792">CommunicationLibrary.Models.Packet.__HeaderSize__</a></div><div class="ttdeci">const byte __HeaderSize__</div><div class="ttdef"><b>Definition:</b> <a href="_packet_8cs_source.html#l00022">Packet.cs:22</a></div></div>
+<div class="ttc" id="aclass_communication_library_1_1_models_1_1_packet_html_ad6b18c21c8bef639b6c23f339693a03c"><div class="ttname"><a href="class_communication_library_1_1_models_1_1_packet.html#ad6b18c21c8bef639b6c23f339693a03c">CommunicationLibrary.Models.Packet.ToByteArray</a></div><div class="ttdeci">byte[] ToByteArray()</div><div class="ttdoc">Returns the packet as a byte array.A byte array that represents the packet.</div><div class="ttdef"><b>Definition:</b> <a href="_packet_8cs_source.html#l00174">Packet.cs:174</a></div></div>
 <div class="ttc" id="ainterface_communication_library_1_1_logic_1_1_i_handler_html"><div class="ttname"><a href="interface_communication_library_1_1_logic_1_1_i_handler.html">CommunicationLibrary.Logic.IHandler</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_handler_8cs_source.html#l00011">IHandler.cs:14</a></div></div>
-<div class="ttc" id="ainterface_communication_library_1_1_logic_1_1_i_handler_html_a9beaf87681bdf52d59d8c50558803437"><div class="ttname"><a href="interface_communication_library_1_1_logic_1_1_i_handler.html#a9beaf87681bdf52d59d8c50558803437">CommunicationLibrary.Logic.IHandler.Encoding</a></div><div class="ttdeci">Encoding Encoding</div><div class="ttdef"><b>Definition:</b> <a href="_i_handler_8cs_source.html#l00015">IHandler.cs:15</a></div></div>
+<div class="ttc" id="ainterface_communication_library_1_1_logic_1_1_i_handler_html_a5ea2a2f81bac3410180b134137605715"><div class="ttname"><a href="interface_communication_library_1_1_logic_1_1_i_handler.html#a5ea2a2f81bac3410180b134137605715">CommunicationLibrary.Logic.IHandler.Handle</a></div><div class="ttdeci">Packet Handle(Packet packet)</div></div>
 <div class="ttc" id="anamespace_communication_library_1_1_end_points_html"><div class="ttname"><a href="namespace_communication_library_1_1_end_points.html">CommunicationLibrary.EndPoints</a></div><div class="ttdef"><b>Definition:</b> <a href="_client_8cs_source.html#l00011">Client.cs:12</a></div></div>
+<div class="ttc" id="anamespace_communication_library_1_1_logic_html"><div class="ttname"><a href="namespace_communication_library_1_1_logic.html">CommunicationLibrary.Logic</a></div><div class="ttdef"><b>Definition:</b> <a href="_base_handler_8cs_source.html#l00007">BaseHandler.cs:8</a></div></div>
+<div class="ttc" id="anamespace_communication_library_1_1_models_1_1_flags_html_aa595f6bf65d6091adc040e28269fe1fcaa6122a65eaa676f700ae68d393054a37"><div class="ttname"><a href="namespace_communication_library_1_1_models_1_1_flags.html#aa595f6bf65d6091adc040e28269fe1fcaa6122a65eaa676f700ae68d393054a37">CommunicationLibrary.Models.Flags.PacketFlags.Start</a></div><div class="ttdeci">@ Start</div></div>
 <div class="ttc" id="anamespace_server_html"><div class="ttname"><a href="namespace_server.html">Server</a></div><div class="ttdef"><b>Definition:</b> <a href="_server_program_8cs_source.html#l00008">ServerProgram.cs:9</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_09bacaa5f41a1292cd7c9ca32099ac35.html">CommunicationLibrary</a></li><li class="navelem"><a class="el" href="dir_25a5ee511c9a6a1279b4965259c6a26f.html">EndPoints</a></li><li class="navelem"><a class="el" href="_server_8cs.html">Server.cs</a></li>
+    <li class="navelem"><a class="el" href="dir_48d2ab0675f1f4006b5918e81cb0368a.html">ClientServer-V2</a></li><li class="navelem"><a class="el" href="dir_5c0219449369723cba3aceac1869d748.html">CommunicationLibrary</a></li><li class="navelem"><a class="el" href="dir_a9817d8ee7ce9fee1513b87711af81ee.html">EndPoints</a></li><li class="navelem"><a class="el" href="_server_8cs.html">Server.cs</a></li>
     <li class="footer">Генериран от <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>

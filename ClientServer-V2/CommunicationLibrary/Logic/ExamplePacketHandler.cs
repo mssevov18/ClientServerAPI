@@ -8,14 +8,14 @@ namespace CommunicationLibrary.Logic
 {
 	using CommunicationLibrary.Models.Flags;
 	using CommunicationLibrary.Models.Pairs;
-
+	using CommunicationLibrary.Models.Structs;
 	using Models;
 	using Models.Features;
 
 	//Example Handler
 	public class ExamplePacketHandler : BaseHandler<PacketFlags>
 	{
-		private readonly Dictionary<PacketFlags, string> _sResponses_ = new Dictionary<PacketFlags, string>()
+		private readonly Dictionary<PacketFlags, string> _responses = new Dictionary<PacketFlags, string>()
 		{
 			{ PacketFlags.Message, "Message" },
 			{ PacketFlags.Message | PacketFlags.Single, "Single Message"},
@@ -39,8 +39,8 @@ namespace CommunicationLibrary.Logic
 		//public Reactor<Func<object, object[]>> PostHandleReactor = new Reactor<Func<object, object[]>>();
 
 
-		private List<byte[]> longBuffer = new List<byte[]>();
-		private FileStream fileStream;
+		private List<byte[]> _longBuffer = new List<byte[]>();
+		private FileStream _fileStream;
 
 
 		//public void ChangePreHandleAction(PacketType.Flags flags, Action action)
@@ -69,12 +69,12 @@ namespace CommunicationLibrary.Logic
 		{
 			try
 			{
-				if (resultWriter == null)
-					throw new Exception("_textWriter is null");
-				if (encoding == null)
-					throw new Exception("encoding is null");
-
-#warning Finish the Handle method
+				if (_ResultWriter == null)
+					throw new NullReferenceException($"{nameof(_ResultWriter)} is null in ExamplePacketHandler.Hanlde");
+				if (_Encoding == null)
+					throw new NullReferenceException($"{nameof(_Encoding)} is null in ExamplePacketHandler.Hanlde");
+				if (packet == null)
+					throw new ArgumentNullException($"{nameof(packet)} is null in ExamplePacketHandler.Hanlde");
 
 				//_responses[packet.Flags]
 
@@ -84,7 +84,7 @@ namespace CommunicationLibrary.Logic
 					//Responses
 					case PacketFlags.Response:
 					case PacketFlags.RspSingleMsg:
-						resultWriter.WriteLine(packet.ToString());
+						_ResultWriter.WriteLine(packet.ToString());
 
 						break;
 
@@ -93,31 +93,31 @@ namespace CommunicationLibrary.Logic
 					//Messages
 					case PacketFlags.SingleMsg:
 						//Clear operation
-						resultWriter.WriteLine(encoding.GetString(packet.Bytes));
+						_ResultWriter.WriteLine(_Encoding.GetString(packet.Bytes));
 
 						break;
 					case PacketFlags.StartMsg:
-						longBuffer.Add(packet.Bytes);
+						_longBuffer.Add(packet.Bytes);
 
 						break;
 
 					case PacketFlags.EndMsg:
 						//Clear operation
-						longBuffer.Add(packet.Bytes);
+						_longBuffer.Add(packet.Bytes);
 
-						foreach (byte[] bytes in longBuffer)
-							resultWriter.Write(encoding.GetString(bytes));
-						resultWriter.WriteLine();
+						foreach (byte[] bytes in _longBuffer)
+							_ResultWriter.Write(_Encoding.GetString(bytes));
+						_ResultWriter.WriteLine();
 
-						longBuffer.Clear();
+						_longBuffer.Clear();
 
 						break;
 
 					// If the _longBuffer is in use, then the
 					// base messages are added to it
 					case PacketFlags.Message:
-						if (longBuffer.Count > 0)
-							longBuffer.Add(packet.Bytes);
+						if (_longBuffer.Count > 0)
+							_longBuffer.Add(packet.Bytes);
 
 						break;
 
@@ -125,17 +125,17 @@ namespace CommunicationLibrary.Logic
 					//Files
 					//https://code-maze.com/convert-byte-array-to-file-csharp/
 					case PacketFlags.File | PacketFlags.Single:
-						FileStruct fstruct = FileStruct.GetStruct(packet);
-						if (fstruct.Name.Length == 0)
-							fstruct.Name = Path.GetRandomFileName();
-						if (File.Exists(fstruct.Name))
-							fileStream = new FileStream(fstruct.Name, FileMode.Truncate);
+						FileStruct fStruct = FileStruct.GetStruct(packet);
+						if (fStruct.Name.Length == 0)
+							fStruct.Name = Path.GetRandomFileName();
+						if (File.Exists(fStruct.Name))
+							_fileStream = new FileStream(fStruct.Name, FileMode.Truncate);
 						else
-							fileStream = new FileStream(fstruct.Name, FileMode.CreateNew);
-						fileStream.Write(fstruct.Data, 0, fstruct.Data.Length);
-						fileStream.Close();
+							_fileStream = new FileStream(fStruct.Name, FileMode.CreateNew);
+						_fileStream.Write(fStruct.Data, 0, fStruct.Data.Length);
+						_fileStream.Close();
 
-						resultWriter.WriteLine($"File {fstruct.Name} recieved");
+						_ResultWriter.WriteLine($"File {fStruct.Name} recieved");
 						break;
 
 					//Clear operation
@@ -155,6 +155,14 @@ namespace CommunicationLibrary.Logic
 				}
 
 			}
+			catch (NotImplementedException nie)
+			{
+				throw nie;
+			}
+			//catch (ArgumentNullException ane)
+			//{
+			//	throw ane;
+			//}
 			catch (Exception e)
 			{
 				return new Packet(
@@ -165,7 +173,7 @@ namespace CommunicationLibrary.Logic
 
 			return new Packet(
 				PacketFlags.RspSingleMsg,
-				_sResponses_[packet.Flags] + ":: {" + packet + "}",
+				_responses[packet.Flags] + ":: {" + packet + "}",
 				packet.Id);
 		}
 	}

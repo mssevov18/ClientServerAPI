@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CommunicationLibrary.Models.Pairs
 {
-	public interface IEnumPair<TEnum> : IEnumerated<TEnum> where TEnum : struct, Enum
+	public interface IPair<TA, TB>
 	{
-		public TEnum Enum { get; set; }
-		public byte Byte { get; set; }
-
+		public TA A { get; set; }
+		public TB B { get; set; }
 	}
 }

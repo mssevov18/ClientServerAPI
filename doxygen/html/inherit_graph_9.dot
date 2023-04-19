@@ -5,5 +5,7 @@ digraph "Йерархия на класовете Графичен вид"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node0 [label="Test.Models.Packets.Packet\lTests",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_test_1_1_models_1_1_packets_1_1_packet_tests.html",tooltip=" "];
+  Node0 [label="CommunicationLibrary.Models.\lStructs.IMessageStruct\<\l FileStruct \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interface_communication_library_1_1_models_1_1_structs_1_1_i_message_struct.html",tooltip=" "];
+  Node0 -> Node1 [dir="back",color="steelblue1",style="solid"];
+  Node1 [label="CommunicationLibrary.Models.\lStructs.FileStruct",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_communication_library_1_1_models_1_1_structs_1_1_file_struct.html",tooltip="POCO struct to contain fileInfo."];
 }

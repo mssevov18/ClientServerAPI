@@ -6,60 +6,60 @@ using System.Text;
 namespace CommunicationLibrary.Models
 {
 	using CommunicationLibrary.Models.Pairs;
-
+	using CommunicationLibrary.Models.Structs;
 	using Features;
 
 	using static CommunicationLibrary.Models.Flags.PacketFlags;
 
 	public class Packet : IPacket
 	{
-		public static uint _PacketGenCount => _packetGenCount;
-		private static uint _packetGenCount = 1;
+		public static uint PacketGenCount => packetGenCount;
+		private static uint packetGenCount = 1;
 
-		public static Encoding _Encoding;
+		public static Encoding Encoding;
 
-		public const ushort __MessageMaxSize__ = ushort.MaxValue;
-		public const byte __HeaderSize__ = 7;
-		public const uint __PacketMaxSize__ = ushort.MaxValue + 7;
+		public const ushort MessageMaxSize = ushort.MaxValue;
+		public const byte HeaderSize = 7;
+		public const uint PacketMaxSize = ushort.MaxValue + 7;
 
 		public PacketFlagsPair Flags
 		{
-			get => flags;
-			set => flags = value;
+			get => _flags;
+			set => _flags = value;
 		}
-		private PacketFlagsPair flags;
+		private PacketFlagsPair _flags;
 
 		public ushort Size
 		{
-			get => size;
-			set => size = value;
+			get => _size;
+			set => _size = value;
 		}
-		private ushort size;
+		private ushort _size;
 
 		public uint Id
 		{
-			get => id;
-			set => id = value;
+			get => _id;
+			set => _id = value;
 		}
-		private uint id;
+		private uint _id;
 
 		public byte[] Bytes
 		{
-			get => messageBytes;
+			get => _messageBytes;
 			set
 			{
 				if (value.Length > ushort.MaxValue)
 					throw new ArgumentOutOfRangeException($"{nameof(value)} is too large");
-				messageBytes = value;
-				size = (ushort)messageBytes.Length;
+				_messageBytes = value;
+				_size = (ushort)_messageBytes.Length;
 			}
 		}
 		public string Message
 		{
-			get => _Encoding.GetString(messageBytes);
-			set => Bytes = _Encoding.GetBytes(value);
+			get => Encoding.GetString(_messageBytes);
+			set => Bytes = Encoding.GetBytes(value);
 		}
-		private byte[] messageBytes;
+		private byte[] _messageBytes;
 
 		#region ctor
 		/// <summary>
@@ -83,8 +83,8 @@ namespace CommunicationLibrary.Models
 		/// <exception cref="Exception"></exception>
 		public Packet(PacketFlagsPair flags, string message, uint id = 0)
 		{
-			if (_Encoding == null)
-				throw new Exception("Encoding can't be null!");
+			if (Encoding == null)
+				throw new NullReferenceException($"{nameof(Encoding)} can't be null!");
 
 			Flags = flags;
 			Message = message;
@@ -112,7 +112,7 @@ namespace CommunicationLibrary.Models
 			Flags = packetBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
 													   packetBytes[2] });
-			Bytes = new ArraySegment<byte>(packetBytes, __HeaderSize__, Size).ToArray();
+			Bytes = new ArraySegment<byte>(packetBytes, HeaderSize, Size).ToArray();
 			_PacketGen(BitConverter.ToUInt32(new byte[4] { packetBytes[3],
 														   packetBytes[4],
 														   packetBytes[5],
@@ -128,7 +128,7 @@ namespace CommunicationLibrary.Models
 			Flags = packetBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
 													   packetBytes[2] });
-			Bytes = new ArraySegment<byte>(packetBytes, __HeaderSize__, Size).ToArray();
+			Bytes = new ArraySegment<byte>(packetBytes, HeaderSize, Size).ToArray();
 			_PacketGen(id);
 		}
 		/// <summary>
@@ -139,8 +139,8 @@ namespace CommunicationLibrary.Models
 		/// <param name="id"></param>
 		public Packet(FileStruct fileStruct, uint id = 0)
 		{
-			if (fileStruct.Length > __MessageMaxSize__)
-				throw new ArgumentOutOfRangeException();
+			if (fileStruct.Length > MessageMaxSize)
+				throw new ArgumentOutOfRangeException($"{nameof(fileStruct)} is too long");
 
 			//fileStruct.NameLength;
 
@@ -153,12 +153,9 @@ namespace CommunicationLibrary.Models
 		private void _PacketGen(uint id = 0)
 		{
 			if (id == 0)
-				this.id = _packetGenCount++;
+				_id = packetGenCount++;
 			else
-				this.id = id;
-
-			//if (flags.HasFlag(PacketType.Flags.File))
-			//    fileStruct = FileStruct.GetStruct(bytes);
+				_id = id;
 		}
 		#endregion
 
@@ -173,7 +170,7 @@ namespace CommunicationLibrary.Models
 		/// <inheritdoc />
 		public byte[] ToByteArray()
 		{
-			byte[] result = new byte[__HeaderSize__ + Bytes.Length];
+			byte[] result = new byte[HeaderSize + Bytes.Length];
 
 			Buffer.SetByte(result, 0, Flags);
 
@@ -183,7 +180,7 @@ namespace CommunicationLibrary.Models
 			Buffer.BlockCopy(BitConverter.GetBytes(Id), 0, result, 3, 4);
 
 			Buffer.BlockCopy(Bytes, 0,
-							 result, __HeaderSize__, Bytes.Length);
+							 result, HeaderSize, Bytes.Length);
 
 			return result;
 		}
@@ -212,6 +209,6 @@ namespace CommunicationLibrary.Models
 			return filePath;
 		}
 
-		public override string ToString() => $"#{Id} {Flags}[{Size}] {{ {_Encoding.GetString(Bytes)} }}";
+		public override string ToString() => $"#{Id} {Flags}[{Size}] {{ {Encoding.GetString(Bytes)} }}";
 	}
 }

@@ -25,7 +25,10 @@
 var menudata={children:[
 {text:"Главна страница",url:"index.html"},
 {text:"Пакети",url:"namespaces.html",children:[
-{text:"Package List",url:"namespaces.html"}]},
+{text:"Package List",url:"namespaces.html"},
+{text:"Членове с област на видимост пакет",url:"namespacemembers.html",children:[
+{text:"Указател към не филтриран списък на всички членове",url:"namespacemembers.html"},
+{text:"Изброявания",url:"namespacemembers_enum.html"}]}]},
 {text:"Класове",url:"annotated.html",children:[
 {text:"Класове Списък",url:"annotated.html"},
 {text:"Класове Указател",url:"classes.html"},
@@ -44,6 +47,7 @@ var menudata={children:[
 {text:"l",url:"functions.html#index_l"},
 {text:"m",url:"functions.html#index_m"},
 {text:"n",url:"functions.html#index_n"},
+{text:"o",url:"functions.html#index_o"},
 {text:"p",url:"functions.html#index_p"},
 {text:"r",url:"functions.html#index_r"},
 {text:"s",url:"functions.html#index_s"},
@@ -59,12 +63,14 @@ var menudata={children:[
 {text:"h",url:"functions_func.html#index_h"},
 {text:"l",url:"functions_func.html#index_l"},
 {text:"m",url:"functions_func.html#index_m"},
+{text:"o",url:"functions_func.html#index_o"},
 {text:"p",url:"functions_func.html#index_p"},
 {text:"s",url:"functions_func.html#index_s"},
 {text:"t",url:"functions_func.html#index_t"},
 {text:"w",url:"functions_func.html#index_w"}]},
 {text:"Променливи",url:"functions_vars.html"},
-{text:"Свойства",url:"functions_prop.html"}]}]},
+{text:"Свойства",url:"functions_prop.html"},
+{text:"Събития",url:"functions_evnt.html"}]}]},
 {text:"Файлове",url:"files.html",children:[
 {text:"Файлове Списък",url:"files.html"},
 {text:"Файлове Членове",url:"globals.html",children:[

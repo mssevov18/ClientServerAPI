@@ -6,27 +6,26 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-
-using CommunicationLibrary.Models.Features;
 using CommunicationLibrary.Models.Flags;
+using CommunicationLibrary.Models.Structs;
 
 namespace CommunicationLibrary.Models
 {
 	public static class PacketBuilder
 	{
-		private static readonly Encoding encoding = Packet._Encoding;
-		public static readonly byte headerMaxSize = Packet.__HeaderSize__;
-		public static readonly ushort messageMaxSize = Packet.__MessageMaxSize__;
-		public static readonly ushort filePacketDataMaxSize = Packet.__MessageMaxSize__ - 256;
+		private static readonly Encoding _encoding = Packet.Encoding;
+		public static readonly byte HeaderMaxSize = Packet.HeaderSize;
+		public static readonly ushort MessageMaxSize = Packet.MessageMaxSize;
+		public static readonly ushort FilePacketDataMaxSize = Packet.MessageMaxSize - 256;
 
-		private static string getString(byte[] data) => encoding.GetString(data);
-		private static byte[] getBytes(string data) => encoding.GetBytes(data);
+		private static string getString(byte[] data) => _encoding.GetString(data);
+		private static byte[] getBytes(string data) => _encoding.GetBytes(data);
 
 		public static Packet[] GetPacketsFromMsg(string message)
 			=> GetPacketsFromMsg(getBytes(message));
 		public static Packet[] GetPacketsFromMsg(byte[] message)
 		{
-			if (message.Length > Packet.__MessageMaxSize__)
+			if (message.Length > Packet.MessageMaxSize)
 				return GetPacketsFromLongMsg(message);
 			else
 				return new Packet[] { new Packet(PacketFlags.SingleMsg, message) };
@@ -38,15 +37,15 @@ namespace CommunicationLibrary.Models
 		{
 			int dataLength = message.Length;
 			ushort iteration = 0;
-			Packet[] packetsArr = new Packet[(dataLength % messageMaxSize) + 1];
+			Packet[] packetsArr = new Packet[(dataLength % MessageMaxSize) + 1];
 
 			while (dataLength > 0)
 			{
-				byte[] tempBuffer = new byte[Packet.__MessageMaxSize__];
+				byte[] tempBuffer = new byte[Packet.MessageMaxSize];
 
-				Buffer.BlockCopy(message, iteration * Packet.__MessageMaxSize__,
+				Buffer.BlockCopy(message, iteration * Packet.MessageMaxSize,
 								 tempBuffer, 0,
-								 Packet.__MessageMaxSize__);
+								 Packet.MessageMaxSize);
 
 
 				PacketFlags flags = PacketFlags.Message;
@@ -55,7 +54,7 @@ namespace CommunicationLibrary.Models
 					flags |= PacketFlags.Start;
 				else
 				{
-					if (dataLength <= Packet.__MessageMaxSize__)
+					if (dataLength <= Packet.MessageMaxSize)
 						flags |= PacketFlags.End;
 					else
 						flags = PacketFlags.Message;
@@ -64,7 +63,7 @@ namespace CommunicationLibrary.Models
 				packetsArr[iteration] = new Packet(PacketFlags.StartMsg, tempBuffer);
 
 				iteration++;
-				dataLength -= Packet.__MessageMaxSize__;
+				dataLength -= Packet.MessageMaxSize;
 			}
 
 			return packetsArr;
@@ -72,12 +71,11 @@ namespace CommunicationLibrary.Models
 
 		public static Packet[] GetFilePackets(string path)
 		{
-			FileInfo fileInfo = new FileInfo(path);
-			byte[] fileBytes = new byte[fileInfo.Length];
+			byte[] fileBytes = new byte[new FileInfo(path).Length];
 
 			foreach (string line in File.ReadAllLines(path))
 			{
-				byte[] buffer = encoding.GetBytes(line);
+				byte[] buffer = _encoding.GetBytes(line);
 				Buffer.BlockCopy(buffer, 0, fileBytes, fileBytes.Length, buffer.Length);
 			}
 
@@ -85,7 +83,7 @@ namespace CommunicationLibrary.Models
 		}
 		public static Packet[] GetFilePackets(string name, byte[] fileBytes)
 		{
-			if (fileBytes.Length > (Packet.__MessageMaxSize__ - (1 + FileStruct.Encoding.GetByteCount(name))))
+			if (fileBytes.Length > (Packet.MessageMaxSize - (1 + FileStruct.Encoding.GetByteCount(name))))
 				return GetLongFilePackets(fileBytes);
 			else
 
@@ -100,15 +98,15 @@ namespace CommunicationLibrary.Models
 		{
 			int dataLength = fileBytes.Length;
 			ushort iteration = 0;
-			Packet[] packetsArr = new Packet[(dataLength % (filePacketDataMaxSize)) + 1];
+			Packet[] packetsArr = new Packet[(dataLength % (FilePacketDataMaxSize)) + 1];
 
 			while (dataLength > 0)
 			{
-				byte[] tempBuffer = new byte[filePacketDataMaxSize];
+				byte[] tempBuffer = new byte[FilePacketDataMaxSize];
 
-				Buffer.BlockCopy(fileBytes, iteration * filePacketDataMaxSize,
+				Buffer.BlockCopy(fileBytes, iteration * FilePacketDataMaxSize,
 								 tempBuffer, 0,
-								 filePacketDataMaxSize);
+								 FilePacketDataMaxSize);
 
 
 				PacketFlags flags = PacketFlags.File;
@@ -117,7 +115,7 @@ namespace CommunicationLibrary.Models
 					flags |= PacketFlags.Start;
 				else
 				{
-					if (dataLength <= filePacketDataMaxSize)
+					if (dataLength <= FilePacketDataMaxSize)
 						flags |= PacketFlags.End;
 					else
 						flags = PacketFlags.Message;
@@ -126,7 +124,7 @@ namespace CommunicationLibrary.Models
 				packetsArr[iteration] = (new Packet((byte)flags, tempBuffer));
 
 				iteration++;
-				dataLength -= filePacketDataMaxSize;
+				dataLength -= FilePacketDataMaxSize;
 			}
 
 			return packetsArr;
@@ -139,7 +137,7 @@ namespace CommunicationLibrary.Models
 		/// <returns>A Packet object that represents the packet.</returns>
 		public static Packet GetPacketFromStreamReader(StreamReader reader)
 		{
-			Span<byte> buffer = encoding.GetBytes(reader.ReadToEnd());
+			Span<byte> buffer = _encoding.GetBytes(reader.ReadToEnd());
 
 			return new Packet(buffer[0],
 				buffer.Slice(7, BitConverter.ToUInt16(buffer.Slice(1, 2))).ToArray(),
@@ -153,7 +151,7 @@ namespace CommunicationLibrary.Models
 		/// <returns>A Packet object that represents the packet.</returns>
 		public static Packet GetPacketFromNetworkStream(NetworkStream network)
 		{
-			byte[] buffer = new byte[Packet.__HeaderSize__];
+			byte[] buffer = new byte[Packet.HeaderSize];
 
 			// Get the first 7 Bytes to create the header
 			byte flagsByte = (byte)network.ReadByte();  //   Flags - 1B

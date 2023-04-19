@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['packet_2ecs_0',['Packet.cs',['../_packet_8cs.html',1,'']]],
-  ['packetbuilder_2ecs_1',['PacketBuilder.cs',['../_packet_builder_8cs.html',1,'']]],
-  ['packetflags_2ecs_2',['PacketFlags.cs',['../_packet_flags_8cs.html',1,'']]],
-  ['packethandler_2ecs_3',['PacketHandler.cs',['../_packet_handler_8cs.html',1,'']]],
-  ['packethandlertests_2ecs_4',['PacketHandlerTests.cs',['../_packet_handler_tests_8cs.html',1,'']]],
-  ['packettests_2ecs_5',['PacketTests.cs',['../_packet_tests_8cs.html',1,'']]],
-  ['program_2ecs_6',['Program.cs',['../_client_2_program_8cs.html',1,'(Глобални именни пространства)'],['../_server_tester_2_program_8cs.html',1,'(Глобални именни пространства)']]]
+  ['ienumerated_2ecs_0',['IEnumerated.cs',['../_i_enumerated_8cs.html',1,'']]],
+  ['iflagged_2ecs_1',['IFlagged.cs',['../_i_flagged_8cs.html',1,'']]],
+  ['ihandler_2ecs_2',['IHandler.cs',['../_i_handler_8cs.html',1,'']]],
+  ['imessagestruct_2ecs_3',['IMessageStruct.cs',['../_i_message_struct_8cs.html',1,'']]],
+  ['ipacket_2ecs_4',['IPacket.cs',['../_i_packet_8cs.html',1,'']]],
+  ['ipair_2ecs_5',['IPair.cs',['../_i_pair_8cs.html',1,'']]]
 ];

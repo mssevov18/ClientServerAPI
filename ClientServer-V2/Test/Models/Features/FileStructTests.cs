@@ -3,28 +3,27 @@ using System.Text;
 using NUnit.Framework;
 
 using static Test.Utils;
-
-using CommunicationLibrary.Models.Features;
+using CommunicationLibrary.Models.Structs;
 
 namespace Test.Models.Features
 {
 	public class FileStructTests
 	{
 		private static Encoding _encoding = Encoding.UTF8;
-		private string testString = "yabadabado";
-		private byte[] __encodedBytes;
+		private string _testString = "yabadabado";
+		private byte[] _encodedBytes;
 
 		[SetUp]
 		public void SetUp()
 		{
 			FileStruct.Encoding = _encoding;
-			__encodedBytes =  _encoding.GetBytes("yabadabado");
+			_encodedBytes =  _encoding.GetBytes("yabadabado");
 		}
 
 		[Test]
-		public void ctor_byteArr()
+		public void Ctor_ByteArr()
 		{
-			FileStruct @struct = new FileStruct(5, "Hello", __encodedBytes);
+			FileStruct @struct = new FileStruct(5, "Hello", _encodedBytes);
 
 			Assert.That(@struct.NameLength, Is.EqualTo(5));
 			Assert.That(@struct.Name, Is.EqualTo("Hello"));
@@ -32,9 +31,9 @@ namespace Test.Models.Features
 		}
 
 		[Test]
-		public void ctor_string()
+		public void Ctor_String()
 		{
-			FileStruct @struct = new FileStruct(5, "Hello", testString);
+			FileStruct @struct = new FileStruct(5, "Hello", _testString);
 
 			Assert.That(@struct.NameLength, Is.EqualTo(5));
 			Assert.That(@struct.Name, Is.EqualTo("Hello"));
@@ -42,7 +41,7 @@ namespace Test.Models.Features
 		}
 
 		[Test]
-		public void sm_GetBytes()
+		public void CanGetBytes()
 		{
 			FileStruct @struct = new FileStruct(5, "Hello", _encoding.GetBytes("yabadabado"));
 
@@ -52,7 +51,7 @@ namespace Test.Models.Features
 		}
 
 		[Test]
-		public void sm_GetStruct()
+		public void CanGetStruct()
 		{
 			byte[] bytes = new byte[]
 			{ 5, 72, 101, 108, 108, 111, 121, 97, 98, 97, 100, 97, 98, 97, 100, 111};

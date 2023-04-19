@@ -9,8 +9,7 @@ using CommunicationLibrary.Models;
 namespace CommunicationLibrary.Logic
 {
 	public interface IHandler<TPacketFlags>
-		where TPacketFlags :
-					struct, Enum
+		where TPacketFlags : struct, Enum
 	{
 		public Encoding Encoding { get; set; }
 

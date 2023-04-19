@@ -1,0 +1,12 @@
+digraph "CommunicationLibrary.Models.Structs.FileStruct"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="CommunicationLibrary.Models.\lStructs.FileStruct",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="POCO struct to contain fileInfo."];
+  Node2 -> Node1 [dir="back",color="steelblue1",style="solid"];
+  Node2 [label="IMessageStruct\< FileStruct \>",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$interface_communication_library_1_1_models_1_1_structs_1_1_i_message_struct.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",style="dashed",label=" Encoding\n__DataMaxSize__\n__HeaderMaxSize__" ];
+  Node3 [label="static",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",tooltip=" "];
+}

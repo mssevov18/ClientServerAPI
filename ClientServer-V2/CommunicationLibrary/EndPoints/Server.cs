@@ -18,59 +18,56 @@ namespace CommunicationLibrary.EndPoints
 	using Models.Features;
 
 	public class Server<TPacketFlags>
-		where TPacketFlags :
-					struct, Enum
+		where TPacketFlags : struct, Enum
 	{
-		private TcpListener server;
-		private IPAddress ipAddress;
-		private int port;
-		public bool IsRunning => isRunning;
-		private bool isRunning;
+		private TcpListener _server;
+		private IPAddress _ipAddress;
+		private int _port;
+		public bool IsRunning => _isRunning;
+		private bool _isRunning;
 
-		private TextWriter textWriter;
+		private TextWriter _textWriter;
 
 		public Action<Packet> OnPacketRecieved;
 
-		public event EventHandler<ClientEventArgs> ClientConnected;
-		public event EventHandler<ClientEventArgs> ClientDisconnected;
+		public event EventHandler<ClientEventArgs> OnClientConnected;
+		public event EventHandler<ClientEventArgs> OnClientDisconnected;
 
-		private IHandler<TPacketFlags> Handler;
+		private IHandler<TPacketFlags> _handler;
 
 		public Server(TextWriter textWriter, IHandler<TPacketFlags> handler)
 		{
-			this.textWriter = textWriter;
-			this.Handler = handler;
+			this._textWriter = textWriter;
+			this._handler = handler;
 		}
 
 		public void Start(string ipAddress, int port)
 		{
 			Start(IPAddress.Parse(ipAddress), port);
 		}
-
 		public void Start(IPAddress ipAddress, int port)
 		{
-			this.ipAddress = ipAddress;
-			this.port = port;
-			server = new TcpListener(this.ipAddress, this.port);
-			server.Start();
-			isRunning = true;
+			this._ipAddress = ipAddress;
+			this._port = port;
+			_server = new TcpListener(this._ipAddress, this._port);
+			_server.Start();
+			_isRunning = true;
 
 			LoopClients();
 		}
 
 		public void Stop()
 		{
-			server.Stop();
-			isRunning = false;
+			_server.Stop();
+			_isRunning = false;
 		}
-
 
 		public void LoopClients()
 		{
-			while (isRunning)
+			while (_isRunning)
 			{
 				// wait for client connection
-				TcpClient newClient = server.AcceptTcpClient();
+				TcpClient newClient = _server.AcceptTcpClient();
 
 				// client found.
 				// create a thread to handle communication
@@ -96,14 +93,14 @@ namespace CommunicationLibrary.EndPoints
 				{
 					packet = PacketBuilder.GetPacketFromNetworkStream(network);
 
-					response = Handler.Handle(packet);
+					response = _handler.Handle(packet);
 					if (OnPacketRecieved != null)
 						OnPacketRecieved(packet);
 
 					network.Write(
 						response.ToByteArray(),
 						0,
-						Packet.__HeaderSize__ + response.Size);
+						Packet.HeaderSize + response.Size);
 					network.Flush();
 				}
 			}
@@ -119,7 +116,7 @@ namespace CommunicationLibrary.EndPoints
 
 		private void RaiseClientConnected(TcpClient client)
 		{
-			var handler = ClientConnected;
+			var handler = OnClientConnected;
 			if (handler != null)
 			{
 				handler(this, new ClientEventArgs(client));
@@ -128,7 +125,7 @@ namespace CommunicationLibrary.EndPoints
 
 		private void RaiseClientDisconnected(TcpClient client)
 		{
-			var handler = ClientDisconnected;
+			var handler = OnClientDisconnected;
 			if (handler != null)
 			{
 				handler(this, new ClientEventArgs(client));

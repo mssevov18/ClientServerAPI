@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['test_2eassemblyinfo_2ecs_0',['Test.AssemblyInfo.cs',['../_debug_2net5_80_2_test_8_assembly_info_8cs.html',1,'(Глобални именни пространства)'],['../_debug_2net6_80_2_test_8_assembly_info_8cs.html',1,'(Глобални именни пространства)'],['../_release_01_lib_2net6_80_2_test_8_assembly_info_8cs.html',1,'(Глобални именни пространства)'],['../_release_2net6_80_2_test_8_assembly_info_8cs.html',1,'(Глобални именни пространства)']]],
-  ['testclient_2eassemblyinfo_2ecs_1',['TestClient.AssemblyInfo.cs',['../_debug_2net6_80_2_test_client_8_assembly_info_8cs.html',1,'(Глобални именни пространства)'],['../_release_01_lib_2net6_80_2_test_client_8_assembly_info_8cs.html',1,'(Глобални именни пространства)'],['../_release_2net6_80_2_test_client_8_assembly_info_8cs.html',1,'(Глобални именни пространства)']]],
-  ['testerprogram_2eassemblyinfo_2ecs_2',['TesterProgram.AssemblyInfo.cs',['../_tester_program_8_assembly_info_8cs.html',1,'']]],
-  ['testserver_2eassemblyinfo_2ecs_3',['TestServer.AssemblyInfo.cs',['../_debug_2net6_80_2_test_server_8_assembly_info_8cs.html',1,'(Глобални именни пространства)'],['../_release_01_lib_2net6_80_2_test_server_8_assembly_info_8cs.html',1,'(Глобални именни пространства)'],['../_release_2net6_80_2_test_server_8_assembly_info_8cs.html',1,'(Глобални именни пространства)']]],
-  ['testserver_2eglobalusings_2eg_2ecs_4',['TestServer.GlobalUsings.g.cs',['../_debug_2net6_80_2_test_server_8_global_usings_8g_8cs.html',1,'(Глобални именни пространства)'],['../_release_01_lib_2net6_80_2_test_server_8_global_usings_8g_8cs.html',1,'(Глобални именни пространства)'],['../_release_2net6_80_2_test_server_8_global_usings_8g_8cs.html',1,'(Глобални именни пространства)']]],
-  ['todo_2ecs_5',['Todo.cs',['../_todo_8cs.html',1,'']]]
+  ['packet_2ecs_0',['Packet.cs',['../_packet_8cs.html',1,'']]],
+  ['packetbuilder_2ecs_1',['PacketBuilder.cs',['../_packet_builder_8cs.html',1,'']]],
+  ['packetflags_2ecs_2',['PacketFlags.cs',['../_packet_flags_8cs.html',1,'']]],
+  ['packetflagspair_2ecs_3',['PacketFlagsPair.cs',['../_packet_flags_pair_8cs.html',1,'']]],
+  ['packethandlertests_2ecs_4',['PacketHandlerTests.cs',['../_packet_handler_tests_8cs.html',1,'']]],
+  ['packettests_2ecs_5',['PacketTests.cs',['../_packet_tests_8cs.html',1,'']]],
+  ['program_2ecs_6',['Program.cs',['../_client_2_program_8cs.html',1,'(Глобални именни пространства)'],['../_server_tester_2_program_8cs.html',1,'(Глобални именни пространства)']]]
 ];

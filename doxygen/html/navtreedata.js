@@ -26,7 +26,11 @@ var NAVTREE =
 [
   [ "Communication Library", "index.html", [
     [ "Пакети", "namespaces.html", [
-      [ "Package List", "namespaces.html", "namespaces_dup" ]
+      [ "Package List", "namespaces.html", "namespaces_dup" ],
+      [ "Членове с област на видимост пакет", "namespacemembers.html", [
+        [ "Указател към не филтриран списък на всички членове", "namespacemembers.html", null ],
+        [ "Изброявания", "namespacemembers_enum.html", null ]
+      ] ]
     ] ],
     [ "Класове", "annotated.html", [
       [ "Класове Списък", "annotated.html", "annotated_dup" ],
@@ -36,7 +40,8 @@ var NAVTREE =
         [ "Указател към не филтриран списък на всички членове", "functions.html", null ],
         [ "Функции", "functions_func.html", null ],
         [ "Променливи", "functions_vars.html", null ],
-        [ "Свойства", "functions_prop.html", null ]
+        [ "Свойства", "functions_prop.html", null ],
+        [ "Събития", "functions_evnt.html", null ]
       ] ]
     ] ],
     [ "Файлове", "files.html", [
@@ -52,7 +57,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_base_handler_8cs.html",
-"class_test_1_1_models_1_1_packets_1_1_packet_tests.html#acd6c2668a1e241f9d3f76bf578cc3391"
+"class_communication_library_1_1_models_1_1_pairs_1_1_generic_pair.html#a578823882ae27c9f9953b6abd5dae163"
 ];
 
 var SYNCONMSG = 'натиснете на изключване за синхронизация на панела';

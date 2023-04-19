@@ -7,41 +7,47 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
+using CommunicationLibrary.Logic;
+using CommunicationLibrary.Models;
 
 namespace CommunicationLibrary.EndPoints
 {
-	using Logic;
-	using Models;
-
-	public class Client<TPacketFlags>
-		where TPacketFlags :
-					struct, Enum
+	public class Client<TPacketFlags> : IDisposable
+		where TPacketFlags : struct, Enum
 	{
-		private TcpClient client;
-		private NetworkStream nStream;
-		public bool IsConnected => isConnected;
-		private bool isConnected;
+		private TcpClient _client;
+		private NetworkStream _nStream;
+		public bool IsConnected => _isConnected;
+		private bool _isConnected;
 
-		private TextReader textReader; // Console.In
-		private TextWriter textWriter; // Console.Out
-		private Encoding encoding; // Console.OutputEncoding
+		private TextReader _textReader; // Console.In
+		private TextWriter _textWriter; // Console.Out
+		private Encoding _encoding; // Console.OutputEncoding
 
 		private Thread _receiveThread;
 
-		private Queue<Packet> packQueue = new Queue<Packet>();
-		private Queue<uint> packIdQueue = new Queue<uint>();
+		private Queue<Packet> _packQueue = new Queue<Packet>();
+		private Queue<uint> _packIdQueue = new Queue<uint>();
 
-		private IHandler<TPacketFlags> handler;
+		private IHandler<TPacketFlags> _handler;
 
 		public Client(TextReader textReader, TextWriter textWriter, IHandler<TPacketFlags> handler)
 		{
-			client = new TcpClient();
-			isConnected = false;
+			if (handler == null)
+				throw new ArgumentNullException(nameof(handler));
 
-			this.textReader = textReader;
-			this.textWriter = textWriter;
-			this.handler = handler;
-			this.encoding = handler.Encoding;
+			_client = new TcpClient();
+			_isConnected = false;
+
+			this._textReader = textReader;
+			this._textWriter = textWriter;
+			this._handler = handler;
+			this._encoding = handler.Encoding;
+		}
+
+		~Client()
+		{
+			Dispose();
 		}
 
 		/// <summary>
@@ -60,9 +66,9 @@ namespace CommunicationLibrary.EndPoints
 		{
 			try
 			{
-				client.Connect(ipAddress, port);
-				nStream = client.GetStream();
-				isConnected = true;
+				_client.Connect(ipAddress, port);
+				_nStream = _client.GetStream();
+				_isConnected = true;
 
 				//_cThread = new Thread(HandleCommunication);
 				//_cThread.Start();
@@ -73,21 +79,21 @@ namespace CommunicationLibrary.EndPoints
 			catch (Exception)
 			{
 #warning Exception needs handling
-				isConnected = false;
+				_isConnected = false;
 				throw;
 			}
 		}
 
 		public void Disconnect()
 		{
-			if (!isConnected)
+			if (!_isConnected)
 				return;
 
 			try
 			{
-				isConnected = false;
-				client.Close();
-				nStream.Close();
+				_isConnected = false;
+				_client.Close();
+				_nStream.Close();
 			}
 			catch (Exception)
 			{
@@ -104,18 +110,18 @@ namespace CommunicationLibrary.EndPoints
 			try
 			{
 				//Handle incoming messages....
-				while (isConnected)
+				while (_isConnected)
 				{
 					// I think im overdoing this...
 					// The bank system needs a connection
 					// Not a 0ms 24/7 back and forth chat service ):
 					//kkdkkdkdkkdkdkmsdfmsdlkfmsldkfmslmflkmgvkmpoimcoinomvrotnvonec
-					handler.Handle(PacketBuilder.GetPacketFromNetworkStream(nStream));
+					_handler.Handle(PacketBuilder.GetPacketFromNetworkStream(_nStream));
 				}
 			}
 			catch (IOException)
 			{
-				textWriter.WriteLine("Server terminated");
+				_textWriter.WriteLine("Server terminated");
 			}
 		}
 
@@ -126,15 +132,15 @@ namespace CommunicationLibrary.EndPoints
 		{
 			Packet curPacket;
 
-			while (isConnected && packQueue.Count != 0)
+			while (_isConnected && _packQueue.Count != 0)
 			{
-				curPacket = packQueue.Dequeue();
-				packIdQueue.Enqueue(curPacket.Id);
-				nStream.Write(
+				curPacket = _packQueue.Dequeue();
+				_packIdQueue.Enqueue(curPacket.Id);
+				_nStream.Write(
 					curPacket.ToByteArray(),
 					0,
-					Packet.__HeaderSize__ + curPacket.Size);
-				nStream.Flush();
+					Packet.HeaderSize + curPacket.Size);
+				_nStream.Flush();
 			}
 		}
 
@@ -143,7 +149,7 @@ namespace CommunicationLibrary.EndPoints
 			if (packet.Size != packet.Bytes.Length)
 				throw new Exception("Packet size mismatch!");
 
-			packQueue.Enqueue(packet);
+			_packQueue.Enqueue(packet);
 
 			SendLoop();
 		}
@@ -154,10 +160,16 @@ namespace CommunicationLibrary.EndPoints
 				if (packet.Size != packet.Bytes.Length)
 					throw new Exception("Packet size mismatch!");
 
-				packQueue.Enqueue(packet);
+				_packQueue.Enqueue(packet);
 			}
 
 			SendLoop();
+		}
+
+		public void Dispose()
+		{
+			_client.Dispose();
+			_nStream.Dispose();
 		}
 
 		//public void Receive()
@@ -166,6 +178,5 @@ namespace CommunicationLibrary.EndPoints
 		//    _nStream.Read(data);
 		//    _textWriter.Write(_encoding.GetString(data));
 		//}
-
 	}
 }

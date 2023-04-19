@@ -5,7 +5,9 @@ digraph "Йерархия на класовете Графичен вид"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node0 [label="CommunicationLibrary.Models.\lFeatures.IMessageStruct\l\< FileStruct \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interface_communication_library_1_1_models_1_1_features_1_1_i_message_struct.html",tooltip=" "];
+  Node0 [label="CommunicationLibrary.Models.\lFeatures.IEnumerated\< PacketFlags \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interface_communication_library_1_1_models_1_1_features_1_1_i_enumerated.html",tooltip=" "];
   Node0 -> Node1 [dir="back",color="steelblue1",style="solid"];
-  Node1 [label="CommunicationLibrary.Models.\lFeatures.FileStruct",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$struct_communication_library_1_1_models_1_1_features_1_1_file_struct.html",tooltip="POCO struct to contain fileInfo."];
+  Node1 [label="CommunicationLibrary.Models.\lPairs.PacketFlagsPair",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_communication_library_1_1_models_1_1_pairs_1_1_packet_flags_pair.html",tooltip=" "];
+  Node2 [label="CommunicationLibrary.Models.\lFlags.IEnumFlagged\< PacketFlags \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$interface_communication_library_1_1_models_1_1_flags_1_1_i_enum_flagged.html",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="steelblue1",style="solid"];
 }
