@@ -134,7 +134,13 @@ namespace CommunicationLibrary.EndPoints
 				_textWriter.WriteLine("Exception!");
 				_textWriter.WriteLine(e.Message);
 				_textWriter.WriteLine(e.Source);
-				throw new NotImplementedException();
+				if (e.InnerException != null)
+				{
+					_textWriter.WriteLine("Inner Exception!");
+					_textWriter.WriteLine(e.InnerException.Message);
+					_textWriter.WriteLine(e.InnerException.Source);
+				}
+				//throw new NotImplementedException();
 			}
 		}
 
