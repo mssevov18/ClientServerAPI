@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 using CommunicationLibrary.Logic;
 using CommunicationLibrary.Models;
@@ -20,7 +21,9 @@ namespace CommunicationLibrary.EndPoints
 		public bool IsConnected => _isConnected;
 		private bool _isConnected;
 
+		public TextReader TextReader => _textReader;
 		private TextReader _textReader; // Console.In
+		public TextWriter TextWriter => _textWriter;
 		private TextWriter _textWriter; // Console.Out
 		private Encoding _encoding; // Console.OutputEncoding
 
@@ -29,7 +32,10 @@ namespace CommunicationLibrary.EndPoints
 		private Queue<Packet> _packQueue = new Queue<Packet>();
 		private Queue<uint> _packIdQueue = new Queue<uint>();
 
-		private IHandler<TPacketFlags> _handler;
+		protected IHandler<TPacketFlags> _handler;
+
+		public event EventHandler<PacketEventArgs> OnPacketRecieved;
+		public event EventHandler<PacketEventArgs> OnPacketSent;
 
 		public Client(TextReader textReader, TextWriter textWriter, IHandler<TPacketFlags> handler)
 		{
@@ -39,10 +45,10 @@ namespace CommunicationLibrary.EndPoints
 			_client = new TcpClient();
 			_isConnected = false;
 
-			this._textReader = textReader;
-			this._textWriter = textWriter;
-			this._handler = handler;
-			this._encoding = handler.Encoding;
+			_textReader = textReader;
+			_textWriter = textWriter;
+			_handler = handler;
+			_encoding = handler.Encoding;
 		}
 
 		~Client()
@@ -109,6 +115,8 @@ namespace CommunicationLibrary.EndPoints
 		{
 			try
 			{
+				Packet packet;
+				LinkedList<Packet> responses = new LinkedList<Packet>();
 				//Handle incoming messages....
 				while (_isConnected)
 				{
@@ -116,7 +124,16 @@ namespace CommunicationLibrary.EndPoints
 					// The bank system needs a connection
 					// Not a 0ms 24/7 back and forth chat service ):
 					//kkdkkdkdkkdkdkmsdfmsdlkfmsldkfmslmflkmgvkmpoimcoinomvrotnvonec
-					_handler.Handle(PacketBuilder.GetPacketFromNetworkStream(_nStream));
+					packet = PacketBuilder.GetPacketFromNetworkStream(_nStream);
+
+					if (OnPacketRecieved != null)
+						OnPacketRecieved.Invoke(this, packet);
+
+					responses = _handler.Handle(packet);
+
+					if (responses != null && responses.Count > 0)
+						foreach (Packet pck in responses)
+							SendPacket(pck);
 				}
 			}
 			catch (IOException)
@@ -141,6 +158,8 @@ namespace CommunicationLibrary.EndPoints
 					0,
 					Packet.HeaderSize + curPacket.Size);
 				_nStream.Flush();
+				if (OnPacketSent != null)
+					OnPacketSent(this, curPacket);
 			}
 		}
 
@@ -149,27 +168,44 @@ namespace CommunicationLibrary.EndPoints
 			if (packet.Size != packet.Bytes.Length)
 				throw new Exception("Packet size mismatch!");
 
-			_packQueue.Enqueue(packet);
+			//_packQueue.Enqueue(packet);
+			//SendLoop();
 
-			SendLoop();
+			_nStream.Write(
+				packet.ToByteArray(),
+				0,
+				Packet.HeaderSize + packet.Size);
+			_nStream.Flush();
+			if (OnPacketSent != null)
+				OnPacketSent(this, packet);
+
 		}
 		public void SendPacket(Packet[] packets)
 		{
 			foreach (Packet packet in packets)
 			{
-				if (packet.Size != packet.Bytes.Length)
-					throw new Exception("Packet size mismatch!");
+				//if (packet.Size != packet.Bytes.Length)
+				//	throw new Exception("Packet size mismatch!");
+				//_packQueue.Enqueue(packet);
 
-				_packQueue.Enqueue(packet);
+				SendPacket(packet);
 			}
 
-			SendLoop();
+			//SendLoop();
 		}
 
 		public void Dispose()
 		{
+			if (IsConnected)
+				Disconnect();
+
 			_client.Dispose();
 			_nStream.Dispose();
+		}
+
+		public virtual async Task<Packet> WaitForPacketResponse(Packet packet, int timeout = 1000)
+		{
+			return await _handler.WaitForPacketResponse(packet, timeout);
 		}
 
 		//public void Receive()

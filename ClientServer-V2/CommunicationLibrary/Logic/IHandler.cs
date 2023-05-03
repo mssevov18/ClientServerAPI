@@ -20,6 +20,9 @@ namespace CommunicationLibrary.Logic
 
 		public Type PacketFlagsType { get; }
 
-		public Packet Handle(Packet packet);
+		public LinkedList<Packet> Handle(Packet packet);
+
+		public async Task<Packet> WaitForPacketResponse(Packet packet, int timeout = 1000)
+			=> throw new NotImplementedException();
 	}
 }

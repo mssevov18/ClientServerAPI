@@ -36,6 +36,7 @@ namespace CommunicationLibrary.Models
 		public static Packet[] GetPacketsFromLongMsg(byte[] message)
 		{
 			int dataLength = message.Length;
+			throw new NotImplementedException("OLD METHOD");
 			ushort iteration = 0;
 			Packet[] packetsArr = new Packet[(dataLength % MessageMaxSize) + 1];
 

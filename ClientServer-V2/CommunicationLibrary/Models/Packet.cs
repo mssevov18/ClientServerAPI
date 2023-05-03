@@ -7,6 +7,7 @@ namespace CommunicationLibrary.Models
 {
 	using CommunicationLibrary.Models.Pairs;
 	using CommunicationLibrary.Models.Structs;
+
 	using Features;
 
 	using static CommunicationLibrary.Models.Flags.PacketFlags;
@@ -209,6 +210,7 @@ namespace CommunicationLibrary.Models
 			return filePath;
 		}
 
-		public override string ToString() => $"#{Id} {Flags}[{Size}] {{ {Encoding.GetString(Bytes)} }}";
+		public override string ToString()
+			=> $"#{Id} ({Flags}), {Size} Byte{(Size == 1 ? "" : "s")}: {{ {Message} }}";
 	}
 }

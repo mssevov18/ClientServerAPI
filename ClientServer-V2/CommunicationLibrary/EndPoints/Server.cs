@@ -8,6 +8,7 @@ using System.Threading;
 namespace CommunicationLibrary.EndPoints
 {
 	using System;
+	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 
 	using CommunicationLibrary.Logic;
@@ -28,7 +29,8 @@ namespace CommunicationLibrary.EndPoints
 
 		private TextWriter _textWriter;
 
-		public Action<Packet> OnPacketRecieved;
+		public event EventHandler<PacketEventArgs> OnPacketRecieved;
+		public event EventHandler<PacketEventArgs> OnPacketSent;
 
 		public event EventHandler<ClientEventArgs> OnClientConnected;
 		public event EventHandler<ClientEventArgs> OnClientDisconnected;
@@ -87,29 +89,51 @@ namespace CommunicationLibrary.EndPoints
 			RaiseClientConnected(client);
 			try
 			{
-				Packet packet, response;
+				Packet packet;
+				LinkedList<Packet> responses = new LinkedList<Packet>();
 #warning Write encoding handshake hahaha
 				while (bClientConnected)
 				{
 					packet = PacketBuilder.GetPacketFromNetworkStream(network);
 
-					response = _handler.Handle(packet);
 					if (OnPacketRecieved != null)
-						OnPacketRecieved(packet);
+						OnPacketRecieved.Invoke(this, packet);
 
-					network.Write(
-						response.ToByteArray(),
-						0,
-						Packet.HeaderSize + response.Size);
+					responses = _handler.Handle(packet);
+
+
+					if (responses.Count != 0)
+					{
+						foreach (Packet responsePacket in responses)
+						{
+							network.Write(
+								responsePacket.ToByteArray(),
+								0,
+								Packet.HeaderSize + responsePacket.Size);
+
+							if (OnPacketSent != null)
+								OnPacketSent.Invoke(this, responsePacket);
+						}
+					}
 					network.Flush();
 				}
 			}
-			catch (IOException)
+			catch (IOException ioe)
 			{
-				RaiseClientDisconnected(client);
+				if (ioe.Source == "System.Net.Sockets")
+					RaiseClientDisconnected(client);
+				else
+				{
+					_textWriter.WriteLine("IOException!");
+					_textWriter.WriteLine(ioe.Message);
+					_textWriter.WriteLine(ioe.Source);
+				}
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
+				_textWriter.WriteLine("Exception!");
+				_textWriter.WriteLine(e.Message);
+				_textWriter.WriteLine(e.Source);
 				throw new NotImplementedException();
 			}
 		}

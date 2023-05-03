@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace CommunicationLibrary.Logic
 {
 	using System.IO;
+	using System.Threading;
+
 	using CommunicationLibrary.Models.Structs;
 	using Models;
 	using Models.Features;
@@ -45,6 +47,9 @@ namespace CommunicationLibrary.Logic
 		/// </summary>
 		/// <param name="packet"></param>
 		/// <returns></returns>
-		public abstract Packet Handle(Packet packet);
+		public abstract LinkedList<Packet> Handle(Packet packet);
+
+		public virtual async Task<Packet> WaitForPacketResponse(Packet packet, int timeout = 1000)
+			=> throw new NotImplementedException();
 	}
 }

@@ -6,9 +6,12 @@ using System.Text;
 
 namespace CommunicationLibrary.Logic
 {
+	using System.Threading.Tasks;
+
 	using CommunicationLibrary.Models.Flags;
 	using CommunicationLibrary.Models.Pairs;
 	using CommunicationLibrary.Models.Structs;
+
 	using Models;
 	using Models.Features;
 
@@ -65,8 +68,10 @@ namespace CommunicationLibrary.Logic
 		//}
 		public ExamplePacketHandler(Encoding encoding, TextWriter textWriter) : base(encoding, textWriter) { }
 
-		public override Packet Handle(Packet packet)
+		public override LinkedList<Packet> Handle(Packet packet)
 		{
+			LinkedList<Packet> retPackets = new LinkedList<Packet>();
+
 			try
 			{
 				if (_ResultWriter == null)
@@ -154,6 +159,10 @@ namespace CommunicationLibrary.Logic
 						throw new ArgumentNullException("Packet's has no flags");
 				}
 
+				retPackets.AddLast(new Packet(
+				PacketFlags.RspSingleMsg,
+				_responses[packet.Flags] + ":: {" + packet + "}",
+				packet.Id));
 			}
 			catch (NotImplementedException nie)
 			{
@@ -165,16 +174,16 @@ namespace CommunicationLibrary.Logic
 			//}
 			catch (Exception e)
 			{
-				return new Packet(
+				retPackets.AddLast(new Packet(
 					PacketFlags.RspSingleErr,
 					e.Message + " | {" + packet + "}",
-					packet.Id);
+					packet.Id));
 			}
 
-			return new Packet(
-				PacketFlags.RspSingleMsg,
-				_responses[packet.Flags] + ":: {" + packet + "}",
-				packet.Id);
+			return retPackets;
 		}
+
+		public override Task<Packet> WaitForPacketResponse(Packet packet, int timeout = 1000)
+			=> throw new NotImplementedException();
 	}
 }

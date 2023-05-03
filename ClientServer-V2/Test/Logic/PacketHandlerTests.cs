@@ -9,6 +9,8 @@ using static Test.Utils;
 using CommunicationLibrary.Logic;
 using CommunicationLibrary.Models;
 using CommunicationLibrary.Models.Flags;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Test.Logic
 {
@@ -96,11 +98,12 @@ namespace Test.Logic
 
 			Packet packet = new Packet(PacketFlags.SingleMsg, msg);
 
-			Packet response = _handler.Handle(packet);
+			Packet response = _handler.Handle(packet).First();
 
-			PrintDebug(packet.ToString(), response.ToString());
-			Assert.That(packet.Id,
-				Is.EqualTo(response.Id));
+			Console.WriteLine(packet.ToString());
+				Console.WriteLine(response.ToString());
+				Assert.That(packet.Id,
+					Is.EqualTo(response.Id));
 		}
 
 		[Test]
@@ -111,12 +114,13 @@ namespace Test.Logic
 
 			Packet packet = new Packet(PacketFlags.None, msg);
 
-			Packet response = _handler.Handle(packet);
+			Packet response = _handler.Handle(packet).First();
 
-			PrintDebug(packet.ToString(), response.ToString());
-			Assert.That(packet.Id,
-				Is.EqualTo(response.Id));
-			Assert.True(((PacketFlags)response.Flags).HasFlag(PacketFlags.Error));
+			Console.WriteLine(packet.ToString());
+				Console.WriteLine(response.ToString());
+				Assert.That(packet.Id,
+					Is.EqualTo(response.Id));
+				Assert.True(((PacketFlags)response.Flags).HasFlag(PacketFlags.Error));
 		}
 
 		[Test]
