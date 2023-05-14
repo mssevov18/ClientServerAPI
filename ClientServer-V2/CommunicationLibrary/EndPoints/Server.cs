@@ -68,21 +68,16 @@ namespace CommunicationLibrary.EndPoints
 		{
 			while (_isRunning)
 			{
-				// wait for client connection
-				TcpClient newClient = _server.AcceptTcpClient();
+								TcpClient newClient = _server.AcceptTcpClient();
 
-				// client found.
-				// create a thread to handle communication
-				//Thread t = new Thread(new ParameterizedThreadStart(HandleClient));
-				Thread t = new Thread(new ParameterizedThreadStart(HandleClientPackets));
+																Thread t = new Thread(new ParameterizedThreadStart(HandleClientPackets));
 				t.Start(newClient);
 			}
 		}
 
 		private void HandleClientPackets(object obj)
 		{
-			// retrieve client from parameter passed to thread
-			TcpClient client = (TcpClient)obj;
+						TcpClient client = (TcpClient)obj;
 			NetworkStream network = client.GetStream();
 			bool bClientConnected = true;
 
@@ -140,8 +135,7 @@ namespace CommunicationLibrary.EndPoints
 					_textWriter.WriteLine(e.InnerException.Message);
 					_textWriter.WriteLine(e.InnerException.Source);
 				}
-				//throw new NotImplementedException();
-			}
+							}
 		}
 
 		private void RaiseClientConnected(TcpClient client)

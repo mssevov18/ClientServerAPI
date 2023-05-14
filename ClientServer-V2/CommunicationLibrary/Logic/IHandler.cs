@@ -13,10 +13,7 @@ namespace CommunicationLibrary.Logic
 	{
 		public Encoding Encoding { get; set; }
 
-		/// <summary>
-		/// TextWriter -> {StreamWriter, StringWriter}
-		/// </summary>
-		public TextWriter ResultWriter { get; set; }
+								public TextWriter ResultWriter { get; set; }
 
 		public Type PacketFlagsType { get; }
 

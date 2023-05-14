@@ -3,30 +3,14 @@ using System.Text;
 
 namespace CommunicationLibrary.Models.Structs
 {
-	/// <summary>
-	/// POCO struct to contain fileInfo
-	/// 
-	/// 
-	/// <list type="bullet">
-	///    <listheader>
-	///        <term>term</term>
-	///        <description>description</description>
-	///    </listheader>
-	///    <item>
-	///        <term>Assembly</term>
-	///        <description>The library or executable built from a compilation.</description>
-	///    </item>
-	///</list>
-	/// </summary>
-	public struct FileStruct : IMessageStruct<FileStruct>
+																public struct FileStruct : IMessageStruct<FileStruct>
 	{
 		public static readonly int HeaderMaxSize = 256;
 		public static readonly int DataMaxSize = Packet.MessageMaxSize - HeaderMaxSize;
 
 		public byte NameLength;
 		public string Name;
-		//public string Type;
-		public byte[] Data;
+				public byte[] Data;
 
 		public static Encoding Encoding;
 

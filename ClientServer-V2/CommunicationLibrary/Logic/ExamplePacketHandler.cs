@@ -15,7 +15,6 @@ namespace CommunicationLibrary.Logic
 	using Models;
 	using Models.Features;
 
-	//Example Handler
 	public class ExamplePacketHandler : BaseHandler<PacketFlags>
 	{
 		private readonly Dictionary<PacketFlags, string> _responses = new Dictionary<PacketFlags, string>()
@@ -35,37 +34,15 @@ namespace CommunicationLibrary.Logic
 		};
 
 
-		//private Dictionary<PacketType.Flags, Action> preHandleAction = new Dictionary<PacketType.Flags, Action>();
-		//private Dictionary<PacketType.Flags, Action> postHandleAction = new Dictionary<PacketType.Flags, Action>();
 
-		//public Reactor<Action> PreHandleReactor = new Reactor<Action>();
-		//public Reactor<Func<object, object[]>> PostHandleReactor = new Reactor<Func<object, object[]>>();
 
 
 		private List<byte[]> _longBuffer = new List<byte[]>();
 		private FileStream _fileStream;
 
 
-		//public void ChangePreHandleAction(PacketType.Flags flags, Action action)
-		//{
-		//	if (!preHandleAction.ContainsKey(flags))
-		//		return;
 
-		//	preHandleAction[flags] = action;
-		//}
-		//public void ChangePostHandleAction(PacketType.Flags flags, Action action)
-		//{
-		//	if (!postHandleAction.ContainsKey(flags))
-		//		return;
 
-		//	postHandleAction[flags] = action;
-		//}
-		//public void SetActions(Dictionary<PacketType.Flags, Action> preAction,
-		//						 Dictionary<PacketType.Flags, Action> postAction)
-		//{
-		//	preHandleAction = preAction;
-		//	postHandleAction = postAction;
-		//}
 		public ExamplePacketHandler(Encoding encoding, TextWriter textWriter) : base(encoding, textWriter) { }
 
 		public override LinkedList<Packet> Handle(Packet packet)
@@ -81,12 +58,9 @@ namespace CommunicationLibrary.Logic
 				if (packet == null)
 					throw new ArgumentNullException($"{nameof(packet)} is null in ExamplePacketHandler.Hanlde");
 
-				//_responses[packet.Flags]
 
 				switch (packet.Flags.Enum)
 				{
-					//=============
-					//Responses
 					case PacketFlags.Response:
 					case PacketFlags.RspSingleMsg:
 						_ResultWriter.WriteLine(packet.ToString());
@@ -94,10 +68,7 @@ namespace CommunicationLibrary.Logic
 						break;
 
 
-					//=============
-					//Messages
 					case PacketFlags.SingleMsg:
-						//Clear operation
 						_ResultWriter.WriteLine(_Encoding.GetString(packet.Bytes));
 
 						break;
@@ -107,7 +78,6 @@ namespace CommunicationLibrary.Logic
 						break;
 
 					case PacketFlags.EndMsg:
-						//Clear operation
 						_longBuffer.Add(packet.Bytes);
 
 						foreach (byte[] bytes in _longBuffer)
@@ -118,18 +88,13 @@ namespace CommunicationLibrary.Logic
 
 						break;
 
-					// If the _longBuffer is in use, then the
-					// base messages are added to it
 					case PacketFlags.Message:
 						if (_longBuffer.Count > 0)
 							_longBuffer.Add(packet.Bytes);
 
 						break;
 
-					//=============
-					//Files
-					//https://code-maze.com/convert-byte-array-to-file-csharp/
-					case PacketFlags.File | PacketFlags.Single:
+																				case PacketFlags.File | PacketFlags.Single:
 						FileStruct fStruct = FileStruct.GetStruct(packet);
 						if (fStruct.Name.Length == 0)
 							fStruct.Name = Path.GetRandomFileName();
@@ -143,12 +108,10 @@ namespace CommunicationLibrary.Logic
 						_ResultWriter.WriteLine($"File {fStruct.Name} recieved");
 						break;
 
-					//Clear operation
-					case PacketFlags.File | PacketFlags.Start:
+										case PacketFlags.File | PacketFlags.Start:
 						throw new NotImplementedException();
 					case PacketFlags.File | PacketFlags.End:
-						//Clear operation
-						throw new NotImplementedException();
+												throw new NotImplementedException();
 					case PacketFlags.File:
 						throw new NotImplementedException();
 
@@ -168,11 +131,7 @@ namespace CommunicationLibrary.Logic
 			{
 				throw nie;
 			}
-			//catch (ArgumentNullException ane)
-			//{
-			//	throw ane;
-			//}
-			catch (Exception e)
+															catch (Exception e)
 			{
 				retPackets.AddLast(new Packet(
 					PacketFlags.RspSingleErr,

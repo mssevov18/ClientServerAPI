@@ -63,26 +63,13 @@ namespace CommunicationLibrary.Models
 		private byte[] _messageBytes;
 
 		#region ctor
-		/// <summary>
-		/// Default constructor.
-		/// If id is 0 (optional), the packet's id will autogenerate
-		/// </summary>
-		/// <param name="id"></param>
-		public Packet(uint id = 0)
+												public Packet(uint id = 0)
 		{
 			Flags = 0;
 			Bytes = new byte[0];
 			_PacketGen(id);
 		}
-		/// <summary>
-		/// 
-		/// If id is 0 (optional), the packet's id will autogenerate
-		/// </summary>
-		/// <param name="flags"></param>
-		/// <param name="message"></param>
-		/// <param name="id"></param>
-		/// <exception cref="Exception"></exception>
-		public Packet(PacketFlagsPair flags, string message, uint id = 0)
+																		public Packet(PacketFlagsPair flags, string message, uint id = 0)
 		{
 			if (Encoding == null)
 				throw new NullReferenceException($"{nameof(Encoding)} can't be null!");
@@ -91,24 +78,13 @@ namespace CommunicationLibrary.Models
 			Message = message;
 			_PacketGen(id);
 		}
-		/// <summary>
-		/// 
-		/// If id is 0 (optional), the packet's id will autogenerate
-		/// </summary>
-		/// <param name="flags"></param>
-		/// <param name="msgBytes"></param>
-		/// <param name="id"></param>
-		public Packet(PacketFlagsPair flags, byte[] msgBytes, uint id = 0)
+																public Packet(PacketFlagsPair flags, byte[] msgBytes, uint id = 0)
 		{
 			Flags = flags;
 			Bytes = msgBytes;
 			_PacketGen(id);
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="packetBytes"></param>
-		public Packet(byte[] packetBytes)
+										public Packet(byte[] packetBytes)
 		{
 			Flags = packetBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
@@ -119,12 +95,7 @@ namespace CommunicationLibrary.Models
 														   packetBytes[5],
 														   packetBytes[6]}));
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="packetBytes"></param>
-		/// <param name="id"></param>
-		public Packet(byte[] packetBytes, uint id)
+												public Packet(byte[] packetBytes, uint id)
 		{
 			Flags = packetBytes[0];
 			Size = BitConverter.ToUInt16(new byte[2] { packetBytes[1],
@@ -132,26 +103,18 @@ namespace CommunicationLibrary.Models
 			Bytes = new ArraySegment<byte>(packetBytes, HeaderSize, Size).ToArray();
 			_PacketGen(id);
 		}
-		/// <summary>
-		/// 
-		/// If id is 0 (optional), the packet's id will autogenerate
-		/// </summary>
-		/// <param name="fileStruct"></param>
-		/// <param name="id"></param>
-		public Packet(FileStruct fileStruct, uint id = 0)
+														public Packet(FileStruct fileStruct, uint id = 0)
 		{
 			if (fileStruct.Length > MessageMaxSize)
 				throw new ArgumentOutOfRangeException($"{nameof(fileStruct)} is too long");
 
-			//fileStruct.NameLength;
-
+			
 			Bytes = FileStruct.GetBytes(fileStruct);
 
 			_PacketGen(id);
 		}
 
-		/// <inheritdoc />
-		private void _PacketGen(uint id = 0)
+				private void _PacketGen(uint id = 0)
 		{
 			if (id == 0)
 				_id = packetGenCount++;
@@ -160,16 +123,14 @@ namespace CommunicationLibrary.Models
 		}
 		#endregion
 
-		/// <inheritdoc />
-		public void Clear()
+				public void Clear()
 		{
 			Flags = 0;
 			Size = 0;
 			Array.Clear(Bytes, 0, Bytes.Length);
 		}
 
-		/// <inheritdoc />
-		public byte[] ToByteArray()
+				public byte[] ToByteArray()
 		{
 			byte[] result = new byte[HeaderSize + Bytes.Length];
 
@@ -186,28 +147,17 @@ namespace CommunicationLibrary.Models
 			return result;
 		}
 
-		/// <summary>
-		/// Writes the packet bytes to a file in the specified directory and returns the full file path.
-		/// </summary>
-		/// <param name="directoryPath">The directory path where the file should be created.</param>
-		/// <param name="fileName">The name of the file to be created (optional). If not specified, a random file name will be generated.</param>
-		/// <returns>The full file path of the created file.</returns>
-		public string WriteToFile(string directoryPath, string fileName = null)
+														public string WriteToFile(string directoryPath, string fileName = null)
 		{
-			// generate a random file name
-			if (fileName == null)
+						if (fileName == null)
 				fileName = Path.GetRandomFileName();
 
-			// combine the directory path and file name to create a full file path
-			string filePath = Path.Combine(directoryPath, fileName);
+						string filePath = Path.Combine(directoryPath, fileName);
 
-			// write the bytes to the file
-			//FileStruct = FileStruct.GetStruct(bytes);
-
+						
 			System.IO.File.WriteAllBytes(filePath, FileStruct.GetStruct(Bytes).Data);
 
-			// return the full file path
-			return filePath;
+						return filePath;
 		}
 
 		public override string ToString()

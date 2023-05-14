@@ -131,12 +131,7 @@ namespace CommunicationLibrary.Models
 			return packetsArr;
 		}
 
-		/// <summary>
-		/// Returns a packet from a StreamReader object.
-		/// </summary>
-		/// <param name="reader">A StreamReader object that contains the packet data.</param>
-		/// <returns>A Packet object that represents the packet.</returns>
-		public static Packet GetPacketFromStreamReader(StreamReader reader)
+												public static Packet GetPacketFromStreamReader(StreamReader reader)
 		{
 			Span<byte> buffer = _encoding.GetBytes(reader.ReadToEnd());
 
@@ -145,21 +140,12 @@ namespace CommunicationLibrary.Models
 				BitConverter.ToUInt32(buffer.Slice(3, 4)));
 		}
 
-		/// <summary>
-		/// Returns a packet from a NetworkStream object.
-		/// </summary>
-		/// <param name="network">A NetworkStream object that contains the packet data.</param>
-		/// <returns>A Packet object that represents the packet.</returns>
-		public static Packet GetPacketFromNetworkStream(NetworkStream network)
+												public static Packet GetPacketFromNetworkStream(NetworkStream network)
 		{
 			byte[] buffer = new byte[Packet.HeaderSize];
 
-			// Get the first 7 Bytes to create the header
-			byte flagsByte = (byte)network.ReadByte();  //   Flags - 1B
-			network.Read(buffer, 0, 2);                 //   Size  - 2B
-			ushort size = BitConverter.ToUInt16(buffer, 0);
-			network.Read(buffer, 0, 4);                 //   Id    - 4B
-			uint id = BitConverter.ToUInt32(buffer, 0);
+						byte flagsByte = (byte)network.ReadByte();  			network.Read(buffer, 0, 2);                 			ushort size = BitConverter.ToUInt16(buffer, 0);
+			network.Read(buffer, 0, 4);                 			uint id = BitConverter.ToUInt32(buffer, 0);
 
 			buffer = new byte[size];
 			network.Read(buffer, 0, size);

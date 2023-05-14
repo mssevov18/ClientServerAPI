@@ -42,12 +42,7 @@ namespace CommunicationLibrary.Logic
 			Encoding = encoding;
 			ResultWriter = textWriter;
 		}
-		/// <summary>
-		/// Returns the response packet
-		/// </summary>
-		/// <param name="packet"></param>
-		/// <returns></returns>
-		public abstract LinkedList<Packet> Handle(Packet packet);
+												public abstract LinkedList<Packet> Handle(Packet packet);
 
 		public virtual async Task<Packet> WaitForPacketResponse(Packet packet, int timeout = 1000)
 			=> throw new NotImplementedException();

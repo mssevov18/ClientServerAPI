@@ -22,11 +22,8 @@ namespace CommunicationLibrary.EndPoints
 		private bool _isConnected;
 
 		public TextReader TextReader => _textReader;
-		private TextReader _textReader; // Console.In
-		public TextWriter TextWriter => _textWriter;
-		private TextWriter _textWriter; // Console.Out
-		private Encoding _encoding; // Console.OutputEncoding
-
+		private TextReader _textReader; public TextWriter TextWriter => _textWriter;
+		private TextWriter _textWriter; private Encoding _encoding;
 		private Thread _receiveThread;
 
 		private Queue<Packet> _packQueue = new Queue<Packet>();
@@ -58,18 +55,8 @@ namespace CommunicationLibrary.EndPoints
 
 		public void Connect(int port)
 			=> Connect(Utils.GetLocalIPAddress(), port);
-		/// <summary>
-		/// Attempt connecting to a server on the ipAddress and port
-		/// </summary>
-		/// <param name="ipAddress"></param>
-		/// <param name="port"></param>
 		public void Connect(string ipAddress, int port)
-			=> Connect(IPAddress.Parse(ipAddress), port);
-		/// <summary>
-		/// Attempt connecting to a server on the ipAddress and port
-		/// </summary>
-		/// <param name="ipAddress"></param>
-		/// <param name="port"></param>
+=> Connect(IPAddress.Parse(ipAddress), port);
 		public void Connect(IPAddress ipAddress, int port)
 		{
 			try
@@ -78,9 +65,7 @@ namespace CommunicationLibrary.EndPoints
 				_nStream = _client.GetStream();
 				_isConnected = true;
 
-				//_cThread = new Thread(HandleCommunication);
-				//_cThread.Start();
-
+								
 				_receiveThread = new Thread(ReceiverLoop);
 				_receiveThread.Start();
 			}
@@ -112,21 +97,15 @@ namespace CommunicationLibrary.EndPoints
 		}
 
 
-		//this should handle receiving data...
-		private void ReceiverLoop()
+				private void ReceiverLoop()
 		{
 			try
 			{
 				Packet packet;
 				LinkedList<Packet> responses = new LinkedList<Packet>();
-				//Handle incoming messages....
-				while (_isConnected)
+								while (_isConnected)
 				{
-					// I think im overdoing this...
-					// The bank system needs a connection
-					// Not a 0ms 24/7 back and forth chat service ):
-					//kkdkkdkdkkdkdkmsdfmsdlkfmsldkfmslmflkmgvkmpoimcoinomvrotnvonec
-					packet = PacketBuilder.GetPacketFromNetworkStream(_nStream);
+																									packet = PacketBuilder.GetPacketFromNetworkStream(_nStream);
 
 					if (OnPacketRecieved != null)
 						OnPacketRecieved.Invoke(this, packet);
@@ -144,10 +123,7 @@ namespace CommunicationLibrary.EndPoints
 			}
 		}
 
-		/// <summary>
-		/// The Sending Loop -> Started as a Thread by Send() functions.
-		/// </summary>
-		private void SendLoop()
+								private void SendLoop()
 		{
 			Packet curPacket;
 
@@ -170,9 +146,7 @@ namespace CommunicationLibrary.EndPoints
 			if (packet.Size != packet.Bytes.Length)
 				throw new Exception("Packet size mismatch!");
 
-			//_packQueue.Enqueue(packet);
-			//SendLoop();
-
+						
 			_nStream.Write(
 				packet.ToByteArray(),
 				0,
@@ -186,15 +160,11 @@ namespace CommunicationLibrary.EndPoints
 		{
 			foreach (Packet packet in packets)
 			{
-				//if (packet.Size != packet.Bytes.Length)
-				//	throw new Exception("Packet size mismatch!");
-				//_packQueue.Enqueue(packet);
-
+												
 				SendPacket(packet);
 			}
 
-			//SendLoop();
-		}
+					}
 
 		public void Dispose()
 		{
@@ -210,11 +180,5 @@ namespace CommunicationLibrary.EndPoints
 			return await _handler.WaitForPacketResponse(packet, timeout);
 		}
 
-		//public void Receive()
-		//{
-		//    Span<byte> data = new Span<byte>();
-		//    _nStream.Read(data);
-		//    _textWriter.Write(_encoding.GetString(data));
-		//}
-	}
+													}
 }
