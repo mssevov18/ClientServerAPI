@@ -6,7 +6,7 @@
     <Title>TCP/IP Communication Library</Title>
     <Copyright>mssevov18</Copyright>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-    <Configurations>Debug;Release;Release Lib</Configurations>
+    <Configurations>Debug;Release;Release Lib;WebDebug</Configurations>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <SignAssembly>False</SignAssembly>
     <Authors>mssevov18</Authors>

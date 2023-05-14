@@ -43,10 +43,10 @@ namespace CommunicationLibrary.EndPoints
 			this._handler = handler;
 		}
 
+		public void Start(int port)
+			=> Start(Utils.GetLocalIPAddress(), port);
 		public void Start(string ipAddress, int port)
-		{
-			Start(IPAddress.Parse(ipAddress), port);
-		}
+			=>	Start(IPAddress.Parse(ipAddress), port);
 		public void Start(IPAddress ipAddress, int port)
 		{
 			this._ipAddress = ipAddress;

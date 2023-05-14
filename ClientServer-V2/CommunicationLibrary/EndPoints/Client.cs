@@ -56,13 +56,15 @@ namespace CommunicationLibrary.EndPoints
 			Dispose();
 		}
 
+		public void Connect(int port)
+			=> Connect(Utils.GetLocalIPAddress(), port);
 		/// <summary>
 		/// Attempt connecting to a server on the ipAddress and port
 		/// </summary>
 		/// <param name="ipAddress"></param>
 		/// <param name="port"></param>
-		public void Connect(string ipAddress, int port) =>
-			Connect(IPAddress.Parse(ipAddress), port);
+		public void Connect(string ipAddress, int port)
+			=> Connect(IPAddress.Parse(ipAddress), port);
 		/// <summary>
 		/// Attempt connecting to a server on the ipAddress and port
 		/// </summary>
